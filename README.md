@@ -84,6 +84,20 @@ bash script/finetune_others_anomaly.sh
 
 The result will be stored in the`logs` folder.
 
+# Get result
+
+To obtain the five-fold results on multiple datasets, we provide some code, `get_result_{task_name}.py`, in the `get_result` folder.
+
+For example, run
+
+```
+python get_result/get_result_anomaly.py --path THE_PATH_OF_LOGS
+```
+
+which shows the per-fold results and average results for each dataset in the anomaly detection task.
+
+For the capacity estimation task, please add `--type {dataset_type}` to specify dataset types (like EV, BESS and lab).
+
 # Data availability
 The datasets are available at links below https://cloud.tsinghua.edu.cn/d/fca1245f527d479d82f5/.
 
