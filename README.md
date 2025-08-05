@@ -82,11 +82,11 @@ For example, run
 bash script/finetune_others_anomaly.sh
 ```
 
-The result will be stored in the`logs` folder.
+The result will be stored in the `logs` folder.
 
 # Get result
 
-To obtain the five-fold results on multiple datasets, we provide some code, `get_result_{task_name}.py`, in the `get_result` folder.
+To obtain the five-fold results on multiple datasets, we provide some codes, `get_result_{task_name}.py`, in the `get_result` folder.
 
 For example, run
 
