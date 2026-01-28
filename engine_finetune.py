@@ -269,22 +269,18 @@ def get_evaluate_stats(data_loader, model, criterion, device, header, label_norm
         return np.stack((label, car_id, logits), axis=1), epoch_loss / len_data, predict, label
 
 @torch.no_grad()
-def evaluate(data_loader_valid, data_loader_test, model, criterion, device, args, data_task):
-    assert data_loader_valid is None
-    valid_res, valid_loss, valid_predict, valid_label = get_evaluate_stats(data_loader_valid, model, criterion, device, 'valid', args=args, data_task=data_task)
+def evaluate(data_loader_test, model, criterion, device, args, data_task):
     test_res, test_loss, test_predict, test_label = get_evaluate_stats(data_loader_test, model, criterion, device, 'test', args=args, data_task=data_task)
     
-    AUC = util.evaluation.evaluation(valid_res, test_res, brand_num=args.brand_num, h=args.h)
+    AUC = util.evaluation.evaluation(test_res, brand_num=args.brand_num, h=args.h)
     
     return {'test_auroc': AUC, 
             'test_loss': test_loss,
-            'valid_auroc': 0, 
-            'valid_loss': valid_loss
             }
 
 
 @torch.no_grad()
-def evaluate_RUL(all_res):
+def evaluate_RUL(all_res, inference_cycle_id):
     if all_res is None:
         return 0., 0.
     answer = {}
@@ -305,11 +301,10 @@ def evaluate_RUL(all_res):
     
     square_error = []
     percentage_error = []
-    threshold = 90
     for car, value in answer.items():
         preds = []
         for (pred, current) in value[0]:
-            if current > threshold:
+            if str(int(current)) in inference_cycle_id:
                 preds.append(pred)
         pred = np.mean(preds)
         print(value[1], car, pred)

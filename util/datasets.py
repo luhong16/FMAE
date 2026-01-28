@@ -76,7 +76,7 @@ class PreprocessNormalizer:
         self.brand_num = brand_num
         self.rng = np.random.default_rng(seed)
 
-        if self.downstream in ['pretrain', 'anomaly', 'capacity', 'RUL']:
+        if self.downstream in ['pretrain', 'anomaly', 'capacity', 'RUL', 'IR']:
             
             if self.downstream == 'anomaly':
                 max_mileage_dict = pickle.load(open(r"normailze/max_mileage.pkl", 'rb'))
@@ -88,8 +88,6 @@ class PreprocessNormalizer:
                         self.mileage[j] /= max_mileage
                 if self.downstream in ['capacity']:
                     self.car_dict[_][0].sort(key=lambda x: (self.mileage[x]))
-        elif self.downstream in ['IR']:
-            pass
         else:
             raise NotImplementedError
 
@@ -185,7 +183,7 @@ class PreprocessNormalizer:
             return df, label, car
 
 
-def load_dataset(fold_num, brand_num, same_normalizer=False, car_dict_dir='five_fold_utils_six_brand_all', downstream='', data_type=None, normalizer = None, dataset_fn=None, ind_ood_car_dict=None, all_car_dict=None, num_snippet=0, cycle_gap=0, data_percent=100, seed=0, normalizer_lab=None, task=''):
+def load_dataset(fold_num, brand_num, same_normalizer=False, car_dict_dir='five_fold_utils_six_brand_all', downstream='', data_type=None, normalizer = None, dataset_fn=None, ind_ood_car_dict=None, all_car_dict=None, num_snippet=0, cycle_gap=0, cycle_id=None, data_percent=100, seed=0, normalizer_lab=None, task=''):
     
     TOTAL_BRAND_NUM = 14
     
@@ -209,7 +207,7 @@ def load_dataset(fold_num, brand_num, same_normalizer=False, car_dict_dir='five_
         
 
         if downstream in ['anomaly']:
-            if data_type == 'finetune_train' or data_type == "finetune_valid": 
+            if data_type == 'finetune_train': 
                 car_number = ind_car_num_list[:int(fold_num * len(ind_car_num_list) / 5)] + ind_car_num_list[
                                                 int((fold_num + 1) * len(ind_car_num_list) / 5):] + ood_car_num_list[int(fold_num * len(ood_car_num_list) / 5):int((fold_num + 1) * len(ood_car_num_list) / 5)]
             elif data_type == 'finetune_test':
@@ -220,7 +218,7 @@ def load_dataset(fold_num, brand_num, same_normalizer=False, car_dict_dir='five_
 
         elif downstream in ['capacity', 'IR', 'RUL']:
             
-            if data_type == 'finetune_train' or data_type == "finetune_valid": 
+            if data_type == 'finetune_train': 
                 
                 car_number = ind_car_num_list[:int(fold_num * len(ind_car_num_list) / 5)] \
                             + ind_car_num_list[int((fold_num + 1) * len(ind_car_num_list) / 5):] \
@@ -260,10 +258,6 @@ def load_dataset(fold_num, brand_num, same_normalizer=False, car_dict_dir='five_
         if downstream in ['anomaly', 'capacity', 'IR']:  
             if data_type == 'finetune_train':
                 pkls = all_car_dict[each_num][:int(len(all_car_dict[each_num]) * 0.01 * data_percent)]
-            elif data_type == 'finetune_valid':
-                pkls = all_car_dict[each_num][int(len(all_car_dict[each_num]) * 0.01 * data_percent):]
-                if len(pkls) == 0:
-                    pkls = all_car_dict[each_num][-1:]
             elif data_type == 'finetune_test':
                 pkls = all_car_dict[each_num]
             else:
@@ -278,16 +272,19 @@ def load_dataset(fold_num, brand_num, same_normalizer=False, car_dict_dir='five_
             train1 = torch.load(each_pkl) 
             
             if downstream in ['RUL']:
-                if train1[1]['label'][1] < 100 - data_percent:
-                    continue
 
-                if train1[1]['label'][1] % 20 != 0:
+                if str(train1[1]['label'][1]) not in cycle_id:
                     continue
                 
             if downstream == 'capacity' and float(train1[1]["capacity"]) == 0 and brand_num <= 7: #no capacity data
                 assert NotImplementedError
 
             x = train1[0].transpose(1, 0).astype(np.float32)
+            '''
+            # add guassian noise with 0.005 std on x[0], which has length 128
+            noise = np.random.normal(0, 0.005, x[0].shape)
+            x[0] = x[0] + noise
+            '''
             X.append(x) 
             
             metadata.append(train1[1])
@@ -337,9 +334,9 @@ def load_dataset(fold_num, brand_num, same_normalizer=False, car_dict_dir='five_
             else:
                 charge = train1[1]['charge_segment'] != -1
 
-            if downstream in ['pretrain', 'anomaly', 'capacity', 'RUL']:
+            if downstream in ['pretrain', 'anomaly', 'capacity', 'RUL', 'IR']:
 
-                if downstream in ['pretrain', 'anomaly', 'capacity']:
+                if downstream in ['pretrain', 'anomaly', 'capacity', 'IR']:
                     pair = (car, charge)
                 elif downstream in ['RUL']:
                     pair = (car, charge, mileage_cycle)

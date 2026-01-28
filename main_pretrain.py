@@ -246,6 +246,9 @@ def main(args):
     print(f"Start training for {args.epochs} epochs")
     start_time = time.time()
     for epoch in range(args.start_epoch, args.epochs):
+    
+        # print(f"mask_channel_token, {model.module.mask_channel_token}")
+
         if args.distributed:
             data_loader_train.sampler.set_epoch(epoch)
         if args.num_snippet > 0:

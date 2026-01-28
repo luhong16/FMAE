@@ -143,7 +143,7 @@ def calculate_stat(dataframe, ind_car_num_list, ood_car_num_list):
     return f1, recall, false_rate, precision, accuracy, auroc
 
 
-def evaluation(train_res_csv, test_res_csv, brand_num, h = None, dir_prefix = 'five_fold_utils'):
+def evaluation(test_res_csv, brand_num, h = None, dir_prefix = 'five_fold_utils'):
 
     assert h is not None
     ind_ood_car_dict = np.load(os.path.join(dir_prefix, f'five_fold_utils_six_brand_all/ind_odd_dict{brand_num}.npz.npy'), allow_pickle=True).item()

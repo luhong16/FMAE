@@ -116,7 +116,9 @@ def get_args_parser():
     parser.add_argument('--cycle_gap', default=0, type=int)
     parser.add_argument("--num_snippet", default=0, type=int) 
     parser.add_argument("--pos_embed_dim", default=-1, type=int) 
-    parser.add_argument("--snippet_size", default=128, type=int) 
+    parser.add_argument("--snippet_size", default=128, type=int)
+    parser.add_argument('--cycle_id', nargs='+', default=None)
+    parser.add_argument('--inference_cycle_id', nargs='+', default=None)
 
     # Dataset parameters
     parser.add_argument("--same_normalizer", action='store_true')
@@ -234,9 +236,9 @@ def main(args):
     for each_num in ind_ood_car_dict['ind_sorted'] + ind_ood_car_dict['ood_sorted']:
         random.shuffle(all_car_dict[each_num])
         
-    dataset_train, _ = load_dataset(args.fold_num, brand_num=args.brand_num, same_normalizer=args.same_normalizer, car_dict_dir=car_dict_dir, downstream=args.downstream, data_type = 'finetune_train', normalizer=normalizer, dataset_fn=PreprocessNormalizer, ind_ood_car_dict=ind_ood_car_dict, all_car_dict=all_car_dict, num_snippet=args.num_snippet, cycle_gap=args.cycle_gap, data_percent=args.data_percent, seed=args.seed, task=args.task)
+    dataset_train, _ = load_dataset(args.fold_num, brand_num=args.brand_num, same_normalizer=args.same_normalizer, car_dict_dir=car_dict_dir, downstream=args.downstream, data_type = 'finetune_train', normalizer=normalizer, dataset_fn=PreprocessNormalizer, ind_ood_car_dict=ind_ood_car_dict, all_car_dict=all_car_dict, num_snippet=args.num_snippet, cycle_gap=args.cycle_gap, cycle_id=args.cycle_id, data_percent=args.data_percent, seed=args.seed, task=args.task)
     normalizer = _
-    dataset_test, _ = load_dataset(args.fold_num, brand_num=args.brand_num, same_normalizer=args.same_normalizer, car_dict_dir=car_dict_dir, downstream=args.downstream, data_type = 'finetune_test', normalizer=normalizer, dataset_fn=PreprocessNormalizer, ind_ood_car_dict=ind_ood_car_dict, all_car_dict=all_car_dict, num_snippet=args.num_snippet, cycle_gap=args.cycle_gap, data_percent=args.data_percent, seed=args.seed, task=args.task)
+    dataset_test, _ = load_dataset(args.fold_num, brand_num=args.brand_num, same_normalizer=args.same_normalizer, car_dict_dir=car_dict_dir, downstream=args.downstream, data_type = 'finetune_test', normalizer=normalizer, dataset_fn=PreprocessNormalizer, ind_ood_car_dict=ind_ood_car_dict, all_car_dict=all_car_dict, num_snippet=args.num_snippet, cycle_gap=args.cycle_gap, cycle_id=args.cycle_id, data_percent=args.data_percent, seed=args.seed, task=args.task)
     
     sampler_train = torch.utils.data.RandomSampler(dataset_train)
     sampler_test = torch.utils.data.SequentialSampler(dataset_test)
@@ -248,7 +250,6 @@ def main(args):
         pin_memory=args.pin_mem,
         drop_last=True,
     )
-    data_loader_valid = None
     data_loader_test = torch.utils.data.DataLoader(
         dataset_test, sampler=sampler_test,
         batch_size=args.batch_size,
@@ -298,6 +299,14 @@ def main(args):
         msg = model.load_state_dict(checkpoint_model, strict=False)
         print(msg)
         trunc_normal_(model.head.weight, std=2e-5)
+        '''
+        # I want to freeze all layers except for the head
+        for name, param in model.named_parameters():
+            if "head" not in name and "fc_norm" not in name:
+                param.requires_grad = False
+            else:
+                print(f"Finetuning {name}...")
+        '''   
         
     model.to(device)
     model_without_ddp = model
@@ -338,25 +347,20 @@ def main(args):
     print("criterion = %s" % str(criterion))
 
     misc.load_model(args=args, model_without_ddp=model_without_ddp, optimizer=optimizer, loss_scaler=loss_scaler)
-
+    
     #Test at first
     
     if args.downstream in ['anomaly']:
         if args.model.startswith("vit"):
-            evaluate(data_loader_valid, data_loader_test, model, criterion, device, args, data_task)
+            evaluate(data_loader_test, model, criterion, device, args, data_task)
     elif args.downstream in ['capacity', 'IR', 'RUL']:
-        valid_res, valid_loss, _, _ = get_evaluate_stats(data_loader_valid, model, criterion, device, 'valid', label_normalizer=dataset_train.label_normalizer, args=args, data_task=data_task)
         test_res, test_loss, _, _ = get_evaluate_stats(data_loader_test, model, criterion, device, 'test', label_normalizer=dataset_train.label_normalizer, args=args, data_task=data_task)
     
     print(f"Start training for {args.epochs} epochs")
     start_time = time.time()
-    max_valid_auroc = 0.0
     max_test_auroc = 0.0
-    min_valid_RMSE = 1000.0
     min_test_RMSE = 1000.0
-    min_valid_cell_level_RMSE = 1000.0
     min_test_cell_level_RMSE = 1000.0
-    min_valid_cell_level_percentage_error = 1000.0
     min_test_cell_level_percentage_error = 1000.0
     for epoch in range(args.start_epoch, args.epochs):
         
@@ -372,11 +376,10 @@ def main(args):
         )
 
         if args.downstream in ['anomaly']:
-            test_stats = evaluate(data_loader_valid, data_loader_test, model, criterion, device, args, data_task)
+            test_stats = evaluate(data_loader_test, model, criterion, device, args, data_task)
             
             print('test_auroc{:.3f}, test_loss {:.3f}'.format(
                     test_stats["test_auroc"], test_stats["test_loss"]))
-            max_valid_auroc = max(max_valid_auroc, test_stats["valid_auroc"])
             max_test_auroc = max(max_test_auroc, test_stats["test_auroc"])
             print(f'Max test set auroc score: {max_test_auroc:.4f}')
 
@@ -390,11 +393,9 @@ def main(args):
                     step = epoch + 1)
 
         elif args.downstream in ['capacity', 'IR', 'RUL']:
-            valid_res, valid_loss, _, _ = get_evaluate_stats(data_loader_valid, model, criterion, device, 'valid', label_normalizer=dataset_train.label_normalizer, args=args, data_task=data_task)
             test_res, test_loss, _, _ = get_evaluate_stats(data_loader_test, model, criterion, device, 'test', label_normalizer=dataset_train.label_normalizer, args=args, data_task=data_task)
             
-            test_stats = {'test_RMSE': np.sqrt(test_loss), 'valid_RMSE': np.sqrt(valid_loss), 'test_loss': test_loss, 'valid_loss': valid_loss}
-            min_valid_RMSE = min(min_valid_RMSE, test_stats['valid_RMSE'])
+            test_stats = {'test_RMSE': np.sqrt(test_loss), 'test_loss': test_loss}
             if test_stats['test_RMSE'] <= min_test_RMSE and args.downstream in ['capacity']:
                 print('update saved res')
                 np.save(os.path.join(args.output_dir, "res.npy"), test_res)
@@ -413,12 +414,9 @@ def main(args):
                 
             if args.downstream in ['RUL']:
                 
-                valid_cell_level_rmse, valid_cell_level_percentage_error = evaluate_RUL(valid_res)
-                test_cell_level_rmse, test_cell_level_percentage_error = evaluate_RUL(test_res)
+                test_cell_level_rmse, test_cell_level_percentage_error = evaluate_RUL(test_res, args.inference_cycle_id)
                 
-                min_valid_cell_level_RMSE = min(min_valid_cell_level_RMSE, valid_cell_level_rmse)
                 min_test_cell_level_RMSE = min(min_test_cell_level_RMSE, test_cell_level_rmse)
-                min_valid_cell_level_percentage_error = min(min_valid_cell_level_percentage_error, valid_cell_level_percentage_error)
                 min_test_cell_level_percentage_error = min(min_test_cell_level_percentage_error, test_cell_level_percentage_error)
                 print(f'Min test cell level RMSE: {min_test_cell_level_RMSE:.9f}')
                 print(f'Min test cell level percentage error: {min_test_cell_level_percentage_error:.9f}')

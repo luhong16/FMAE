@@ -11,7 +11,7 @@ if __name__ == "__main__":
 
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--path", type=str, default="logs/IR/max_min_volt_temp/799_pretrain_vit_tiny_patch16_depth3/epoch20_blr8e-3_bsz32_ld0.65_wd0.05_dp0.1/s5")
+    parser.add_argument("--path", type=str, default="logs/IR/max_min_volt_temp/799_pretrain_vit_half_patch16/epoch20_warmupepoch4_blr5e-3_bsz32_ld0.8_wd0.05_dp0.1/s5")
     
     args = parser.parse_args()
     args.path = args.path + r"/f{fold_num}_b{brand_num}.txt"

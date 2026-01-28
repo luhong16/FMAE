@@ -71,7 +71,10 @@ class MaskedAutoencoderViT(nn.Module):
         self.decoder_patch_embed = PatchEmbed(img_size, patch_size, len(self.decoder_channel_id), decoder_embed_dim)
         self.decoder_pad_type = kwargs["decoder_pad_type"]    #  mask_token or soc_current_mileage_embed
         num_patches = self.patch_embed.num_patches
-        self.mask_channel_token = nn.Parameter(torch.zeros(1, in_chans, embed_dim))
+        if "no_learned_channel_token" in kwargs and kwargs["no_learned_channel_token"]:
+            self.mask_channel_token = nn.Parameter(torch.zeros(1, in_chans, embed_dim), requires_grad=False)
+        else:
+            self.mask_channel_token = nn.Parameter(torch.zeros(1, in_chans, embed_dim))
         self.cls_token = nn.Parameter(torch.zeros(1, 1, embed_dim))
 
         if "pos_embed_dim" in kwargs:
@@ -145,7 +148,9 @@ class MaskedAutoencoderViT(nn.Module):
         # timm's trunc_normal_(std=.02) is effectively normal_(std=0.02) as cutoff is too big (2.)
         torch.nn.init.normal_(self.cls_token, std=.02)
         torch.nn.init.normal_(self.mask_token, std=.02)
-        torch.nn.init.normal_(self.mask_channel_token, std=.02)
+        # do not initialize mask channel token if require grad is False
+        if self.mask_channel_token.requires_grad:
+            torch.nn.init.normal_(self.mask_channel_token, std=.02)
 
         # initialize nn.Linear and nn.LayerNorm
         self.apply(self._init_weights)
@@ -479,6 +484,13 @@ def mae_vit_half_patch16(**kwargs):
         patch_size=16, embed_dim=96, depth=6, num_heads=3,
         decoder_embed_dim=64, decoder_depth=4, decoder_num_heads=4,
         mlp_ratio=4, norm_layer=partial(nn.LayerNorm, eps=1e-6), **kwargs)
+    return model
+
+def mae_vit_half_patch16_no_learned_channel_token(**kwargs):
+    model = MaskedAutoencoderViT(
+        patch_size=16, embed_dim=96, depth=6, num_heads=3,
+        decoder_embed_dim=64, decoder_depth=4, decoder_num_heads=4,
+        mlp_ratio=4, norm_layer=partial(nn.LayerNorm, eps=1e-6), no_learned_channel_token=True, **kwargs)
     return model
 
 def mae_vit_base_patch8_dec512d8b(**kwargs):
