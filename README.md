@@ -1,6 +1,6 @@
 This is the official code repository for our paper entitled **Multitask Battery Management With Flexible Pretraining**.
 
-###Environment requirement
+### Environment requirement
 
 ```
 # basic environment
@@ -14,9 +14,9 @@ torchvision==0.8.2+cu110
 pip install -r requirement.txt
 ```
 
-###Preparation
+### Preparation
 
-####Dataset download
+#### Dataset download
 
 We provide a python code to download dataset. Run
 
@@ -49,17 +49,17 @@ Please make sure the structure is like the following.
     ...
 ```
 
-####Pretrained model
+#### Pretrained model
 
 The pretrained model is in the `pretrained_model` folder. Of course, you can also pretrain from scratch. This part will be mentioned next.
 
-####Other information for five-fold cross-validation
+#### Other information for five-fold cross-validation
 
 `five_fold_utils` folder provides the path information for five-fold cross-validation.
 
 `normalize` folder provides the normalization coefficients.
 
-###FMAE pretraining (ours)
+### FMAE pretraining (ours)
 
 Run the following command to pretrain from scratch. 
 
@@ -67,11 +67,11 @@ Run the following command to pretrain from scratch.
 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python -u -m torch.distributed.launch --nproc_per_node=8 main_pretrain.py --batch_size 32 --model mae_vit_half_patch16 --mask_patch_ratio 0.5 --mask_channel_ratio 0.4 --epochs 800 --warmup_epochs 40 --same_normalizer --blr 1.5e-4 --weight_decay 0.05 --num_snippet 5 --task batterybrandmileage --decoder_type combine --decoder_pad_type soc_current_mileage_embed --mask_snippet_num 0 --pos_embed_dim 12 --decoder_pos_embed_dim 8 --output_dir ./
 ```
 
-###Finetuning
+### Finetuning
 
 We provide several scripts named `finetune_{method_name}_{task_name}` (or `finetune_FMAE_{method_name}_{dataset_name}` for the capacity estimation task) in the `script` and `baselines/scripts` folder for finetuning.
 
-####FMAE finetuning (ours)
+#### FMAE finetuning (ours)
 
 **Anomaly detection**: run the following script
 
@@ -272,11 +272,11 @@ python ./baselines/visual_results/RUL_results_traditional_methods.py
 python ./baselines/visual_results/IR_results_traditional_methods.py
 ```
 
-###Data availability
+### Data availability
 
 The datasets are available at links below https://cloud.tsinghua.edu.cn/d/713eb388382c49e585a6/.
 
-###Code reference
+### Code reference
 
 We use partial code from 
 
