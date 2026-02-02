@@ -3,6 +3,9 @@ This is the official code repository for our paper entitled **Multitask Battery 
 ### Environment requirement
 
 ```
+# system
+Ubuntu 22.04
+
 # basic environment
 python 3.6.6
 
@@ -10,8 +13,44 @@ python 3.6.6
 torch==1.7.1+cu110
 torchvision==0.8.2+cu110
 
-# installing packages
-pip install -r requirement.txt
+# installing conda environments and packages by running the following commands
+conda create --name fmae python=3.6.6
+source activate fmae
+pip install torch==1.7.1+cu110 torchvision==0.8.2+cu110 -f https://download.pytorch.org/whl/torch_stable.html
+cd FMAE
+pip install -r requirements.txt
+```
+
+Environment setup may take 20 minutes to an hour, depending on your network conditions.
+
+### Demo
+
+We provide a demo that loads the pretrained model and finetunes it on the capacity estimation task using a small subset of EV data. This is intended to verify that your environment is correctly installed and the code executes as expected.
+
+Instructions for downloading the full dataset, as well as performing pretraining and finetuning on the complete dataset, are provided below.
+
+#### Run the demo
+
+Execute the following command to start the finetuning process:
+```
+python -u main_finetune.py --finetune ./pretrained_model/mae_pretrainmae_vit_half_patch16_mpr0.5_mcr0.4_msn0_lrNone_blr0.00015_minlr0.0_weightdecay0.05_warmupepoch40_numsnippet5_pos_embed_dim12_d_pos_embed_dim8_d_typecombine_d_pad_typesoc_current_mileage_embed_epochs800_s0/checkpoint-799.pth --batch_size 32 --model vit_half_patch16 --epochs 20 --warmup_epochs 4 --blr 5e-2 --layer_decay 0.5 --fold_num 2 --brand_num -1 --weight_decay 0.005 --drop_path 0.0 --same_normalizer --mask_type no --pos_embed_dim 12 --seed 5  --downstream capacity --data_percent 100 --task batterybrandmileage --output_dir logs/demo > logs/demo/demo.txt 2>&1
+```
+It will take less than one minute.
+
+#### Retrieve results
+
+Execute the following command to read the results:
+```
+python get_result/get_result_capacity.py --path logs/demo --type demo
+```
+
+#### Expected Output
+
+The expected results should look like the following (please note that values may vary slightly depending on your hardware and environment):
+
+```
+Demo RMSE:  1.489702393514389 Average: 1.489702393514389
+Overall average:  1.489702393514389
 ```
 
 ### Preparation

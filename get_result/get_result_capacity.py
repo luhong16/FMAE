@@ -15,6 +15,7 @@ if __name__ == "__main__":
     parser.add_argument("--path", type=str, default="logs/capacity/no/799_pretrain_vit_half_patch16/epoch20_blr5e-2_bsz32_ld0.5_wd0.005_dp0.0/s5")
     parser.add_argument("--type", type=str, default="EV")
     args = parser.parse_args()
+    original_path = args.path
     args.path = args.path + r"/f{fold_num}_b{brand_num}.txt"
 
     # Normalize to get SOH
@@ -32,6 +33,9 @@ if __name__ == "__main__":
     if args.type == 'nc':
         brand_num_list = [14]
         dataset_name = [""]
+    if args.type == 'demo':
+        brand_num_list = [-1]
+        dataset_name = ["Demo"]
         
     result = []
     for b, n in zip(brand_num_list, dataset_name):
@@ -40,12 +44,20 @@ if __name__ == "__main__":
         for f in range(5):
             
             specify_name = args.path.format(fold_num=f,brand_num=b)
+
+            if args.type == 'demo':
+                if f != 2:
+                    continue
+                specify_name = original_path + r"/demo.txt"
+
             res = file_to_string(specify_name)
             if "Training time" in res:
                 for line in reversed(res.split("\n")):
                     if "Min test set RMSE:" in line:
                         rmse = float(line.split()[-1])
-                        if b <= 7:
+                        if b == -1:
+                            rmse = rmse * 10000 / Normalize[2]
+                        elif b <= 7:
                             rmse = rmse * 10000 / Normalize[b]
                         else:
                             rmse = rmse * 100.

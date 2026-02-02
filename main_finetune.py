@@ -200,6 +200,8 @@ def main(args):
             car_dict_dir = 'five_fold_utils_lab_capacity'
         elif args.brand_num == 14:
             car_dict_dir = 'five_fold_utils_nc_relaxation_capacity'
+        elif args.brand_num == -1:
+            car_dict_dir = 'five_fold_utils_demo'
         else:
             car_dict_dir = 'five_fold_utils_EV_capacity'
     elif args.downstream == 'IR':
@@ -209,7 +211,10 @@ def main(args):
     else:
         raise NotImplementedError
     
-    car_dict_dir = r"five_fold_utils/"+car_dict_dir
+    if args.brand_num == -1:
+        car_dict_dir = r"demo/"+car_dict_dir
+    else:
+        car_dict_dir = r"five_fold_utils/"+car_dict_dir
 
     if args.downstream in ['anomaly']:
         if args.finetune:
