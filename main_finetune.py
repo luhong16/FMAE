@@ -55,6 +55,9 @@ def get_args_parser():
     parser.add_argument('--save_interval', default=10000, type=int)
     
     parser.add_argument('--task', type=str, default="batterybranda")
+    parser.add_argument('--input_channels', type=str, default="all",
+                        choices=["all", "soc_current_volt"],
+                        help='Finetuning channel subset. soc_current_volt uses SoC, current, voltage plus mileage.')
     parser.add_argument('--h', type=int, default=None, help='Choose largest h thousandths') 
 
     parser.add_argument("--downstream", type=str, default="anomaly")
@@ -269,7 +272,12 @@ def main(args):
         columns = ['volt', 'current', 'soc', 'max_single_volt', 'min_single_volt', 'max_temp', 'min_temp', 'timestamp', 'mileage']
         assert args.task == "batterybrandmileage"
     
-    data_task = tasks.Task(task_name=args.task, columns=columns)
+    task_name = args.task
+    if args.input_channels == "soc_current_volt":
+        if args.task != "batterybrandmileage":
+            raise ValueError("--input_channels soc_current_volt is only supported with --task batterybrandmileage")
+        task_name = "batterybrandmileagecore"
+    data_task = tasks.Task(task_name=task_name, columns=columns)
 
     kwargs = {}
     if args.pos_embed_dim != -1:

@@ -114,6 +114,21 @@ class BatterybrandmileageTask(Task):
              columns.index('volt'), 
              columns.index('mileage')]).astype(int)
         return self.encoder
+
+
+class BatterybrandmileagecoreTask(Task):
+    def set_params(self):
+        self.encoder_dimension = 4
+        self.decoder_dimension = 2
+        self.output_dimension = 2
+
+    def get_task_idx(self, columns):
+        self.encoder = np.array(
+            [columns.index("soc"),
+             columns.index("current"),
+             columns.index("volt"),
+             columns.index("mileage")]).astype(int)
+        return self.encoder
     
 
 def to_tensor(input_embedding):

@@ -50,6 +50,9 @@ def get_args_parser():
                         help='Accumulate gradient iterations (for increasing the effective batch size under memory constraints)')
 
     parser.add_argument('--task', type=str, default="batterybranda")
+    parser.add_argument('--input_channels', type=str, default="all",
+                        choices=["all", "soc_current_volt"],
+                        help='Pretraining channel subset. soc_current_volt uses SoC, current, voltage plus mileage.')
     
     #wandb
     parser.add_argument("--use-wandb", action='store_true')
@@ -99,6 +102,12 @@ def get_args_parser():
     
     # Dataset parameters
     parser.add_argument("--same_normalizer", action='store_true')
+    parser.add_argument('--pretrain_data', default='ev', choices=['ev', 'ev_lab'],
+                        help='Pretraining data source. ev keeps the original EV-only behavior; ev_lab adds lab capacity snippets.')
+    parser.add_argument('--pretrain_ev_car_dict_dir', default='five_fold_utils/five_fold_utils_six_brand_all',
+                        help='EV car-dict directory used for pretraining.')
+    parser.add_argument('--pretrain_lab_car_dict_dir', default='five_fold_utils/five_fold_utils_lab_capacity',
+                        help='Lab car-dict directory used when --pretrain_data ev_lab.')
 
     parser.add_argument('--output_dir', default='',
                         help='path where to save, empty for no saving')
@@ -163,12 +172,32 @@ def main(args):
 
     cudnn.benchmark = True
 
-    car_dict_dir = r'five_fold_utils/five_fold_utils_six_brand_all'
-    dataset_train, normalizer = load_dataset(fold_num=None, brand_num=None, same_normalizer=args.same_normalizer, car_dict_dir = car_dict_dir, data_type = 'pretrain', dataset_fn=PreprocessNormalizer, num_snippet=args.num_snippet, downstream='pretrain', seed=args.seed, task=args.task)
+    car_dict_dir_lab = args.pretrain_lab_car_dict_dir if args.pretrain_data == 'ev_lab' else None
+    dataset_result = load_dataset(
+        fold_num=None,
+        brand_num=None,
+        same_normalizer=args.same_normalizer,
+        car_dict_dir=args.pretrain_ev_car_dict_dir,
+        data_type='pretrain',
+        dataset_fn=PreprocessNormalizer,
+        num_snippet=args.num_snippet,
+        downstream='pretrain',
+        seed=args.seed,
+        task=args.task,
+        car_dict_dir_lab=car_dict_dir_lab,
+    )
+    if args.pretrain_data == 'ev_lab':
+        dataset_train, normalizer, normalizer_lab = dataset_result
+    else:
+        dataset_train, normalizer = dataset_result
+        normalizer_lab = None
     
     if misc.is_main_process():
         with open(os.path.join(args.output_dir, "norm.pkl"), "wb") as f:
             pickle.dump(normalizer, f)
+        if normalizer_lab is not None:
+            with open(os.path.join(args.output_dir, "norm_lab.pkl"), "wb") as f:
+                pickle.dump(normalizer_lab, f)
 
     num_tasks = misc.get_world_size()
     global_rank = misc.get_rank()
@@ -195,7 +224,12 @@ def main(args):
         columns = ['volt', 'current', 'soc', 'max_single_volt', 'min_single_volt', 'max_temp', 'min_temp', 'timestamp', 'mileage']
     else:
         columns = ['volt', 'current', 'soc', 'max_single_volt', 'min_single_volt', 'max_temp', 'min_temp', 'timestamp']
-    data_task = tasks.Task(task_name=args.task, columns=columns)
+    task_name = args.task
+    if args.input_channels == "soc_current_volt":
+        if args.task != "batterybrandmileage":
+            raise ValueError("--input_channels soc_current_volt is only supported with --task batterybrandmileage")
+        task_name = "batterybrandmileagecore"
+    data_task = tasks.Task(task_name=task_name, columns=columns)
 
     # define the model
     kwargs = {}
@@ -205,7 +239,10 @@ def main(args):
         kwargs["decoder_pos_embed_dim"] = args.decoder_pos_embed_dim
     kwargs["decoder_pad_type"] = args.decoder_pad_type
     if args.decoder_pad_type == "soc_current_mileage_embed":
-        kwargs["decoder_channel_id"] = [0, 1, 7]
+        if args.input_channels == "soc_current_volt":
+            kwargs["decoder_channel_id"] = [0, 1, 3]
+        else:
+            kwargs["decoder_channel_id"] = [0, 1, 7]
     kwargs["mask_snippet_num"] = args.mask_snippet_num
 
     model = models_mae.__dict__[args.model](in_chans=len(data_task.encoder), norm_pix_loss=args.norm_pix_loss, num_snippet=args.num_snippet, decoder_type=args.decoder_type, **kwargs)
@@ -304,8 +341,12 @@ if __name__ == '__main__':
                         '_d_type' + str(args.decoder_type) + \
                         '_d_pad_type' + str(args.decoder_pad_type) + \
                         '_epochs' + str(args.epochs) + \
-                        '_s' + str(args.seed) 
-                        
+                        '_s' + str(args.seed)
+    if args.input_channels != "all":
+        args.output_dir += '_inputchannels' + str(args.input_channels)
+    if args.pretrain_data != "ev":
+        args.output_dir += '_pretraindata' + str(args.pretrain_data)
+
     if args.output_dir:
         Path(args.output_dir).mkdir(parents=True, exist_ok=True)
     main(args)

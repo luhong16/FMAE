@@ -60,9 +60,10 @@ class Normalizer:
 
 class PreprocessNormalizer:
 
-    def __init__(self, dataset, metadata=None, normalizer_fn=None, label_normalizer=None, num_snippet=0, cycle_gap=None, car_dict=None, mileage=None, lab=None, cycle_info=None, downstream='', task='', seed=0, brand_num=None, **kwargs):
+    def __init__(self, dataset, metadata=None, normalizer_fn=None, label_normalizer=None, num_snippet=0, cycle_gap=None, car_dict=None, mileage=None, lab=None, cycle_info=None, normalizer_lab_fn=None, downstream='', task='', seed=0, brand_num=None, **kwargs):
         self.dataset = dataset
         self.normalizer_fn = normalizer_fn
+        self.normalizer_lab_fn = normalizer_lab_fn
         self.metadata = metadata
         self.label_normalizer = label_normalizer # (mean, std)
         self.num_snippet = num_snippet # how many snippets are used in multi-snippet MAE
@@ -142,7 +143,10 @@ class PreprocessNormalizer:
         if self.num_snippet == 0:
             df, label, car, brand = self.dataset[0][idx], self.dataset[1][idx], self.dataset[2][idx], self.dataset[3][idx]
            
-            df = self.normalizer_fn(df)
+            if self.downstream == 'pretrain' and self.lab[idx] and self.normalizer_lab_fn is not None:
+                df = self.normalizer_lab_fn(df)
+            else:
+                df = self.normalizer_fn(df)
             
             if self.task == "batterybrandmileage":
                 normalize_mile = np.ones((1, df.shape[1]), dtype = df.dtype) * self.mileage[idx]
@@ -157,7 +161,10 @@ class PreprocessNormalizer:
                 assert self.dataset[2][ids] == car
                 assert self.dataset[3][ids] == brand
 
-                df = self.normalizer_fn(df)
+                if self.downstream == 'pretrain' and self.lab[ids] and self.normalizer_lab_fn is not None:
+                    df = self.normalizer_lab_fn(df)
+                else:
+                    df = self.normalizer_fn(df)
                 
                 normalize_mile = np.ones((1, df.shape[1]), dtype = df.dtype) * self.mileage[ids]
                 
@@ -183,19 +190,23 @@ class PreprocessNormalizer:
             return df, label, car
 
 
-def load_dataset(fold_num, brand_num, same_normalizer=False, car_dict_dir='five_fold_utils_six_brand_all', downstream='', data_type=None, normalizer = None, dataset_fn=None, ind_ood_car_dict=None, all_car_dict=None, num_snippet=0, cycle_gap=0, cycle_id=None, data_percent=100, seed=0, normalizer_lab=None, task=''):
+def load_dataset(fold_num, brand_num, same_normalizer=False, car_dict_dir='five_fold_utils_six_brand_all', downstream='', data_type=None, normalizer = None, dataset_fn=None, ind_ood_car_dict=None, all_car_dict=None, num_snippet=0, cycle_gap=0, cycle_id=None, data_percent=100, seed=0, normalizer_lab=None, task='', car_dict_dir_lab=None):
     
     TOTAL_BRAND_NUM = 14
+    LAB_CAR_ID_OFFSET = 10000
+
+    def car_dict_path(root, filename):
+        return os.path.join(root, filename)
     
     if data_type == 'pretrain':
         brand = []
         pretrain_list = []
         brand.append([])
         for i in range(1, 7):
-            ind_ood_car_dict = np.load(f'./{car_dict_dir}/ind_odd_dict{i}.npz.npy', allow_pickle=True).item()
+            ind_ood_car_dict = np.load(car_dict_path(car_dict_dir, f'ind_odd_dict{i}.npz.npy'), allow_pickle=True).item()
             brand.append(ind_ood_car_dict['ind_sorted'] + ind_ood_car_dict['ood_sorted'])
             pretrain_list += ind_ood_car_dict['ind_sorted'] + ind_ood_car_dict['ood_sorted']
-        all_car_dict = np.load(f'./{car_dict_dir}/all_car_dict.npz.npy', allow_pickle=True).item()
+        all_car_dict = np.load(car_dict_path(car_dict_dir, 'all_car_dict.npz.npy'), allow_pickle=True).item()
         car_number = pretrain_list
 
     else:
@@ -366,6 +377,68 @@ def load_dataset(fold_num, brand_num, same_normalizer=False, car_dict_dir='five_
     if normalizer is None:
         if same_normalizer:
             normalizer = Normalizer(dfs=X)
+
+    if data_type == 'pretrain' and car_dict_dir_lab is not None:
+        if not same_normalizer and normalizer_lab is None:
+            raise ValueError("EV+lab pretraining currently requires --same_normalizer so lab data can get a normalizer.")
+
+        lab_brand = {}
+        lab_pretrain_list = []
+        for i in range(10, 14):
+            lab_ind_ood_car_dict = np.load(car_dict_path(car_dict_dir_lab, f'ind_odd_dict{i}.npz.npy'), allow_pickle=True).item()
+            lab_brand[i] = lab_ind_ood_car_dict['ind_sorted'] + lab_ind_ood_car_dict['ood_sorted']
+            lab_pretrain_list += lab_brand[i]
+        lab_all_car_dict = np.load(car_dict_path(car_dict_dir_lab, 'all_car_dict.npz.npy'), allow_pickle=True).item()
+
+        X_lab = []
+        print('lab car_number is ', data_type, lab_pretrain_list)
+        print(len(lab_pretrain_list))
+        for (___, each_num) in enumerate(lab_pretrain_list):
+            print('lab', ___, len(lab_all_car_dict[each_num]))
+            pkls = lab_all_car_dict[each_num]
+
+            for pkl_all in pkls:
+                each_pkl = pkl_all[0]
+                train1 = torch.load(each_pkl)
+                x = train1[0].transpose(1, 0).astype(np.float32)
+
+                charge = train1[1]['charge_segment'] != -1
+
+                X_lab.append(x)
+                y.append(0)
+                metadata.append(train1[1])
+
+                if train1[1]['charge_segment'] != -1:
+                    mileage_cycle = train1[1]['charge_segment']
+                elif train1[1]['discharge_segment'] != -1:
+                    mileage_cycle = train1[1]['discharge_segment']
+                else:
+                    raise NotImplementedError
+
+                mileage.append(mileage_cycle)
+
+                car = int(train1[1]['car']) + LAB_CAR_ID_OFFSET
+                car_id.append(car)
+                lab.append(1)
+
+                pair = (car, charge)
+                if pair not in car_dict:
+                    car_dict[pair] = [[], 0.]
+                car_dict[pair][0].append(len(y)-1)
+                car_dict[pair][1] = max(car_dict[pair][1], mileage_cycle)
+
+                only_in_one_brand = False
+                for i in range(10, 14):
+                    if each_num in lab_brand[i]:
+                        brand_id.append(i)
+                        assert only_in_one_brand is False
+                        only_in_one_brand = True
+                assert only_in_one_brand is True
+
+        if normalizer_lab is None:
+            if same_normalizer:
+                normalizer_lab = Normalizer(dfs=X_lab)
+        X.extend(X_lab)
             
     if downstream in ['anomaly', 'pretrain']:
         y = np.stack(y).astype(np.int64)
@@ -379,7 +452,13 @@ def load_dataset(fold_num, brand_num, same_normalizer=False, car_dict_dir='five_
 
     label_normalizer = (np.mean(y), np.std(y))
 
+    kwargs = {}
+    if data_type == 'pretrain' and car_dict_dir_lab is not None:
+        kwargs["normalizer_lab_fn"] = normalizer_lab.norm_func
+
     dataset = dataset_fn((X, y, car_id, brand_id), label_normalizer=label_normalizer, metadata=metadata, mileage=mileage, lab=lab, cycle_info=cycle_info, normalizer_fn=normalizer.norm_func if same_normalizer else [
-                            None if normalizer[i] is None else normalizer[i].norm_func for i in range(len(normalizer))], num_snippet=num_snippet, cycle_gap=cycle_gap, car_dict=car_dict, downstream=downstream, seed=seed, task=task, brand_num=brand_num)
+                            None if normalizer[i] is None else normalizer[i].norm_func for i in range(len(normalizer))], num_snippet=num_snippet, cycle_gap=cycle_gap, car_dict=car_dict, downstream=downstream, seed=seed, task=task, brand_num=brand_num, **kwargs)
     
+    if data_type == 'pretrain' and car_dict_dir_lab is not None:
+        return dataset, normalizer, normalizer_lab
     return dataset, normalizer

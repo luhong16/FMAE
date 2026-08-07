@@ -53,6 +53,64 @@ Demo RMSE:  1.489702393514389 Average: 1.489702393514389
 Overall average:  1.489702393514389
 ```
 
+### Visualize results
+
+We provide scripts to recreate out plots from intermediate results.
+
+We provide a python code to download these intermediate results. Run
+
+```
+python thu_cloud_download.py -l https://cloud.tsinghua.edu.cn/d/e635c9dcebd04f039466/ -s ./visual/
+```
+
+, and then press 'y' and enter. 
+
+You can also download `data.tar.gz` from `https://cloud.tsinghua.edu.cn/d/e635c9dcebd04f039466/` manually.
+
+Run
+
+```
+cd visual
+tar -xzvf data.tar.gz
+```
+
+to unzip them. 
+
+You can run the python code to recreate plots, for example, run
+
+```
+python fig3/FMAE_fig3a_cell_capacity.py
+python fig3/FMAE_fig3a_cell_IR.py
+```
+
+, which will recreate our figure3a in the `/fig3` folder.
+
+All the commands are:
+
+```
+python fig3/FMAE_fig3a_cell_capacity.py
+python fig3/FMAE_fig3a_cell_IR.py
+python fig3/FMAE_fig3b_system_anomaly.py
+python fig3/FMAE_fig3b_system_capacity.py
+python fig4/FMAE_fig4_cell_RUL.py
+python fig5/FMAE_fig5a_pretraining_improvements.py
+python fig5/FMAE_fig5b_NC_capacity.py
+python fig5/FMAE_fig5c_robustness.py
+python SI_fig3/FMAE_SI_fig3_NE_reproduce.py
+python SI_fig4/FMAE_SI_fig4_gradient_analysis.py
+python Rebuttal2_capacity_embeddings/tsne_visual_capacity.py
+```
+
+The plots will be recreated at the same folder of each python code.
+
+Note: when running 
+
+```
+python Rebuttal2_capacity_embeddings/tsne_visual_capacity.py
+```
+
+, since python 3.6.6 does not support scikit-learn 1.6.1 to run tsne_visual_capacity.py, we provide a new environment. The details can be found in the `Rebuttal2_capacity_embeddings/README.md`.
+
 ### Preparation
 
 #### Dataset download
