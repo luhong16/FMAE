@@ -228,13 +228,14 @@ bash script/finetune_LSTM_IR.sh
 
 The result will be stored in the `logs` folder. 
 
-#### PatchTST and iTransformer
+#### PatchTST, iTransformer and TimeMixer++
 
 **Anomaly detection**: run the following script
 
 ```
 bash ./baselines/scripts/finetune_PatchTST_anomaly.sh
 bash ./baselines/scripts/finetune_iTransformer_anomaly.sh
+bash ./baselines/scripts/finetune_TimeMixer++_anomaly.sh
 ```
 
 **Capacity estimation**: run the following scripts
@@ -247,6 +248,10 @@ bash ./baselines/scripts/finetune_PatchTST_capacity_storage.sh
 bash ./baselines/scripts/finetune_iTransformer_capacity_EV.sh
 bash ./baselines/scripts/finetune_iTransformer_capacity_lab.sh
 bash ./baselines/scripts/finetune_iTransformer_capacity_storage.sh
+
+bash ./baselines/scripts/finetune_TimeMixer++_capacity_EV.sh
+bash ./baselines/scripts/finetune_TimeMixer++_capacity_lab.sh
+bash ./baselines/scripts/finetune_TimeMixer++_capacity_storage.sh
 ```
 
 **RUL prediction**: run the following script
@@ -254,6 +259,7 @@ bash ./baselines/scripts/finetune_iTransformer_capacity_storage.sh
 ```
 bash ./baselines/scripts/finetune_PatchTST_RUL.sh
 bash ./baselines/scripts/finetune_iTransformer_RUL.sh
+bash ./baselines/scripts/finetune_TimeMixer++_RUL.sh
 ```
 
 **IR estimation**: run the following script
@@ -261,6 +267,7 @@ bash ./baselines/scripts/finetune_iTransformer_RUL.sh
 ```
 bash ./baselines/scripts/finetune_PatchTST_IR.sh
 bash ./baselines/scripts/finetune_iTransformer_IR.sh
+bash ./baselines/scripts/finetune_TimeMixer++_IR.sh
 ```
 
 The result will be stored in the `logs` folder. 
@@ -369,6 +376,12 @@ python ./baselines/visual_results/RUL_results_traditional_methods.py
 python ./baselines/visual_results/IR_results_traditional_methods.py
 ```
 
+### Other experiments
+
+The `/experiment` folder contains the code, instructions, scripts, and logs for our newly added experiments.
+
+It includes multiple subfolders, with each subfolder corresponding to a specific experiment. Each experiment folder contains its own `README.md`, which provides instructions for reproducing and running the corresponding experiment.
+
 ### Data availability
 
 The datasets are available at links below https://cloud.tsinghua.edu.cn/d/713eb388382c49e585a6/.
@@ -380,6 +393,7 @@ We use partial code from
 ```
 https://github.com/facebookresearch/mae
 https://github.com/thuml/Time-Series-Library
+https://github.com/JuRenGithub/LiPM
 https://github.com/962086838/Battery_fault_detection_NC_github
 https://github.com/chenyifanthu/THU-Cloud-Downloader
 ```

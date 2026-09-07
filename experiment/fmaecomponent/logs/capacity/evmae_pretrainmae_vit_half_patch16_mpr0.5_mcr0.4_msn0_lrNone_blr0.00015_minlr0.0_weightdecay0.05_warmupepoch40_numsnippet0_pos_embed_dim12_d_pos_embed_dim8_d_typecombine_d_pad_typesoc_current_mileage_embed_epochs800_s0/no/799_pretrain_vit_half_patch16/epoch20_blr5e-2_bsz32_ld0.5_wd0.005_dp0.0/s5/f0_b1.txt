@@ -1,0 +1,929 @@
+[19:56:50.228991] job dir: /nfs/nfs-home/luhong/FMAE_clean/FMAE
+[19:56:50.229113] Namespace(SFT_blr=1e-06,
+accum_iter=1,
+apply_noise=False,
+batch_size=32,
+blr=0.05,
+brand_num=1,
+clip_grad=None,
+cycle_gap=0,
+cycle_id=None,
+data_percent=5,
+device='cuda',
+dist_eval=False,
+dist_on_itp=False,
+dist_url='env://',
+distributed=False,
+downstream='capacity',
+drop_path=0.0,
+epochs=20,
+eval=False,
+finetune='/nfs/nfs-home/luhong/FMAE_clean/FMAE/experiment/fmaecomponent/pretrained_model/evmae_pretrainmae_vit_half_patch16_mpr0.5_mcr0.4_msn0_lrNone_blr0.00015_minlr0.0_weightdecay0.05_warmupepoch40_numsnippet0_pos_embed_dim12_d_pos_embed_dim8_d_typecombine_d_pad_typesoc_current_mileage_embed_epochs800_s0/checkpoint-799.pth',
+fold_num=0,
+global_pool=True,
+h=None,
+inference_cycle_id=None,
+input_channels='all',
+input_size=224,
+job_type='training-',
+label_normalizer=False,
+layer_decay=0.5,
+linear_probe=False,
+local_rank=-1,
+log_dir=None,
+lr=None,
+mask_type='no',
+min_lr=1e-06,
+model='vit_half_patch16',
+num_snippet=0,
+num_workers=10,
+output_dir='/nfs/nfs-home/luhong/FMAE_clean/FMAE/experiment/fmaecomponent/logs/capacity/evmae_pretrainmae_vit_half_patch16_mpr0.5_mcr0.4_msn0_lrNone_blr0.00015_minlr0.0_weightdecay0.05_warmupepoch40_numsnippet0_pos_embed_dim12_d_pos_embed_dim8_d_typecombine_d_pad_typesoc_current_mileage_embed_epochs800_s0/no/799_pretrain_vit_half_patch16/epoch20_blr5e-2_bsz32_ld0.5_wd0.005_dp0.0/s5/f0_b1',
+pin_mem=True,
+pos_embed_dim=12,
+resume='',
+same_normalizer=True,
+save_interval=10000,
+seed=5,
+snippet_size=128,
+start_epoch=0,
+task='batterybrandmileage',
+use_wandb=False,
+user_name='',
+wandb_group='vit_finetune',
+wandb_name='',
+wandb_project='',
+warmup_epochs=4,
+weight_decay=0.005,
+world_size=1)
+[19:56:50.931954] ind_car_num_list [1078, 1106, 1015, 1110, 1186, 1074, 1061, 1010, 1020, 1174, 1118, 1050, 1132, 1138, 1032, 1067, 1101, 1123, 1009, 1065, 1072, 1147, 1019, 1026, 1154, 1165, 1128, 1149, 1157, 1080, 1006, 1098, 1070, 1040, 1100, 1108, 1105, 1073, 1084, 1102, 1060, 1035, 1081, 1175, 1142, 1041, 1139, 1159, 1127, 1028, 1054, 1086, 1113, 1012, 1066, 1144, 1171, 1158, 1124, 1178, 1185, 1014, 1046, 1047, 1002, 1036, 1021, 1083, 1129, 1042, 1062, 1048, 1109, 1013, 1094, 1146, 1055, 1135, 1121, 1111, 1030, 1117, 1003, 1016, 1056, 1120, 1187, 1008, 1085, 1104, 1053, 1099, 1058, 1153, 1150]
+[19:56:50.932092] ood_car_num_list [1049, 1033, 1112, 1164]
+[19:56:50.932126] car_number is  finetune_train [1065, 1072, 1147, 1019, 1026, 1154, 1165, 1128, 1149, 1157, 1080, 1006, 1098, 1070, 1040, 1100, 1108, 1105, 1073, 1084, 1102, 1060, 1035, 1081, 1175, 1142, 1041, 1139, 1159, 1127, 1028, 1054, 1086, 1113, 1012, 1066, 1144, 1171, 1158, 1124, 1178, 1185, 1014, 1046, 1047, 1002, 1036, 1021, 1083, 1129, 1042, 1062, 1048, 1109, 1013, 1094, 1146, 1055, 1135, 1121, 1111, 1030, 1117, 1003, 1016, 1056, 1120, 1187, 1008, 1085, 1104, 1053, 1099, 1058, 1153, 1150, 1049, 1033, 1112, 1164]
+[19:56:50.932146] 80
+[19:56:50.932158] 0 2738
+[19:56:51.012818] 1 2012
+[19:56:51.072272] 2 1519
+[19:56:51.117174] 3 6567
+[19:56:51.316035] 4 5366
+[19:56:51.482346] 5 3644
+[19:56:51.591445] 6 2414
+[19:56:51.660744] 7 1587
+[19:56:51.707555] 8 3556
+[19:56:51.812516] 9 3915
+[19:56:51.947951] 10 4772
+[19:56:52.137790] 11 3614
+[19:56:52.278413] 12 6865
+[19:56:52.565142] 13 1496
+[19:56:52.625483] 14 735
+[19:56:52.654098] 15 1585
+[19:56:52.716741] 16 3293
+[19:56:52.818305] 17 4766
+[19:56:52.976224] 18 518
+[19:56:52.995090] 19 4018
+[19:56:53.148061] 20 4752
+[19:56:53.340176] 21 5024
+[19:56:53.540400] 22 3016
+[19:56:53.658640] 23 3287
+[19:56:53.775245] 24 1621
+[19:56:53.823292] 25 2711
+[19:56:53.926707] 26 2143
+[19:56:54.010117] 27 4831
+[19:56:54.200727] 28 4621
+[19:56:54.387997] 29 4739
+[19:56:54.576340] 30 3972
+[19:56:54.734487] 31 3226
+[19:56:54.861506] 32 7489
+[19:56:55.153901] 33 393
+[19:56:55.169674] 34 929
+[19:56:55.206491] 35 2678
+[19:56:55.312754] 36 5599
+[19:56:55.533001] 37 3613
+[19:56:55.675100] 38 4377
+[19:56:55.852989] 39 3698
+[19:56:55.996171] 40 3067
+[19:56:56.120968] 41 1880
+[19:56:56.197584] 42 4651
+[19:56:56.385969] 43 4444
+[19:56:56.567466] 44 5181
+[19:56:56.773445] 45 4327
+[19:56:56.945846] 46 2901
+[19:56:57.061090] 47 4738
+[19:56:57.244595] 48 5997
+[19:56:57.478481] 49 6308
+[19:56:57.735662] 50 519
+[19:56:57.756443] 51 7175
+[19:56:58.043358] 52 1753
+[19:56:58.114474] 53 2527
+[19:56:58.218785] 54 3078
+[19:56:58.342739] 55 2253
+[19:56:58.434775] 56 819
+[19:56:58.468703] 57 5503
+[19:56:58.690439] 58 4911
+[19:56:58.893368] 59 2731
+[19:56:59.003450] 60 834
+[19:56:59.036795] 61 457
+[19:56:59.055091] 62 8831
+[19:56:59.413620] 63 932
+[19:56:59.451376] 64 3585
+[19:56:59.597262] 65 5176
+[19:56:59.804501] 66 3854
+[19:56:59.957480] 67 729
+[19:56:59.986323] 68 2714
+[19:57:00.095808] 69 2437
+[19:57:00.198475] 70 5316
+[19:57:00.416942] 71 7127
+[19:57:00.706774] 72 4685
+[19:57:00.896356] 73 842
+[19:57:00.929703] 74 1742
+[19:57:01.001328] 75 1015
+[19:57:01.042719] 76 1222
+[19:57:01.092085] 77 4553
+[19:57:01.276224] 78 945
+[19:57:01.315316] 79 1908
+[19:57:01.505993] ind_car_num_list [1078, 1106, 1015, 1110, 1186, 1074, 1061, 1010, 1020, 1174, 1118, 1050, 1132, 1138, 1032, 1067, 1101, 1123, 1009, 1065, 1072, 1147, 1019, 1026, 1154, 1165, 1128, 1149, 1157, 1080, 1006, 1098, 1070, 1040, 1100, 1108, 1105, 1073, 1084, 1102, 1060, 1035, 1081, 1175, 1142, 1041, 1139, 1159, 1127, 1028, 1054, 1086, 1113, 1012, 1066, 1144, 1171, 1158, 1124, 1178, 1185, 1014, 1046, 1047, 1002, 1036, 1021, 1083, 1129, 1042, 1062, 1048, 1109, 1013, 1094, 1146, 1055, 1135, 1121, 1111, 1030, 1117, 1003, 1016, 1056, 1120, 1187, 1008, 1085, 1104, 1053, 1099, 1058, 1153, 1150]
+[19:57:01.506063] ood_car_num_list [1049, 1033, 1112, 1164]
+[19:57:01.506081] car_number is  finetune_test [1078, 1106, 1015, 1110, 1186, 1074, 1061, 1010, 1020, 1174, 1118, 1050, 1132, 1138, 1032, 1067, 1101, 1123, 1009]
+[19:57:01.506091] 19
+[19:57:01.506106] 0 1764
+[19:57:02.734676] 1 5342
+[19:57:06.842632] 2 3095
+[19:57:09.224449] 3 7517
+[19:57:15.154697] 4 3958
+[19:57:18.280749] 5 4240
+[19:57:21.550517] 6 4867
+[19:57:25.355738] 7 5258
+[19:57:29.506743] 8 5696
+[19:57:33.908219] 9 4518
+[19:57:37.420796] 10 493
+[19:57:37.804340] 11 3653
+[19:57:40.614259] 12 4523
+[19:57:43.770143] 13 6302
+[19:57:48.545776] 14 1508
+[19:57:49.733237] 15 3783
+[19:57:52.699758] 16 3354
+[19:57:55.359271] 17 522
+[19:57:55.768567] 18 1667
+[19:57:57.802204] sin cos
+[19:57:57.858385] Load pre-trained checkpoint from: /nfs/nfs-home/luhong/FMAE_clean/FMAE/experiment/fmaecomponent/pretrained_model/evmae_pretrainmae_vit_half_patch16_mpr0.5_mcr0.4_msn0_lrNone_blr0.00015_minlr0.0_weightdecay0.05_warmupepoch40_numsnippet0_pos_embed_dim12_d_pos_embed_dim8_d_typecombine_d_pad_typesoc_current_mileage_embed_epochs800_s0/checkpoint-799.pth
+[19:57:57.866723] _IncompatibleKeys(missing_keys=['head.weight', 'head.bias', 'fc_norm.weight', 'fc_norm.bias'], unexpected_keys=['mask_token', 'decoder_pos_embed', 'decoder_patch_embed.proj.weight', 'decoder_patch_embed.proj.bias', 'decoder_embed.weight', 'decoder_embed.bias', 'decoder_blocks.0.norm1.weight', 'decoder_blocks.0.norm1.bias', 'decoder_blocks.0.attn.qkv.weight', 'decoder_blocks.0.attn.qkv.bias', 'decoder_blocks.0.attn.proj.weight', 'decoder_blocks.0.attn.proj.bias', 'decoder_blocks.0.norm2.weight', 'decoder_blocks.0.norm2.bias', 'decoder_blocks.0.mlp.fc1.weight', 'decoder_blocks.0.mlp.fc1.bias', 'decoder_blocks.0.mlp.fc2.weight', 'decoder_blocks.0.mlp.fc2.bias', 'decoder_blocks.1.norm1.weight', 'decoder_blocks.1.norm1.bias', 'decoder_blocks.1.attn.qkv.weight', 'decoder_blocks.1.attn.qkv.bias', 'decoder_blocks.1.attn.proj.weight', 'decoder_blocks.1.attn.proj.bias', 'decoder_blocks.1.norm2.weight', 'decoder_blocks.1.norm2.bias', 'decoder_blocks.1.mlp.fc1.weight', 'decoder_blocks.1.mlp.fc1.bias', 'decoder_blocks.1.mlp.fc2.weight', 'decoder_blocks.1.mlp.fc2.bias', 'decoder_blocks.2.norm1.weight', 'decoder_blocks.2.norm1.bias', 'decoder_blocks.2.attn.qkv.weight', 'decoder_blocks.2.attn.qkv.bias', 'decoder_blocks.2.attn.proj.weight', 'decoder_blocks.2.attn.proj.bias', 'decoder_blocks.2.norm2.weight', 'decoder_blocks.2.norm2.bias', 'decoder_blocks.2.mlp.fc1.weight', 'decoder_blocks.2.mlp.fc1.bias', 'decoder_blocks.2.mlp.fc2.weight', 'decoder_blocks.2.mlp.fc2.bias', 'decoder_blocks.3.norm1.weight', 'decoder_blocks.3.norm1.bias', 'decoder_blocks.3.attn.qkv.weight', 'decoder_blocks.3.attn.qkv.bias', 'decoder_blocks.3.attn.proj.weight', 'decoder_blocks.3.attn.proj.bias', 'decoder_blocks.3.norm2.weight', 'decoder_blocks.3.norm2.bias', 'decoder_blocks.3.mlp.fc1.weight', 'decoder_blocks.3.mlp.fc1.bias', 'decoder_blocks.3.mlp.fc2.weight', 'decoder_blocks.3.mlp.fc2.bias', 'decoder_norm.weight', 'decoder_norm.bias', 'decoder_pred.weight', 'decoder_pred.bias'])
+[19:58:01.902464] Model = VisionTransformer(
+  (patch_embed): PatchEmbed(
+    (proj): Conv1d(8, 96, kernel_size=(16,), stride=(16,))
+    (norm): Identity()
+  )
+  (pos_drop): Dropout(p=0.0, inplace=False)
+  (blocks): ModuleList(
+    (0): Block(
+      (norm1): LayerNorm((108,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=108, out_features=324, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=108, out_features=108, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((108,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=108, out_features=432, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=432, out_features=108, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (1): Block(
+      (norm1): LayerNorm((108,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=108, out_features=324, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=108, out_features=108, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((108,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=108, out_features=432, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=432, out_features=108, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (2): Block(
+      (norm1): LayerNorm((108,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=108, out_features=324, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=108, out_features=108, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((108,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=108, out_features=432, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=432, out_features=108, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (3): Block(
+      (norm1): LayerNorm((108,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=108, out_features=324, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=108, out_features=108, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((108,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=108, out_features=432, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=432, out_features=108, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (4): Block(
+      (norm1): LayerNorm((108,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=108, out_features=324, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=108, out_features=108, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((108,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=108, out_features=432, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=432, out_features=108, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (5): Block(
+      (norm1): LayerNorm((108,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=108, out_features=324, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=108, out_features=108, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((108,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=108, out_features=432, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=432, out_features=108, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+  )
+  (norm): LayerNorm((108,), eps=1e-06, elementwise_affine=True)
+  (head): Linear(in_features=108, out_features=1, bias=True)
+  (fc_norm): LayerNorm((108,), eps=1e-06, elementwise_affine=True)
+)
+[19:58:01.902562] number of params (M): 0.86
+[19:58:01.902583] base lr: 5.00e-02
+[19:58:01.902591] actual lr: 6.25e-03
+[19:58:01.902599] accumulate grad iterations: 1
+[19:58:01.902607] effective batch size: 32
+[19:58:01.903689] parameter groups: 
+{
+  "layer_0_no_decay": {
+    "lr_scale": 0.0078125,
+    "weight_decay": 0.0,
+    "params": [
+      "cls_token",
+      "patch_embed.proj.bias"
+    ]
+  },
+  "layer_7_decay": {
+    "lr_scale": 1.0,
+    "weight_decay": 0.005,
+    "params": [
+      "mask_channel_token",
+      "head.weight"
+    ]
+  },
+  "layer_0_decay": {
+    "lr_scale": 0.0078125,
+    "weight_decay": 0.005,
+    "params": [
+      "patch_embed.proj.weight"
+    ]
+  },
+  "layer_1_no_decay": {
+    "lr_scale": 0.015625,
+    "weight_decay": 0.0,
+    "params": [
+      "blocks.0.norm1.weight",
+      "blocks.0.norm1.bias",
+      "blocks.0.attn.qkv.bias",
+      "blocks.0.attn.proj.bias",
+      "blocks.0.norm2.weight",
+      "blocks.0.norm2.bias",
+      "blocks.0.mlp.fc1.bias",
+      "blocks.0.mlp.fc2.bias"
+    ]
+  },
+  "layer_1_decay": {
+    "lr_scale": 0.015625,
+    "weight_decay": 0.005,
+    "params": [
+      "blocks.0.attn.qkv.weight",
+      "blocks.0.attn.proj.weight",
+      "blocks.0.mlp.fc1.weight",
+      "blocks.0.mlp.fc2.weight"
+    ]
+  },
+  "layer_2_no_decay": {
+    "lr_scale": 0.03125,
+    "weight_decay": 0.0,
+    "params": [
+      "blocks.1.norm1.weight",
+      "blocks.1.norm1.bias",
+      "blocks.1.attn.qkv.bias",
+      "blocks.1.attn.proj.bias",
+      "blocks.1.norm2.weight",
+      "blocks.1.norm2.bias",
+      "blocks.1.mlp.fc1.bias",
+      "blocks.1.mlp.fc2.bias"
+    ]
+  },
+  "layer_2_decay": {
+    "lr_scale": 0.03125,
+    "weight_decay": 0.005,
+    "params": [
+      "blocks.1.attn.qkv.weight",
+      "blocks.1.attn.proj.weight",
+      "blocks.1.mlp.fc1.weight",
+      "blocks.1.mlp.fc2.weight"
+    ]
+  },
+  "layer_3_no_decay": {
+    "lr_scale": 0.0625,
+    "weight_decay": 0.0,
+    "params": [
+      "blocks.2.norm1.weight",
+      "blocks.2.norm1.bias",
+      "blocks.2.attn.qkv.bias",
+      "blocks.2.attn.proj.bias",
+      "blocks.2.norm2.weight",
+      "blocks.2.norm2.bias",
+      "blocks.2.mlp.fc1.bias",
+      "blocks.2.mlp.fc2.bias"
+    ]
+  },
+  "layer_3_decay": {
+    "lr_scale": 0.0625,
+    "weight_decay": 0.005,
+    "params": [
+      "blocks.2.attn.qkv.weight",
+      "blocks.2.attn.proj.weight",
+      "blocks.2.mlp.fc1.weight",
+      "blocks.2.mlp.fc2.weight"
+    ]
+  },
+  "layer_4_no_decay": {
+    "lr_scale": 0.125,
+    "weight_decay": 0.0,
+    "params": [
+      "blocks.3.norm1.weight",
+      "blocks.3.norm1.bias",
+      "blocks.3.attn.qkv.bias",
+      "blocks.3.attn.proj.bias",
+      "blocks.3.norm2.weight",
+      "blocks.3.norm2.bias",
+      "blocks.3.mlp.fc1.bias",
+      "blocks.3.mlp.fc2.bias"
+    ]
+  },
+  "layer_4_decay": {
+    "lr_scale": 0.125,
+    "weight_decay": 0.005,
+    "params": [
+      "blocks.3.attn.qkv.weight",
+      "blocks.3.attn.proj.weight",
+      "blocks.3.mlp.fc1.weight",
+      "blocks.3.mlp.fc2.weight"
+    ]
+  },
+  "layer_5_no_decay": {
+    "lr_scale": 0.25,
+    "weight_decay": 0.0,
+    "params": [
+      "blocks.4.norm1.weight",
+      "blocks.4.norm1.bias",
+      "blocks.4.attn.qkv.bias",
+      "blocks.4.attn.proj.bias",
+      "blocks.4.norm2.weight",
+      "blocks.4.norm2.bias",
+      "blocks.4.mlp.fc1.bias",
+      "blocks.4.mlp.fc2.bias"
+    ]
+  },
+  "layer_5_decay": {
+    "lr_scale": 0.25,
+    "weight_decay": 0.005,
+    "params": [
+      "blocks.4.attn.qkv.weight",
+      "blocks.4.attn.proj.weight",
+      "blocks.4.mlp.fc1.weight",
+      "blocks.4.mlp.fc2.weight"
+    ]
+  },
+  "layer_6_no_decay": {
+    "lr_scale": 0.5,
+    "weight_decay": 0.0,
+    "params": [
+      "blocks.5.norm1.weight",
+      "blocks.5.norm1.bias",
+      "blocks.5.attn.qkv.bias",
+      "blocks.5.attn.proj.bias",
+      "blocks.5.norm2.weight",
+      "blocks.5.norm2.bias",
+      "blocks.5.mlp.fc1.bias",
+      "blocks.5.mlp.fc2.bias"
+    ]
+  },
+  "layer_6_decay": {
+    "lr_scale": 0.5,
+    "weight_decay": 0.005,
+    "params": [
+      "blocks.5.attn.qkv.weight",
+      "blocks.5.attn.proj.weight",
+      "blocks.5.mlp.fc1.weight",
+      "blocks.5.mlp.fc2.weight"
+    ]
+  },
+  "layer_7_no_decay": {
+    "lr_scale": 1.0,
+    "weight_decay": 0.0,
+    "params": [
+      "norm.weight",
+      "norm.bias",
+      "head.bias",
+      "fc_norm.weight",
+      "fc_norm.bias"
+    ]
+  }
+}
+[19:58:01.905557] criterion = MSELoss()
+[19:58:03.192789] test  [   0/2252]  eta: 0:48:16  loss: 0.1812 (0.1812)  time: 1.2861  data: 1.2620  max mem: 5
+[19:58:04.231095] test  [ 200/2252]  eta: 0:00:23  loss: 0.1786 (0.1797)  time: 0.0054  data: 0.0000  max mem: 5
+[19:58:05.339600] test  [ 400/2252]  eta: 0:00:15  loss: 0.1973 (0.1837)  time: 0.0058  data: 0.0000  max mem: 5
+[19:58:06.511195] test  [ 600/2252]  eta: 0:00:12  loss: 0.2028 (0.1886)  time: 0.0060  data: 0.0001  max mem: 5
+[19:58:07.700243] test  [ 800/2252]  eta: 0:00:10  loss: 0.1732 (0.1876)  time: 0.0059  data: 0.0001  max mem: 5
+[19:58:08.946465] test  [1000/2252]  eta: 0:00:08  loss: 0.1807 (0.1862)  time: 0.0063  data: 0.0001  max mem: 5
+[19:58:10.141227] test  [1200/2252]  eta: 0:00:07  loss: 0.1753 (0.1850)  time: 0.0055  data: 0.0000  max mem: 5
+[19:58:11.302757] test  [1400/2252]  eta: 0:00:05  loss: 0.1900 (0.1846)  time: 0.0059  data: 0.0000  max mem: 5
+[19:58:12.487615] test  [1600/2252]  eta: 0:00:04  loss: 0.2023 (0.1849)  time: 0.0059  data: 0.0001  max mem: 5
+[19:58:13.653077] test  [1800/2252]  eta: 0:00:02  loss: 0.1892 (0.1862)  time: 0.0058  data: 0.0000  max mem: 5
+[19:58:14.807572] test  [2000/2252]  eta: 0:00:01  loss: 0.1793 (0.1859)  time: 0.0057  data: 0.0000  max mem: 5
+[19:58:15.923882] test  [2200/2252]  eta: 0:00:00  loss: 0.1874 (0.1858)  time: 0.0057  data: 0.0000  max mem: 5
+[19:58:16.189843] test  [2251/2252]  eta: 0:00:00  loss: 0.2031 (0.1862)  time: 0.0044  data: 0.0000  max mem: 5
+[19:58:16.399478] test Total time: 0:00:14 (0.0064 s / it)
+[19:58:16.413066] Start training for 20 epochs
+[19:58:17.981601] Epoch: [0]  [  0/422]  eta: 0:11:00  lr: 0.000000  loss: 0.1901 (0.1901)  time: 1.5654  data: 1.4796  max mem: 16
+[19:58:25.076754] Epoch: [0]  [200/422]  eta: 0:00:09  lr: 0.000741  loss: 0.0001 (0.0255)  time: 0.0351  data: 0.0001  max mem: 26
+[19:58:31.877439] Epoch: [0]  [400/422]  eta: 0:00:00  lr: 0.001481  loss: 0.0001 (0.0128)  time: 0.0341  data: 0.0001  max mem: 26
+[19:58:32.563169] Epoch: [0]  [421/422]  eta: 0:00:00  lr: 0.001559  loss: 0.0001 (0.0122)  time: 0.0325  data: 0.0001  max mem: 26
+[19:58:32.774005] Epoch: [0] Total time: 0:00:16 (0.0388 s / it)
+[19:58:32.774088] Averaged stats: lr: 0.001559  loss: 0.0001 (0.0122)
+[19:58:34.076720] test  [   0/2252]  eta: 0:48:47  loss: 0.0001 (0.0001)  time: 1.2998  data: 1.2872  max mem: 26
+[19:58:35.295996] test  [ 200/2252]  eta: 0:00:25  loss: 0.0000 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[19:58:36.438279] test  [ 400/2252]  eta: 0:00:16  loss: 0.0000 (0.0001)  time: 0.0056  data: 0.0000  max mem: 26
+[19:58:37.606957] test  [ 600/2252]  eta: 0:00:13  loss: 0.0003 (0.0001)  time: 0.0059  data: 0.0001  max mem: 26
+[19:58:38.811985] test  [ 800/2252]  eta: 0:00:10  loss: 0.0002 (0.0001)  time: 0.0061  data: 0.0001  max mem: 26
+[19:58:40.014911] test  [1000/2252]  eta: 0:00:09  loss: 0.0000 (0.0001)  time: 0.0060  data: 0.0001  max mem: 26
+[19:58:41.190398] test  [1200/2252]  eta: 0:00:07  loss: 0.0002 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[19:58:42.334073] test  [1400/2252]  eta: 0:00:05  loss: 0.0002 (0.0001)  time: 0.0057  data: 0.0001  max mem: 26
+[19:58:43.502885] test  [1600/2252]  eta: 0:00:04  loss: 0.0000 (0.0001)  time: 0.0060  data: 0.0001  max mem: 26
+[19:58:44.702564] test  [1800/2252]  eta: 0:00:02  loss: 0.0001 (0.0001)  time: 0.0059  data: 0.0001  max mem: 26
+[19:58:45.879402] test  [2000/2252]  eta: 0:00:01  loss: 0.0000 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[19:58:47.063621] test  [2200/2252]  eta: 0:00:00  loss: 0.0001 (0.0001)  time: 0.0059  data: 0.0001  max mem: 26
+[19:58:47.332984] test  [2251/2252]  eta: 0:00:00  loss: 0.0000 (0.0001)  time: 0.0044  data: 0.0000  max mem: 26
+[19:58:47.544108] test Total time: 0:00:14 (0.0066 s / it)
+[19:58:47.554670] update saved res
+[19:58:47.645265] Min test set RMSE: 0.009506257
+[19:58:47.645295] test_RMSE 0.009506257, test_loss 0.000090369
+[19:58:48.981797] Epoch: [1]  [  0/422]  eta: 0:09:22  lr: 0.001563  loss: 0.0001 (0.0001)  time: 1.3336  data: 1.2956  max mem: 26
+[19:58:55.930187] Epoch: [1]  [200/422]  eta: 0:00:09  lr: 0.002303  loss: 0.0001 (0.0001)  time: 0.0353  data: 0.0001  max mem: 26
+[19:59:02.951578] Epoch: [1]  [400/422]  eta: 0:00:00  lr: 0.003044  loss: 0.0001 (0.0001)  time: 0.0351  data: 0.0001  max mem: 26
+[19:59:03.659844] Epoch: [1]  [421/422]  eta: 0:00:00  lr: 0.003121  loss: 0.0001 (0.0001)  time: 0.0336  data: 0.0001  max mem: 26
+[19:59:03.874002] Epoch: [1] Total time: 0:00:16 (0.0385 s / it)
+[19:59:03.874308] Averaged stats: lr: 0.003121  loss: 0.0001 (0.0001)
+[19:59:05.180160] test  [   0/2252]  eta: 0:48:54  loss: 0.0005 (0.0005)  time: 1.3033  data: 1.2901  max mem: 26
+[19:59:06.445384] test  [ 200/2252]  eta: 0:00:26  loss: 0.0002 (0.0003)  time: 0.0059  data: 0.0001  max mem: 26
+[19:59:07.625530] test  [ 400/2252]  eta: 0:00:17  loss: 0.0002 (0.0002)  time: 0.0057  data: 0.0000  max mem: 26
+[19:59:08.796346] test  [ 600/2252]  eta: 0:00:13  loss: 0.0001 (0.0002)  time: 0.0058  data: 0.0000  max mem: 26
+[19:59:09.960799] test  [ 800/2252]  eta: 0:00:11  loss: 0.0005 (0.0002)  time: 0.0055  data: 0.0000  max mem: 26
+[19:59:11.083778] test  [1000/2252]  eta: 0:00:08  loss: 0.0001 (0.0002)  time: 0.0055  data: 0.0000  max mem: 26
+[19:59:12.258421] test  [1200/2252]  eta: 0:00:07  loss: 0.0005 (0.0002)  time: 0.0060  data: 0.0000  max mem: 26
+[19:59:13.454868] test  [1400/2252]  eta: 0:00:05  loss: 0.0000 (0.0002)  time: 0.0059  data: 0.0001  max mem: 26
+[19:59:14.643099] test  [1600/2252]  eta: 0:00:04  loss: 0.0001 (0.0002)  time: 0.0059  data: 0.0001  max mem: 26
+[19:59:15.850648] test  [1800/2252]  eta: 0:00:03  loss: 0.0001 (0.0002)  time: 0.0059  data: 0.0001  max mem: 26
+[19:59:17.017805] test  [2000/2252]  eta: 0:00:01  loss: 0.0001 (0.0002)  time: 0.0058  data: 0.0000  max mem: 26
+[19:59:18.194399] test  [2200/2252]  eta: 0:00:00  loss: 0.0003 (0.0002)  time: 0.0058  data: 0.0000  max mem: 26
+[19:59:18.455531] test  [2251/2252]  eta: 0:00:00  loss: 0.0000 (0.0002)  time: 0.0042  data: 0.0000  max mem: 26
+[19:59:18.668081] test Total time: 0:00:14 (0.0066 s / it)
+[19:59:18.674526] Min test set RMSE: 0.009506257
+[19:59:18.674563] test_RMSE 0.014218793, test_loss 0.000202174
+[19:59:20.371253] Epoch: [2]  [  0/422]  eta: 0:11:54  lr: 0.003125  loss: 0.0002 (0.0002)  time: 1.6937  data: 1.6404  max mem: 26
+[19:59:27.409478] Epoch: [2]  [200/422]  eta: 0:00:09  lr: 0.003866  loss: 0.0001 (0.0001)  time: 0.0348  data: 0.0001  max mem: 26
+[19:59:34.430855] Epoch: [2]  [400/422]  eta: 0:00:00  lr: 0.004606  loss: 0.0002 (0.0001)  time: 0.0350  data: 0.0001  max mem: 26
+[19:59:35.136290] Epoch: [2]  [421/422]  eta: 0:00:00  lr: 0.004684  loss: 0.0001 (0.0001)  time: 0.0335  data: 0.0001  max mem: 26
+[19:59:35.343115] Epoch: [2] Total time: 0:00:16 (0.0395 s / it)
+[19:59:35.343215] Averaged stats: lr: 0.004684  loss: 0.0001 (0.0001)
+[19:59:36.677570] test  [   0/2252]  eta: 0:49:58  loss: 0.0001 (0.0001)  time: 1.3316  data: 1.3181  max mem: 26
+[19:59:37.767603] test  [ 200/2252]  eta: 0:00:24  loss: 0.0001 (0.0001)  time: 0.0053  data: 0.0000  max mem: 26
+[19:59:38.829235] test  [ 400/2252]  eta: 0:00:16  loss: 0.0000 (0.0000)  time: 0.0060  data: 0.0001  max mem: 26
+[19:59:40.003360] test  [ 600/2252]  eta: 0:00:12  loss: 0.0004 (0.0001)  time: 0.0060  data: 0.0001  max mem: 26
+[19:59:41.188410] test  [ 800/2252]  eta: 0:00:10  loss: 0.0001 (0.0001)  time: 0.0059  data: 0.0001  max mem: 26
+[19:59:42.379910] test  [1000/2252]  eta: 0:00:08  loss: 0.0001 (0.0001)  time: 0.0060  data: 0.0001  max mem: 26
+[19:59:43.567410] test  [1200/2252]  eta: 0:00:07  loss: 0.0001 (0.0001)  time: 0.0059  data: 0.0001  max mem: 26
+[19:59:44.776768] test  [1400/2252]  eta: 0:00:05  loss: 0.0002 (0.0001)  time: 0.0064  data: 0.0001  max mem: 26
+[19:59:45.981211] test  [1600/2252]  eta: 0:00:04  loss: 0.0000 (0.0001)  time: 0.0061  data: 0.0001  max mem: 26
+[19:59:47.179100] test  [1800/2252]  eta: 0:00:02  loss: 0.0001 (0.0001)  time: 0.0059  data: 0.0001  max mem: 26
+[19:59:48.364982] test  [2000/2252]  eta: 0:00:01  loss: 0.0000 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[19:59:49.552618] test  [2200/2252]  eta: 0:00:00  loss: 0.0001 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[19:59:49.825426] test  [2251/2252]  eta: 0:00:00  loss: 0.0000 (0.0001)  time: 0.0043  data: 0.0000  max mem: 26
+[19:59:50.044278] test Total time: 0:00:14 (0.0065 s / it)
+[19:59:50.054661] update saved res
+[19:59:50.154980] Min test set RMSE: 0.009495962
+[19:59:50.155012] test_RMSE 0.009495962, test_loss 0.000090173
+[19:59:51.535486] Epoch: [3]  [  0/422]  eta: 0:09:41  lr: 0.004688  loss: 0.0001 (0.0001)  time: 1.3771  data: 1.3278  max mem: 26
+[19:59:58.408918] Epoch: [3]  [200/422]  eta: 0:00:09  lr: 0.005428  loss: 0.0001 (0.0001)  time: 0.0347  data: 0.0001  max mem: 26
+[20:00:05.357311] Epoch: [3]  [400/422]  eta: 0:00:00  lr: 0.006169  loss: 0.0001 (0.0001)  time: 0.0347  data: 0.0001  max mem: 26
+[20:00:06.058825] Epoch: [3]  [421/422]  eta: 0:00:00  lr: 0.006246  loss: 0.0001 (0.0001)  time: 0.0333  data: 0.0000  max mem: 26
+[20:00:06.268564] Epoch: [3] Total time: 0:00:16 (0.0382 s / it)
+[20:00:06.268639] Averaged stats: lr: 0.006246  loss: 0.0001 (0.0001)
+[20:00:07.626190] test  [   0/2252]  eta: 0:50:51  loss: 0.0001 (0.0001)  time: 1.3550  data: 1.3425  max mem: 26
+[20:00:08.740124] test  [ 200/2252]  eta: 0:00:25  loss: 0.0001 (0.0001)  time: 0.0057  data: 0.0000  max mem: 26
+[20:00:09.781720] test  [ 400/2252]  eta: 0:00:16  loss: 0.0001 (0.0001)  time: 0.0051  data: 0.0000  max mem: 26
+[20:00:10.821467] test  [ 600/2252]  eta: 0:00:12  loss: 0.0003 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:00:11.979881] test  [ 800/2252]  eta: 0:00:10  loss: 0.0002 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:00:13.141166] test  [1000/2252]  eta: 0:00:08  loss: 0.0001 (0.0001)  time: 0.0058  data: 0.0001  max mem: 26
+[20:00:14.308060] test  [1200/2252]  eta: 0:00:07  loss: 0.0002 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:00:15.513061] test  [1400/2252]  eta: 0:00:05  loss: 0.0001 (0.0001)  time: 0.0060  data: 0.0001  max mem: 26
+[20:00:16.722286] test  [1600/2252]  eta: 0:00:04  loss: 0.0000 (0.0001)  time: 0.0061  data: 0.0001  max mem: 26
+[20:00:17.892061] test  [1800/2252]  eta: 0:00:02  loss: 0.0000 (0.0001)  time: 0.0057  data: 0.0001  max mem: 26
+[20:00:19.054458] test  [2000/2252]  eta: 0:00:01  loss: 0.0000 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:00:20.225075] test  [2200/2252]  eta: 0:00:00  loss: 0.0001 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:00:20.494962] test  [2251/2252]  eta: 0:00:00  loss: 0.0000 (0.0001)  time: 0.0044  data: 0.0000  max mem: 26
+[20:00:20.706277] test Total time: 0:00:14 (0.0064 s / it)
+[20:00:20.713922] Min test set RMSE: 0.009495962
+[20:00:20.713965] test_RMSE 0.009801536, test_loss 0.000096070
+[20:00:22.152390] Epoch: [4]  [  0/422]  eta: 0:10:05  lr: 0.006250  loss: 0.0001 (0.0001)  time: 1.4341  data: 1.3896  max mem: 26
+[20:00:29.462049] Epoch: [4]  [200/422]  eta: 0:00:09  lr: 0.006236  loss: 0.0001 (0.0001)  time: 0.0352  data: 0.0001  max mem: 26
+[20:00:36.254673] Epoch: [4]  [400/422]  eta: 0:00:00  lr: 0.006196  loss: 0.0001 (0.0001)  time: 0.0350  data: 0.0001  max mem: 26
+[20:00:36.964694] Epoch: [4]  [421/422]  eta: 0:00:00  lr: 0.006190  loss: 0.0001 (0.0001)  time: 0.0336  data: 0.0000  max mem: 26
+[20:00:37.196957] Epoch: [4] Total time: 0:00:16 (0.0391 s / it)
+[20:00:37.197019] Averaged stats: lr: 0.006190  loss: 0.0001 (0.0001)
+[20:00:38.497103] test  [   0/2252]  eta: 0:48:41  loss: 0.0002 (0.0002)  time: 1.2974  data: 1.2861  max mem: 26
+[20:00:39.565960] test  [ 200/2252]  eta: 0:00:24  loss: 0.0001 (0.0001)  time: 0.0051  data: 0.0000  max mem: 26
+[20:00:40.678635] test  [ 400/2252]  eta: 0:00:16  loss: 0.0001 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:00:41.834822] test  [ 600/2252]  eta: 0:00:12  loss: 0.0002 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:00:43.019567] test  [ 800/2252]  eta: 0:00:10  loss: 0.0002 (0.0001)  time: 0.0060  data: 0.0000  max mem: 26
+[20:00:44.210979] test  [1000/2252]  eta: 0:00:08  loss: 0.0000 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:00:45.408771] test  [1200/2252]  eta: 0:00:07  loss: 0.0002 (0.0001)  time: 0.0060  data: 0.0000  max mem: 26
+[20:00:46.622909] test  [1400/2252]  eta: 0:00:05  loss: 0.0001 (0.0001)  time: 0.0062  data: 0.0001  max mem: 26
+[20:00:47.811142] test  [1600/2252]  eta: 0:00:04  loss: 0.0001 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:00:48.990174] test  [1800/2252]  eta: 0:00:02  loss: 0.0001 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:00:50.182533] test  [2000/2252]  eta: 0:00:01  loss: 0.0000 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:00:51.361001] test  [2200/2252]  eta: 0:00:00  loss: 0.0001 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:00:51.626538] test  [2251/2252]  eta: 0:00:00  loss: 0.0000 (0.0001)  time: 0.0042  data: 0.0000  max mem: 26
+[20:00:51.845721] test Total time: 0:00:14 (0.0065 s / it)
+[20:00:51.855759] Min test set RMSE: 0.009495962
+[20:00:51.855816] test_RMSE 0.009872734, test_loss 0.000097471
+[20:00:53.247182] Epoch: [5]  [  0/422]  eta: 0:09:44  lr: 0.006190  loss: 0.0001 (0.0001)  time: 1.3860  data: 1.3449  max mem: 26
+[20:01:00.134253] Epoch: [5]  [200/422]  eta: 0:00:09  lr: 0.006120  loss: 0.0001 (0.0001)  time: 0.0341  data: 0.0001  max mem: 26
+[20:01:06.979204] Epoch: [5]  [400/422]  eta: 0:00:00  lr: 0.006024  loss: 0.0001 (0.0001)  time: 0.0342  data: 0.0001  max mem: 26
+[20:01:07.665833] Epoch: [5]  [421/422]  eta: 0:00:00  lr: 0.006013  loss: 0.0001 (0.0001)  time: 0.0326  data: 0.0000  max mem: 26
+[20:01:07.883521] Epoch: [5] Total time: 0:00:16 (0.0380 s / it)
+[20:01:07.883616] Averaged stats: lr: 0.006013  loss: 0.0001 (0.0001)
+[20:01:09.202173] test  [   0/2252]  eta: 0:49:23  loss: 0.0000 (0.0000)  time: 1.3160  data: 1.3061  max mem: 26
+[20:01:10.393445] test  [ 200/2252]  eta: 0:00:25  loss: 0.0001 (0.0000)  time: 0.0058  data: 0.0000  max mem: 26
+[20:01:11.546585] test  [ 400/2252]  eta: 0:00:16  loss: 0.0000 (0.0000)  time: 0.0056  data: 0.0001  max mem: 26
+[20:01:12.750383] test  [ 600/2252]  eta: 0:00:13  loss: 0.0004 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:01:13.936731] test  [ 800/2252]  eta: 0:00:10  loss: 0.0001 (0.0001)  time: 0.0061  data: 0.0001  max mem: 26
+[20:01:15.134432] test  [1000/2252]  eta: 0:00:09  loss: 0.0001 (0.0001)  time: 0.0061  data: 0.0000  max mem: 26
+[20:01:16.322700] test  [1200/2252]  eta: 0:00:07  loss: 0.0001 (0.0001)  time: 0.0060  data: 0.0000  max mem: 26
+[20:01:17.505294] test  [1400/2252]  eta: 0:00:05  loss: 0.0002 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:01:18.703494] test  [1600/2252]  eta: 0:00:04  loss: 0.0000 (0.0001)  time: 0.0060  data: 0.0000  max mem: 26
+[20:01:19.916261] test  [1800/2252]  eta: 0:00:03  loss: 0.0001 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:01:21.089073] test  [2000/2252]  eta: 0:00:01  loss: 0.0001 (0.0001)  time: 0.0061  data: 0.0001  max mem: 26
+[20:01:22.290185] test  [2200/2252]  eta: 0:00:00  loss: 0.0001 (0.0001)  time: 0.0061  data: 0.0000  max mem: 26
+[20:01:22.566612] test  [2251/2252]  eta: 0:00:00  loss: 0.0000 (0.0001)  time: 0.0044  data: 0.0000  max mem: 26
+[20:01:22.780828] test Total time: 0:00:14 (0.0066 s / it)
+[20:01:22.786425] Min test set RMSE: 0.009495962
+[20:01:22.786462] test_RMSE 0.009909211, test_loss 0.000098192
+[20:01:24.126158] Epoch: [6]  [  0/422]  eta: 0:09:24  lr: 0.006012  loss: 0.0001 (0.0001)  time: 1.3368  data: 1.2998  max mem: 26
+[20:01:31.104767] Epoch: [6]  [200/422]  eta: 0:00:09  lr: 0.005889  loss: 0.0001 (0.0001)  time: 0.0355  data: 0.0001  max mem: 26
+[20:01:38.232987] Epoch: [6]  [400/422]  eta: 0:00:00  lr: 0.005741  loss: 0.0001 (0.0001)  time: 0.0362  data: 0.0001  max mem: 26
+[20:01:38.959779] Epoch: [6]  [421/422]  eta: 0:00:00  lr: 0.005724  loss: 0.0001 (0.0001)  time: 0.0345  data: 0.0000  max mem: 26
+[20:01:39.171890] Epoch: [6] Total time: 0:00:16 (0.0388 s / it)
+[20:01:39.172065] Averaged stats: lr: 0.005724  loss: 0.0001 (0.0001)
+[20:01:40.477296] test  [   0/2252]  eta: 0:48:52  loss: 0.0002 (0.0002)  time: 1.3022  data: 1.2893  max mem: 26
+[20:01:41.723272] test  [ 200/2252]  eta: 0:00:25  loss: 0.0001 (0.0001)  time: 0.0057  data: 0.0000  max mem: 26
+[20:01:42.847245] test  [ 400/2252]  eta: 0:00:16  loss: 0.0001 (0.0001)  time: 0.0050  data: 0.0000  max mem: 26
+[20:01:43.926337] test  [ 600/2252]  eta: 0:00:13  loss: 0.0001 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:01:45.185383] test  [ 800/2252]  eta: 0:00:10  loss: 0.0003 (0.0001)  time: 0.0063  data: 0.0001  max mem: 26
+[20:01:46.458502] test  [1000/2252]  eta: 0:00:09  loss: 0.0001 (0.0001)  time: 0.0063  data: 0.0001  max mem: 26
+[20:01:47.674310] test  [1200/2252]  eta: 0:00:07  loss: 0.0003 (0.0001)  time: 0.0060  data: 0.0001  max mem: 26
+[20:01:48.888977] test  [1400/2252]  eta: 0:00:05  loss: 0.0000 (0.0001)  time: 0.0061  data: 0.0001  max mem: 26
+[20:01:50.105983] test  [1600/2252]  eta: 0:00:04  loss: 0.0001 (0.0001)  time: 0.0061  data: 0.0001  max mem: 26
+[20:01:51.339231] test  [1800/2252]  eta: 0:00:03  loss: 0.0000 (0.0001)  time: 0.0065  data: 0.0001  max mem: 26
+[20:01:52.567579] test  [2000/2252]  eta: 0:00:01  loss: 0.0000 (0.0001)  time: 0.0062  data: 0.0001  max mem: 26
+[20:01:53.773449] test  [2200/2252]  eta: 0:00:00  loss: 0.0002 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:01:54.048274] test  [2251/2252]  eta: 0:00:00  loss: 0.0000 (0.0001)  time: 0.0043  data: 0.0000  max mem: 26
+[20:01:54.283289] test Total time: 0:00:15 (0.0067 s / it)
+[20:01:54.291049] Min test set RMSE: 0.009495962
+[20:01:54.291079] test_RMSE 0.010576438, test_loss 0.000111861
+[20:01:55.671076] Epoch: [7]  [  0/422]  eta: 0:09:40  lr: 0.005723  loss: 0.0001 (0.0001)  time: 1.3766  data: 1.3323  max mem: 26
+[20:02:02.652466] Epoch: [7]  [200/422]  eta: 0:00:09  lr: 0.005551  loss: 0.0001 (0.0001)  time: 0.0350  data: 0.0000  max mem: 26
+[20:02:09.682743] Epoch: [7]  [400/422]  eta: 0:00:00  lr: 0.005357  loss: 0.0001 (0.0001)  time: 0.0351  data: 0.0001  max mem: 26
+[20:02:10.388436] Epoch: [7]  [421/422]  eta: 0:00:00  lr: 0.005336  loss: 0.0001 (0.0001)  time: 0.0335  data: 0.0001  max mem: 26
+[20:02:10.596379] Epoch: [7] Total time: 0:00:16 (0.0386 s / it)
+[20:02:10.596454] Averaged stats: lr: 0.005336  loss: 0.0001 (0.0001)
+[20:02:11.921354] test  [   0/2252]  eta: 0:49:37  loss: 0.0002 (0.0002)  time: 1.3222  data: 1.3116  max mem: 26
+[20:02:13.074977] test  [ 200/2252]  eta: 0:00:25  loss: 0.0001 (0.0001)  time: 0.0057  data: 0.0000  max mem: 26
+[20:02:14.243958] test  [ 400/2252]  eta: 0:00:16  loss: 0.0001 (0.0001)  time: 0.0060  data: 0.0001  max mem: 26
+[20:02:15.434738] test  [ 600/2252]  eta: 0:00:13  loss: 0.0002 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:02:16.623406] test  [ 800/2252]  eta: 0:00:10  loss: 0.0002 (0.0001)  time: 0.0059  data: 0.0001  max mem: 26
+[20:02:17.826468] test  [1000/2252]  eta: 0:00:09  loss: 0.0000 (0.0001)  time: 0.0060  data: 0.0000  max mem: 26
+[20:02:19.020615] test  [1200/2252]  eta: 0:00:07  loss: 0.0003 (0.0001)  time: 0.0060  data: 0.0000  max mem: 26
+[20:02:20.212620] test  [1400/2252]  eta: 0:00:05  loss: 0.0000 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:02:21.403001] test  [1600/2252]  eta: 0:00:04  loss: 0.0000 (0.0001)  time: 0.0061  data: 0.0001  max mem: 26
+[20:02:22.597613] test  [1800/2252]  eta: 0:00:03  loss: 0.0000 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:02:23.792357] test  [2000/2252]  eta: 0:00:01  loss: 0.0001 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:02:24.983419] test  [2200/2252]  eta: 0:00:00  loss: 0.0001 (0.0001)  time: 0.0060  data: 0.0000  max mem: 26
+[20:02:25.253135] test  [2251/2252]  eta: 0:00:00  loss: 0.0000 (0.0001)  time: 0.0043  data: 0.0000  max mem: 26
+[20:02:25.461921] test Total time: 0:00:14 (0.0066 s / it)
+[20:02:25.467762] Min test set RMSE: 0.009495962
+[20:02:25.467794] test_RMSE 0.010187370, test_loss 0.000103783
+[20:02:26.796192] Epoch: [8]  [  0/422]  eta: 0:09:19  lr: 0.005335  loss: 0.0001 (0.0001)  time: 1.3254  data: 1.2877  max mem: 26
+[20:02:33.944847] Epoch: [8]  [200/422]  eta: 0:00:09  lr: 0.005120  loss: 0.0001 (0.0001)  time: 0.0351  data: 0.0001  max mem: 26
+[20:02:41.025768] Epoch: [8]  [400/422]  eta: 0:00:00  lr: 0.004888  loss: 0.0001 (0.0001)  time: 0.0353  data: 0.0001  max mem: 26
+[20:02:41.752409] Epoch: [8]  [421/422]  eta: 0:00:00  lr: 0.004863  loss: 0.0001 (0.0001)  time: 0.0345  data: 0.0001  max mem: 26
+[20:02:41.954935] Epoch: [8] Total time: 0:00:16 (0.0391 s / it)
+[20:02:41.955093] Averaged stats: lr: 0.004863  loss: 0.0001 (0.0001)
+[20:02:43.245237] test  [   0/2252]  eta: 0:48:21  loss: 0.0001 (0.0001)  time: 1.2885  data: 1.2773  max mem: 26
+[20:02:44.682366] test  [ 200/2252]  eta: 0:00:27  loss: 0.0001 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:02:45.852886] test  [ 400/2252]  eta: 0:00:17  loss: 0.0000 (0.0001)  time: 0.0060  data: 0.0001  max mem: 26
+[20:02:47.026831] test  [ 600/2252]  eta: 0:00:13  loss: 0.0003 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:02:48.194983] test  [ 800/2252]  eta: 0:00:11  loss: 0.0001 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:02:49.337060] test  [1000/2252]  eta: 0:00:09  loss: 0.0001 (0.0001)  time: 0.0057  data: 0.0000  max mem: 26
+[20:02:50.505455] test  [1200/2252]  eta: 0:00:07  loss: 0.0002 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:02:51.689463] test  [1400/2252]  eta: 0:00:05  loss: 0.0001 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:02:52.861397] test  [1600/2252]  eta: 0:00:04  loss: 0.0000 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:02:54.043139] test  [1800/2252]  eta: 0:00:03  loss: 0.0001 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:02:55.216340] test  [2000/2252]  eta: 0:00:01  loss: 0.0000 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:02:56.389505] test  [2200/2252]  eta: 0:00:00  loss: 0.0001 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:02:56.658646] test  [2251/2252]  eta: 0:00:00  loss: 0.0000 (0.0001)  time: 0.0044  data: 0.0000  max mem: 26
+[20:02:56.866954] test Total time: 0:00:14 (0.0066 s / it)
+[20:02:56.872839] Min test set RMSE: 0.009495962
+[20:02:56.872874] test_RMSE 0.009516873, test_loss 0.000090571
+[20:02:58.226412] Epoch: [9]  [  0/422]  eta: 0:09:29  lr: 0.004861  loss: 0.0001 (0.0001)  time: 1.3506  data: 1.3093  max mem: 26
+[20:03:05.177859] Epoch: [9]  [200/422]  eta: 0:00:09  lr: 0.004612  loss: 0.0001 (0.0001)  time: 0.0350  data: 0.0001  max mem: 26
+[20:03:12.178771] Epoch: [9]  [400/422]  eta: 0:00:00  lr: 0.004351  loss: 0.0001 (0.0001)  time: 0.0353  data: 0.0001  max mem: 26
+[20:03:12.882962] Epoch: [9]  [421/422]  eta: 0:00:00  lr: 0.004323  loss: 0.0001 (0.0001)  time: 0.0334  data: 0.0001  max mem: 26
+[20:03:13.098365] Epoch: [9] Total time: 0:00:16 (0.0384 s / it)
+[20:03:13.098429] Averaged stats: lr: 0.004323  loss: 0.0001 (0.0001)
+[20:03:14.430287] test  [   0/2252]  eta: 0:49:53  loss: 0.0000 (0.0000)  time: 1.3294  data: 1.3191  max mem: 26
+[20:03:15.679278] test  [ 200/2252]  eta: 0:00:26  loss: 0.0001 (0.0001)  time: 0.0061  data: 0.0001  max mem: 26
+[20:03:16.900377] test  [ 400/2252]  eta: 0:00:17  loss: 0.0000 (0.0001)  time: 0.0061  data: 0.0001  max mem: 26
+[20:03:18.099123] test  [ 600/2252]  eta: 0:00:13  loss: 0.0006 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:03:19.274004] test  [ 800/2252]  eta: 0:00:11  loss: 0.0000 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:03:20.460818] test  [1000/2252]  eta: 0:00:09  loss: 0.0002 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:03:21.643888] test  [1200/2252]  eta: 0:00:07  loss: 0.0000 (0.0001)  time: 0.0058  data: 0.0001  max mem: 26
+[20:03:22.825133] test  [1400/2252]  eta: 0:00:05  loss: 0.0004 (0.0002)  time: 0.0059  data: 0.0000  max mem: 26
+[20:03:24.013580] test  [1600/2252]  eta: 0:00:04  loss: 0.0000 (0.0002)  time: 0.0063  data: 0.0001  max mem: 26
+[20:03:25.190628] test  [1800/2252]  eta: 0:00:03  loss: 0.0003 (0.0002)  time: 0.0059  data: 0.0000  max mem: 26
+[20:03:26.370816] test  [2000/2252]  eta: 0:00:01  loss: 0.0001 (0.0002)  time: 0.0060  data: 0.0000  max mem: 26
+[20:03:27.548114] test  [2200/2252]  eta: 0:00:00  loss: 0.0001 (0.0002)  time: 0.0059  data: 0.0000  max mem: 26
+[20:03:27.816531] test  [2251/2252]  eta: 0:00:00  loss: 0.0001 (0.0002)  time: 0.0043  data: 0.0000  max mem: 26
+[20:03:28.069683] test Total time: 0:00:14 (0.0066 s / it)
+[20:03:28.075467] Min test set RMSE: 0.009495962
+[20:03:28.075497] test_RMSE 0.012382573, test_loss 0.000153328
+[20:03:29.435128] Epoch: [10]  [  0/422]  eta: 0:09:32  lr: 0.004321  loss: 0.0002 (0.0002)  time: 1.3566  data: 1.3139  max mem: 26
+[20:03:36.303173] Epoch: [10]  [200/422]  eta: 0:00:09  lr: 0.004048  loss: 0.0001 (0.0001)  time: 0.0298  data: 0.0000  max mem: 26
+[20:03:43.075814] Epoch: [10]  [400/422]  eta: 0:00:00  lr: 0.003766  loss: 0.0001 (0.0001)  time: 0.0363  data: 0.0001  max mem: 26
+[20:03:43.798558] Epoch: [10]  [421/422]  eta: 0:00:00  lr: 0.003736  loss: 0.0001 (0.0001)  time: 0.0343  data: 0.0000  max mem: 26
+[20:03:44.017199] Epoch: [10] Total time: 0:00:15 (0.0378 s / it)
+[20:03:44.017262] Averaged stats: lr: 0.003736  loss: 0.0001 (0.0001)
+[20:03:45.297391] test  [   0/2252]  eta: 0:47:59  loss: 0.0001 (0.0001)  time: 1.2786  data: 1.2675  max mem: 26
+[20:03:46.498589] test  [ 200/2252]  eta: 0:00:25  loss: 0.0001 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:03:47.659438] test  [ 400/2252]  eta: 0:00:16  loss: 0.0000 (0.0000)  time: 0.0057  data: 0.0000  max mem: 26
+[20:03:48.830273] test  [ 600/2252]  eta: 0:00:13  loss: 0.0004 (0.0001)  time: 0.0061  data: 0.0000  max mem: 26
+[20:03:50.025092] test  [ 800/2252]  eta: 0:00:10  loss: 0.0001 (0.0001)  time: 0.0060  data: 0.0000  max mem: 26
+[20:03:51.238183] test  [1000/2252]  eta: 0:00:09  loss: 0.0001 (0.0001)  time: 0.0060  data: 0.0000  max mem: 26
+[20:03:52.404756] test  [1200/2252]  eta: 0:00:07  loss: 0.0001 (0.0001)  time: 0.0060  data: 0.0000  max mem: 26
+[20:03:53.571441] test  [1400/2252]  eta: 0:00:05  loss: 0.0002 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:03:54.736693] test  [1600/2252]  eta: 0:00:04  loss: 0.0000 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:03:55.920723] test  [1800/2252]  eta: 0:00:02  loss: 0.0001 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:03:57.072562] test  [2000/2252]  eta: 0:00:01  loss: 0.0001 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:03:58.253317] test  [2200/2252]  eta: 0:00:00  loss: 0.0001 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:03:58.523192] test  [2251/2252]  eta: 0:00:00  loss: 0.0001 (0.0001)  time: 0.0043  data: 0.0000  max mem: 26
+[20:03:58.741171] test Total time: 0:00:14 (0.0065 s / it)
+[20:03:58.750320] Min test set RMSE: 0.009495962
+[20:03:58.750370] test_RMSE 0.009844023, test_loss 0.000096905
+[20:04:00.126548] Epoch: [11]  [  0/422]  eta: 0:09:38  lr: 0.003735  loss: 0.0001 (0.0001)  time: 1.3707  data: 1.3317  max mem: 26
+[20:04:07.120444] Epoch: [11]  [200/422]  eta: 0:00:09  lr: 0.003448  loss: 0.0001 (0.0001)  time: 0.0351  data: 0.0001  max mem: 26
+[20:04:14.070793] Epoch: [11]  [400/422]  eta: 0:00:00  lr: 0.003157  loss: 0.0001 (0.0001)  time: 0.0352  data: 0.0001  max mem: 26
+[20:04:14.774714] Epoch: [11]  [421/422]  eta: 0:00:00  lr: 0.003127  loss: 0.0001 (0.0001)  time: 0.0334  data: 0.0000  max mem: 26
+[20:04:14.991961] Epoch: [11] Total time: 0:00:16 (0.0385 s / it)
+[20:04:14.992037] Averaged stats: lr: 0.003127  loss: 0.0001 (0.0001)
+[20:04:16.335386] test  [   0/2252]  eta: 0:50:21  loss: 0.0001 (0.0001)  time: 1.3416  data: 1.3309  max mem: 26
+[20:04:17.549112] test  [ 200/2252]  eta: 0:00:26  loss: 0.0001 (0.0001)  time: 0.0056  data: 0.0000  max mem: 26
+[20:04:18.695351] test  [ 400/2252]  eta: 0:00:17  loss: 0.0000 (0.0001)  time: 0.0057  data: 0.0000  max mem: 26
+[20:04:19.858648] test  [ 600/2252]  eta: 0:00:13  loss: 0.0003 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:04:21.043643] test  [ 800/2252]  eta: 0:00:10  loss: 0.0001 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:04:22.229963] test  [1000/2252]  eta: 0:00:09  loss: 0.0001 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:04:23.389469] test  [1200/2252]  eta: 0:00:07  loss: 0.0002 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:04:24.567542] test  [1400/2252]  eta: 0:00:05  loss: 0.0001 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:04:25.762376] test  [1600/2252]  eta: 0:00:04  loss: 0.0000 (0.0001)  time: 0.0060  data: 0.0000  max mem: 26
+[20:04:26.946830] test  [1800/2252]  eta: 0:00:02  loss: 0.0001 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:04:28.133643] test  [2000/2252]  eta: 0:00:01  loss: 0.0001 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:04:29.308121] test  [2200/2252]  eta: 0:00:00  loss: 0.0001 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:04:29.576295] test  [2251/2252]  eta: 0:00:00  loss: 0.0000 (0.0001)  time: 0.0043  data: 0.0000  max mem: 26
+[20:04:29.790879] test Total time: 0:00:14 (0.0066 s / it)
+[20:04:29.795964] update saved res
+[20:04:29.820978] Min test set RMSE: 0.009381947
+[20:04:29.821004] test_RMSE 0.009381947, test_loss 0.000088021
+[20:04:31.214213] Epoch: [12]  [  0/422]  eta: 0:09:46  lr: 0.003126  loss: 0.0001 (0.0001)  time: 1.3903  data: 1.3439  max mem: 26
+[20:04:38.289455] Epoch: [12]  [200/422]  eta: 0:00:09  lr: 0.002835  loss: 0.0001 (0.0001)  time: 0.0353  data: 0.0001  max mem: 26
+[20:04:45.310779] Epoch: [12]  [400/422]  eta: 0:00:00  lr: 0.002547  loss: 0.0001 (0.0001)  time: 0.0350  data: 0.0001  max mem: 26
+[20:04:46.022979] Epoch: [12]  [421/422]  eta: 0:00:00  lr: 0.002517  loss: 0.0001 (0.0001)  time: 0.0338  data: 0.0001  max mem: 26
+[20:04:46.238717] Epoch: [12] Total time: 0:00:16 (0.0389 s / it)
+[20:04:46.238889] Averaged stats: lr: 0.002517  loss: 0.0001 (0.0001)
+[20:04:47.572469] test  [   0/2252]  eta: 0:49:56  loss: 0.0000 (0.0000)  time: 1.3306  data: 1.3181  max mem: 26
+[20:04:48.848186] test  [ 200/2252]  eta: 0:00:26  loss: 0.0001 (0.0000)  time: 0.0060  data: 0.0000  max mem: 26
+[20:04:50.037348] test  [ 400/2252]  eta: 0:00:17  loss: 0.0001 (0.0001)  time: 0.0062  data: 0.0000  max mem: 26
+[20:04:51.222182] test  [ 600/2252]  eta: 0:00:13  loss: 0.0005 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:04:52.416211] test  [ 800/2252]  eta: 0:00:11  loss: 0.0001 (0.0001)  time: 0.0060  data: 0.0000  max mem: 26
+[20:04:53.606667] test  [1000/2252]  eta: 0:00:09  loss: 0.0001 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:04:54.779832] test  [1200/2252]  eta: 0:00:07  loss: 0.0001 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:04:55.992334] test  [1400/2252]  eta: 0:00:05  loss: 0.0003 (0.0001)  time: 0.0061  data: 0.0000  max mem: 26
+[20:04:57.151540] test  [1600/2252]  eta: 0:00:04  loss: 0.0001 (0.0001)  time: 0.0061  data: 0.0001  max mem: 26
+[20:04:58.360965] test  [1800/2252]  eta: 0:00:03  loss: 0.0002 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:04:59.572058] test  [2000/2252]  eta: 0:00:01  loss: 0.0001 (0.0001)  time: 0.0061  data: 0.0001  max mem: 26
+[20:05:00.749758] test  [2200/2252]  eta: 0:00:00  loss: 0.0001 (0.0001)  time: 0.0056  data: 0.0000  max mem: 26
+[20:05:01.011712] test  [2251/2252]  eta: 0:00:00  loss: 0.0001 (0.0001)  time: 0.0043  data: 0.0000  max mem: 26
+[20:05:01.280245] test Total time: 0:00:15 (0.0067 s / it)
+[20:05:01.286545] Min test set RMSE: 0.009381947
+[20:05:01.286577] test_RMSE 0.010831383, test_loss 0.000117319
+[20:05:02.631695] Epoch: [13]  [  0/422]  eta: 0:09:26  lr: 0.002516  loss: 0.0001 (0.0001)  time: 1.3421  data: 1.3045  max mem: 26
+[20:05:09.400447] Epoch: [13]  [200/422]  eta: 0:00:08  lr: 0.002234  loss: 0.0001 (0.0001)  time: 0.0340  data: 0.0001  max mem: 26
+[20:05:16.220992] Epoch: [13]  [400/422]  eta: 0:00:00  lr: 0.001959  loss: 0.0001 (0.0001)  time: 0.0342  data: 0.0001  max mem: 26
+[20:05:16.906324] Epoch: [13]  [421/422]  eta: 0:00:00  lr: 0.001931  loss: 0.0001 (0.0001)  time: 0.0325  data: 0.0000  max mem: 26
+[20:05:17.123856] Epoch: [13] Total time: 0:00:15 (0.0375 s / it)
+[20:05:17.124161] Averaged stats: lr: 0.001931  loss: 0.0001 (0.0001)
+[20:05:18.437653] test  [   0/2252]  eta: 0:49:11  loss: 0.0001 (0.0001)  time: 1.3108  data: 1.2999  max mem: 26
+[20:05:19.536582] test  [ 200/2252]  eta: 0:00:24  loss: 0.0001 (0.0001)  time: 0.0057  data: 0.0000  max mem: 26
+[20:05:20.587835] test  [ 400/2252]  eta: 0:00:15  loss: 0.0000 (0.0001)  time: 0.0052  data: 0.0000  max mem: 26
+[20:05:21.734373] test  [ 600/2252]  eta: 0:00:12  loss: 0.0003 (0.0001)  time: 0.0057  data: 0.0000  max mem: 26
+[20:05:22.901361] test  [ 800/2252]  eta: 0:00:10  loss: 0.0001 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:05:24.073156] test  [1000/2252]  eta: 0:00:08  loss: 0.0001 (0.0001)  time: 0.0057  data: 0.0000  max mem: 26
+[20:05:25.251100] test  [1200/2252]  eta: 0:00:07  loss: 0.0002 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:05:26.426469] test  [1400/2252]  eta: 0:00:05  loss: 0.0001 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:05:27.607029] test  [1600/2252]  eta: 0:00:04  loss: 0.0000 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:05:28.771786] test  [1800/2252]  eta: 0:00:02  loss: 0.0001 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:05:29.938925] test  [2000/2252]  eta: 0:00:01  loss: 0.0000 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:05:31.080751] test  [2200/2252]  eta: 0:00:00  loss: 0.0001 (0.0001)  time: 0.0057  data: 0.0000  max mem: 26
+[20:05:31.341597] test  [2251/2252]  eta: 0:00:00  loss: 0.0000 (0.0001)  time: 0.0043  data: 0.0000  max mem: 26
+[20:05:31.549855] test Total time: 0:00:14 (0.0064 s / it)
+[20:05:31.559325] update saved res
+[20:05:31.659441] Min test set RMSE: 0.009139897
+[20:05:31.659474] test_RMSE 0.009139897, test_loss 0.000083538
+[20:05:32.974505] Epoch: [14]  [  0/422]  eta: 0:09:13  lr: 0.001930  loss: 0.0000 (0.0000)  time: 1.3120  data: 1.2675  max mem: 26
+[20:05:39.933487] Epoch: [14]  [200/422]  eta: 0:00:09  lr: 0.001667  loss: 0.0001 (0.0001)  time: 0.0352  data: 0.0001  max mem: 26
+[20:05:46.896784] Epoch: [14]  [400/422]  eta: 0:00:00  lr: 0.001416  loss: 0.0001 (0.0001)  time: 0.0359  data: 0.0001  max mem: 26
+[20:05:47.634741] Epoch: [14]  [421/422]  eta: 0:00:00  lr: 0.001391  loss: 0.0001 (0.0001)  time: 0.0350  data: 0.0001  max mem: 26
+[20:05:47.847089] Epoch: [14] Total time: 0:00:16 (0.0384 s / it)
+[20:05:47.847179] Averaged stats: lr: 0.001391  loss: 0.0001 (0.0001)
+[20:05:49.191121] test  [   0/2252]  eta: 0:50:22  loss: 0.0002 (0.0002)  time: 1.3423  data: 1.3300  max mem: 26
+[20:05:50.403678] test  [ 200/2252]  eta: 0:00:26  loss: 0.0001 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:05:51.562976] test  [ 400/2252]  eta: 0:00:17  loss: 0.0001 (0.0001)  time: 0.0057  data: 0.0000  max mem: 26
+[20:05:52.737393] test  [ 600/2252]  eta: 0:00:13  loss: 0.0002 (0.0001)  time: 0.0060  data: 0.0000  max mem: 26
+[20:05:53.899918] test  [ 800/2252]  eta: 0:00:10  loss: 0.0002 (0.0001)  time: 0.0061  data: 0.0000  max mem: 26
+[20:05:55.092160] test  [1000/2252]  eta: 0:00:09  loss: 0.0000 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:05:56.268235] test  [1200/2252]  eta: 0:00:07  loss: 0.0003 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:05:57.450793] test  [1400/2252]  eta: 0:00:05  loss: 0.0001 (0.0001)  time: 0.0059  data: 0.0001  max mem: 26
+[20:05:58.631275] test  [1600/2252]  eta: 0:00:04  loss: 0.0000 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:05:59.792264] test  [1800/2252]  eta: 0:00:02  loss: 0.0000 (0.0001)  time: 0.0057  data: 0.0000  max mem: 26
+[20:06:00.943179] test  [2000/2252]  eta: 0:00:01  loss: 0.0001 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:06:02.124522] test  [2200/2252]  eta: 0:00:00  loss: 0.0001 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:06:02.392137] test  [2251/2252]  eta: 0:00:00  loss: 0.0000 (0.0001)  time: 0.0043  data: 0.0000  max mem: 26
+[20:06:02.600782] test Total time: 0:00:14 (0.0066 s / it)
+[20:06:02.607270] Min test set RMSE: 0.009139897
+[20:06:02.607299] test_RMSE 0.010236760, test_loss 0.000104791
+[20:06:03.959000] Epoch: [15]  [  0/422]  eta: 0:09:29  lr: 0.001390  loss: 0.0000 (0.0000)  time: 1.3488  data: 1.3046  max mem: 26
+[20:06:10.709729] Epoch: [15]  [200/422]  eta: 0:00:08  lr: 0.001156  loss: 0.0001 (0.0001)  time: 0.0337  data: 0.0001  max mem: 26
+[20:06:17.663429] Epoch: [15]  [400/422]  eta: 0:00:00  lr: 0.000939  loss: 0.0001 (0.0001)  time: 0.0344  data: 0.0001  max mem: 26
+[20:06:18.354895] Epoch: [15]  [421/422]  eta: 0:00:00  lr: 0.000917  loss: 0.0000 (0.0001)  time: 0.0328  data: 0.0000  max mem: 26
+[20:06:18.565335] Epoch: [15] Total time: 0:00:15 (0.0378 s / it)
+[20:06:18.565571] Averaged stats: lr: 0.000917  loss: 0.0000 (0.0001)
+[20:06:19.880319] test  [   0/2252]  eta: 0:49:17  loss: 0.0001 (0.0001)  time: 1.3131  data: 1.3034  max mem: 26
+[20:06:21.052163] test  [ 200/2252]  eta: 0:00:25  loss: 0.0001 (0.0001)  time: 0.0057  data: 0.0000  max mem: 26
+[20:06:22.160140] test  [ 400/2252]  eta: 0:00:16  loss: 0.0000 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:06:23.319959] test  [ 600/2252]  eta: 0:00:13  loss: 0.0003 (0.0001)  time: 0.0059  data: 0.0001  max mem: 26
+[20:06:24.507023] test  [ 800/2252]  eta: 0:00:10  loss: 0.0001 (0.0001)  time: 0.0061  data: 0.0001  max mem: 26
+[20:06:25.693455] test  [1000/2252]  eta: 0:00:08  loss: 0.0001 (0.0001)  time: 0.0060  data: 0.0001  max mem: 26
+[20:06:26.864854] test  [1200/2252]  eta: 0:00:07  loss: 0.0002 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:06:28.051553] test  [1400/2252]  eta: 0:00:05  loss: 0.0001 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:06:29.232628] test  [1600/2252]  eta: 0:00:04  loss: 0.0000 (0.0001)  time: 0.0057  data: 0.0000  max mem: 26
+[20:06:30.379497] test  [1800/2252]  eta: 0:00:02  loss: 0.0000 (0.0001)  time: 0.0057  data: 0.0000  max mem: 26
+[20:06:31.575067] test  [2000/2252]  eta: 0:00:01  loss: 0.0000 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:06:32.763205] test  [2200/2252]  eta: 0:00:00  loss: 0.0001 (0.0001)  time: 0.0060  data: 0.0000  max mem: 26
+[20:06:33.035067] test  [2251/2252]  eta: 0:00:00  loss: 0.0000 (0.0001)  time: 0.0043  data: 0.0000  max mem: 26
+[20:06:33.242982] test Total time: 0:00:14 (0.0065 s / it)
+[20:06:33.248100] update saved res
+[20:06:33.340200] Min test set RMSE: 0.008772142
+[20:06:33.340228] test_RMSE 0.008772142, test_loss 0.000076950
+[20:06:34.670074] Epoch: [16]  [  0/422]  eta: 0:09:19  lr: 0.000916  loss: 0.0000 (0.0000)  time: 1.3265  data: 1.2728  max mem: 26
+[20:06:41.633302] Epoch: [16]  [200/422]  eta: 0:00:09  lr: 0.000720  loss: 0.0001 (0.0001)  time: 0.0352  data: 0.0000  max mem: 26
+[20:06:48.717525] Epoch: [16]  [400/422]  eta: 0:00:00  lr: 0.000545  loss: 0.0000 (0.0001)  time: 0.0356  data: 0.0001  max mem: 26
+[20:06:49.419351] Epoch: [16]  [421/422]  eta: 0:00:00  lr: 0.000528  loss: 0.0000 (0.0001)  time: 0.0333  data: 0.0000  max mem: 26
+[20:06:49.651497] Epoch: [16] Total time: 0:00:16 (0.0386 s / it)
+[20:06:49.651558] Averaged stats: lr: 0.000528  loss: 0.0000 (0.0001)
+[20:06:50.996000] test  [   0/2252]  eta: 0:50:21  loss: 0.0001 (0.0001)  time: 1.3418  data: 1.3302  max mem: 26
+[20:06:52.304466] test  [ 200/2252]  eta: 0:00:27  loss: 0.0001 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:06:53.538195] test  [ 400/2252]  eta: 0:00:17  loss: 0.0001 (0.0001)  time: 0.0061  data: 0.0001  max mem: 26
+[20:06:54.601374] test  [ 600/2252]  eta: 0:00:13  loss: 0.0002 (0.0001)  time: 0.0053  data: 0.0001  max mem: 26
+[20:06:55.743957] test  [ 800/2252]  eta: 0:00:11  loss: 0.0001 (0.0001)  time: 0.0056  data: 0.0000  max mem: 26
+[20:06:56.935413] test  [1000/2252]  eta: 0:00:09  loss: 0.0001 (0.0001)  time: 0.0061  data: 0.0001  max mem: 26
+[20:06:58.142922] test  [1200/2252]  eta: 0:00:07  loss: 0.0002 (0.0001)  time: 0.0062  data: 0.0001  max mem: 26
+[20:06:59.374276] test  [1400/2252]  eta: 0:00:05  loss: 0.0001 (0.0001)  time: 0.0056  data: 0.0001  max mem: 26
+[20:07:00.560860] test  [1600/2252]  eta: 0:00:04  loss: 0.0000 (0.0001)  time: 0.0058  data: 0.0001  max mem: 26
+[20:07:01.835450] test  [1800/2252]  eta: 0:00:03  loss: 0.0001 (0.0001)  time: 0.0059  data: 0.0001  max mem: 26
+[20:07:03.134154] test  [2000/2252]  eta: 0:00:01  loss: 0.0001 (0.0001)  time: 0.0064  data: 0.0001  max mem: 26
+[20:07:04.425671] test  [2200/2252]  eta: 0:00:00  loss: 0.0001 (0.0001)  time: 0.0064  data: 0.0001  max mem: 26
+[20:07:04.714874] test  [2251/2252]  eta: 0:00:00  loss: 0.0000 (0.0001)  time: 0.0045  data: 0.0000  max mem: 26
+[20:07:04.987283] test Total time: 0:00:15 (0.0068 s / it)
+[20:07:04.994966] Min test set RMSE: 0.008772142
+[20:07:04.995001] test_RMSE 0.009457128, test_loss 0.000089437
+[20:07:07.188009] Epoch: [17]  [  0/422]  eta: 0:15:23  lr: 0.000528  loss: 0.0001 (0.0001)  time: 2.1895  data: 2.1244  max mem: 26
+[20:07:14.238735] Epoch: [17]  [200/422]  eta: 0:00:10  lr: 0.000378  loss: 0.0000 (0.0001)  time: 0.0350  data: 0.0001  max mem: 26
+[20:07:21.699435] Epoch: [17]  [400/422]  eta: 0:00:00  lr: 0.000251  loss: 0.0000 (0.0000)  time: 0.0358  data: 0.0001  max mem: 26
+[20:07:22.421537] Epoch: [17]  [421/422]  eta: 0:00:00  lr: 0.000239  loss: 0.0000 (0.0000)  time: 0.0343  data: 0.0001  max mem: 26
+[20:07:22.706430] Epoch: [17] Total time: 0:00:17 (0.0420 s / it)
+[20:07:22.706502] Averaged stats: lr: 0.000239  loss: 0.0000 (0.0000)
+[20:07:24.769655] test  [   0/2252]  eta: 1:17:21  loss: 0.0001 (0.0001)  time: 2.0609  data: 2.0491  max mem: 26
+[20:07:25.966561] test  [ 200/2252]  eta: 0:00:33  loss: 0.0001 (0.0001)  time: 0.0052  data: 0.0000  max mem: 26
+[20:07:27.110761] test  [ 400/2252]  eta: 0:00:20  loss: 0.0000 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:07:28.305032] test  [ 600/2252]  eta: 0:00:15  loss: 0.0002 (0.0001)  time: 0.0060  data: 0.0001  max mem: 26
+[20:07:29.443732] test  [ 800/2252]  eta: 0:00:12  loss: 0.0001 (0.0001)  time: 0.0056  data: 0.0000  max mem: 26
+[20:07:30.551149] test  [1000/2252]  eta: 0:00:09  loss: 0.0001 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:07:31.715750] test  [1200/2252]  eta: 0:00:07  loss: 0.0002 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:07:32.907315] test  [1400/2252]  eta: 0:00:06  loss: 0.0001 (0.0001)  time: 0.0057  data: 0.0000  max mem: 26
+[20:07:34.085289] test  [1600/2252]  eta: 0:00:04  loss: 0.0000 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:07:35.274187] test  [1800/2252]  eta: 0:00:03  loss: 0.0001 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:07:36.475331] test  [2000/2252]  eta: 0:00:01  loss: 0.0001 (0.0001)  time: 0.0060  data: 0.0000  max mem: 26
+[20:07:37.670546] test  [2200/2252]  eta: 0:00:00  loss: 0.0001 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:07:37.940752] test  [2251/2252]  eta: 0:00:00  loss: 0.0000 (0.0001)  time: 0.0044  data: 0.0000  max mem: 26
+[20:07:38.218390] test Total time: 0:00:15 (0.0069 s / it)
+[20:07:38.229760] Min test set RMSE: 0.008772142
+[20:07:38.229819] test_RMSE 0.009368769, test_loss 0.000087774
+[20:07:40.270205] Epoch: [18]  [  0/422]  eta: 0:14:18  lr: 0.000239  loss: 0.0001 (0.0001)  time: 2.0349  data: 1.9890  max mem: 26
+[20:07:47.560330] Epoch: [18]  [200/422]  eta: 0:00:10  lr: 0.000140  loss: 0.0000 (0.0000)  time: 0.0389  data: 0.0001  max mem: 26
+[20:07:53.865757] Epoch: [18]  [400/422]  eta: 0:00:00  lr: 0.000067  loss: 0.0000 (0.0000)  time: 0.0347  data: 0.0001  max mem: 26
+[20:07:54.584980] Epoch: [18]  [421/422]  eta: 0:00:00  lr: 0.000061  loss: 0.0000 (0.0000)  time: 0.0342  data: 0.0001  max mem: 26
+[20:07:54.872563] Epoch: [18] Total time: 0:00:16 (0.0394 s / it)
+[20:07:54.872667] Averaged stats: lr: 0.000061  loss: 0.0000 (0.0000)
+[20:07:56.806972] test  [   0/2252]  eta: 1:12:30  loss: 0.0001 (0.0001)  time: 1.9318  data: 1.9203  max mem: 26
+[20:07:58.038920] test  [ 200/2252]  eta: 0:00:32  loss: 0.0001 (0.0001)  time: 0.0058  data: 0.0001  max mem: 26
+[20:07:59.144814] test  [ 400/2252]  eta: 0:00:19  loss: 0.0000 (0.0001)  time: 0.0059  data: 0.0001  max mem: 26
+[20:08:00.243254] test  [ 600/2252]  eta: 0:00:14  loss: 0.0003 (0.0001)  time: 0.0057  data: 0.0000  max mem: 26
+[20:08:01.393829] test  [ 800/2252]  eta: 0:00:11  loss: 0.0001 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:08:02.563439] test  [1000/2252]  eta: 0:00:09  loss: 0.0001 (0.0001)  time: 0.0057  data: 0.0000  max mem: 26
+[20:08:03.681191] test  [1200/2252]  eta: 0:00:07  loss: 0.0001 (0.0001)  time: 0.0056  data: 0.0000  max mem: 26
+[20:08:04.870015] test  [1400/2252]  eta: 0:00:06  loss: 0.0001 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:08:06.064248] test  [1600/2252]  eta: 0:00:04  loss: 0.0000 (0.0001)  time: 0.0059  data: 0.0001  max mem: 26
+[20:08:07.224431] test  [1800/2252]  eta: 0:00:03  loss: 0.0001 (0.0001)  time: 0.0059  data: 0.0000  max mem: 26
+[20:08:08.390134] test  [2000/2252]  eta: 0:00:01  loss: 0.0001 (0.0001)  time: 0.0059  data: 0.0001  max mem: 26
+[20:08:09.590844] test  [2200/2252]  eta: 0:00:00  loss: 0.0001 (0.0001)  time: 0.0061  data: 0.0001  max mem: 26
+[20:08:09.872235] test  [2251/2252]  eta: 0:00:00  loss: 0.0000 (0.0001)  time: 0.0047  data: 0.0000  max mem: 26
+[20:08:10.146172] test Total time: 0:00:15 (0.0068 s / it)
+[20:08:10.155893] Min test set RMSE: 0.008772142
+[20:08:10.155963] test_RMSE 0.009219052, test_loss 0.000084991
+[20:08:12.155889] Epoch: [19]  [  0/422]  eta: 0:14:01  lr: 0.000061  loss: 0.0000 (0.0000)  time: 1.9950  data: 1.9481  max mem: 26
+[20:08:19.402322] Epoch: [19]  [200/422]  eta: 0:00:10  lr: 0.000018  loss: 0.0000 (0.0000)  time: 0.0336  data: 0.0001  max mem: 26
+[20:08:26.478454] Epoch: [19]  [400/422]  eta: 0:00:00  lr: 0.000001  loss: 0.0000 (0.0000)  time: 0.0344  data: 0.0001  max mem: 26
+[20:08:27.170882] Epoch: [19]  [421/422]  eta: 0:00:00  lr: 0.000001  loss: 0.0000 (0.0000)  time: 0.0329  data: 0.0001  max mem: 26
+[20:08:27.441805] Epoch: [19] Total time: 0:00:17 (0.0410 s / it)
+[20:08:27.441910] Averaged stats: lr: 0.000001  loss: 0.0000 (0.0000)
+[20:08:29.390536] test  [   0/2252]  eta: 1:13:01  loss: 0.0001 (0.0001)  time: 1.9455  data: 1.9333  max mem: 26
+[20:08:30.853438] test  [ 200/2252]  eta: 0:00:34  loss: 0.0001 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:08:32.011129] test  [ 400/2252]  eta: 0:00:21  loss: 0.0000 (0.0001)  time: 0.0057  data: 0.0000  max mem: 26
+[20:08:33.173439] test  [ 600/2252]  eta: 0:00:15  loss: 0.0002 (0.0001)  time: 0.0058  data: 0.0000  max mem: 26
+[20:08:34.242567] test  [ 800/2252]  eta: 0:00:12  loss: 0.0001 (0.0001)  time: 0.0051  data: 0.0000  max mem: 26
+[20:08:35.283291] test  [1000/2252]  eta: 0:00:09  loss: 0.0001 (0.0001)  time: 0.0052  data: 0.0000  max mem: 26
+[20:08:36.391378] test  [1200/2252]  eta: 0:00:07  loss: 0.0002 (0.0001)  time: 0.0056  data: 0.0000  max mem: 26
+[20:08:37.514018] test  [1400/2252]  eta: 0:00:06  loss: 0.0001 (0.0001)  time: 0.0055  data: 0.0000  max mem: 26
+[20:08:38.602576] test  [1600/2252]  eta: 0:00:04  loss: 0.0000 (0.0001)  time: 0.0055  data: 0.0000  max mem: 26
+[20:08:39.645546] test  [1800/2252]  eta: 0:00:03  loss: 0.0001 (0.0001)  time: 0.0052  data: 0.0000  max mem: 26
+[20:08:40.682423] test  [2000/2252]  eta: 0:00:01  loss: 0.0001 (0.0001)  time: 0.0053  data: 0.0000  max mem: 26
+[20:08:41.773453] test  [2200/2252]  eta: 0:00:00  loss: 0.0001 (0.0001)  time: 0.0055  data: 0.0000  max mem: 26
+[20:08:42.031492] test  [2251/2252]  eta: 0:00:00  loss: 0.0000 (0.0001)  time: 0.0043  data: 0.0000  max mem: 26
+[20:08:42.292066] test Total time: 0:00:14 (0.0066 s / it)
+[20:08:42.297453] Min test set RMSE: 0.008772142
+[20:08:42.297484] test_RMSE 0.009218046, test_loss 0.000084972
+[20:08:42.297501] Training time 0:10:25

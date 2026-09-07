@@ -46,6 +46,7 @@ from util.misc import setup_for_distributed
 import sys
 sys.path.append('./baselines/Time_Series_Library')
 sys.path.append('./baselines/util')
+sys.path.append('./baselines/TimeMixer')
 
 def get_args_parser():
     parser = argparse.ArgumentParser('FMAE', add_help=False)
@@ -318,6 +319,37 @@ def main(args):
             'enc_in': len(data_task.encoder)
         }
         model = iTransformer.Model(configs = SimpleNamespace(**configs))
+    elif args.model.startswith('TimeMixer++'):
+        from TimeMixer.models import TimeMixer
+        from types import SimpleNamespace
+        configs = {
+            'task_name': 'classification', # by setting n_class to 1, we can still use the classification head for regression tasks
+            'seq_len': 128,
+            'pred_len': 1,
+            'd_model':96,
+            'embed': 'fixed',
+            'freq': 'h',
+            'dropout': 0,
+            'factor':3,
+            'n_heads':3,
+            'd_ff': 96*4,
+            'activation': 'relu',
+            'e_layers': 6,
+            'enc_in': len(data_task.encoder),
+            'label_len': 1,
+            'down_sampling_window': 2, # following the setting in TimeMixer training script
+            'channel_independence': 0, 
+            'decomp_method': 'moving_avg', # default value, according to TimeMixer++ run.py argument
+            'moving_avg': 25, # default value, according to TimeMixer++ run.py argument
+            'down_sampling_layers': 3, # following the setting in TimeMixer training script
+            'use_future_temporal_feature': 0,
+            'use_norm': 1, # default value, according to TimeMixer++ run.py argument
+            'c_out': 1,
+            'down_sampling_method': 'avg', # default value, according to TimeMixer++ run.py argument
+            'num_class': 1
+
+        }
+        model = TimeMixer.Model(configs = SimpleNamespace(**configs))
     else:
         model = models_vit.__dict__[args.model](
             in_chans=len(data_task.encoder), 
@@ -364,7 +396,9 @@ def main(args):
 
     if args.model.startswith("LSTM") \
         or args.model.startswith('PatchTST') \
-            or args.model.startswith('iTransformer'):
+            or args.model.startswith('iTransformer') \
+                or args.model.startswith('TimeMixer++') \
+                    or args.model.startswith('Diffusion-TS'):
         optimizer = torch.optim.AdamW(model_without_ddp.parameters(), lr=args.lr, weight_decay=args.weight_decay)
     else:
         # build optimizer with layer-wise lr decay (lrd)

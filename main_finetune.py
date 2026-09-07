@@ -64,11 +64,11 @@ def get_args_parser():
 
     #wandb
     parser.add_argument("--use-wandb", action='store_true')
-    parser.add_argument("--wandb-project", type=str, default="ai-x_project")
-    parser.add_argument("--wandb-group", type=str, default="vit_finetune")
+    parser.add_argument("--wandb-project", type=str, default="")
+    parser.add_argument("--wandb-group", type=str, default="")
     parser.add_argument("--job-type", type=str, default="training-")
     parser.add_argument("--wandb-name", type=str, default="")
-    parser.add_argument("--user-name", type=str, default="dl_project_")
+    parser.add_argument("--user-name", type=str, default="")
 
     # Model parameters
     parser.add_argument('--model', default='vit_large_patch16', type=str, metavar='MODEL',
@@ -106,6 +106,8 @@ def get_args_parser():
     # * Finetuning params
     parser.add_argument('--finetune', default='',
                         help='finetune from checkpoint')
+    parser.add_argument('--linear_probe', action='store_true',
+                        help='Freeze all model parameters except head and fc_norm.')
     parser.add_argument('--global_pool', action='store_true')
     parser.set_defaults(global_pool=True)
     parser.add_argument('--cls_token', action='store_false', dest='global_pool',
@@ -124,6 +126,8 @@ def get_args_parser():
     parser.add_argument('--inference_cycle_id', nargs='+', default=None)
 
     # Dataset parameters
+    parser.add_argument("--apply_noise", action='store_true',
+                        help='Add Gaussian noise with std 0.005 to input channel x[0].')
     parser.add_argument("--same_normalizer", action='store_true')
 
     parser.add_argument('--output_dir', default='',
@@ -244,9 +248,9 @@ def main(args):
     for each_num in ind_ood_car_dict['ind_sorted'] + ind_ood_car_dict['ood_sorted']:
         random.shuffle(all_car_dict[each_num])
         
-    dataset_train, _ = load_dataset(args.fold_num, brand_num=args.brand_num, same_normalizer=args.same_normalizer, car_dict_dir=car_dict_dir, downstream=args.downstream, data_type = 'finetune_train', normalizer=normalizer, dataset_fn=PreprocessNormalizer, ind_ood_car_dict=ind_ood_car_dict, all_car_dict=all_car_dict, num_snippet=args.num_snippet, cycle_gap=args.cycle_gap, cycle_id=args.cycle_id, data_percent=args.data_percent, seed=args.seed, task=args.task)
+    dataset_train, _ = load_dataset(args.fold_num, brand_num=args.brand_num, same_normalizer=args.same_normalizer, car_dict_dir=car_dict_dir, downstream=args.downstream, data_type = 'finetune_train', normalizer=normalizer, dataset_fn=PreprocessNormalizer, ind_ood_car_dict=ind_ood_car_dict, all_car_dict=all_car_dict, num_snippet=args.num_snippet, cycle_gap=args.cycle_gap, cycle_id=args.cycle_id, data_percent=args.data_percent, seed=args.seed, task=args.task, apply_noise=args.apply_noise)
     normalizer = _
-    dataset_test, _ = load_dataset(args.fold_num, brand_num=args.brand_num, same_normalizer=args.same_normalizer, car_dict_dir=car_dict_dir, downstream=args.downstream, data_type = 'finetune_test', normalizer=normalizer, dataset_fn=PreprocessNormalizer, ind_ood_car_dict=ind_ood_car_dict, all_car_dict=all_car_dict, num_snippet=args.num_snippet, cycle_gap=args.cycle_gap, cycle_id=args.cycle_id, data_percent=args.data_percent, seed=args.seed, task=args.task)
+    dataset_test, _ = load_dataset(args.fold_num, brand_num=args.brand_num, same_normalizer=args.same_normalizer, car_dict_dir=car_dict_dir, downstream=args.downstream, data_type = 'finetune_test', normalizer=normalizer, dataset_fn=PreprocessNormalizer, ind_ood_car_dict=ind_ood_car_dict, all_car_dict=all_car_dict, num_snippet=args.num_snippet, cycle_gap=args.cycle_gap, cycle_id=args.cycle_id, data_percent=args.data_percent, seed=args.seed, task=args.task, apply_noise=args.apply_noise)
     
     sampler_train = torch.utils.data.RandomSampler(dataset_train)
     sampler_test = torch.utils.data.SequentialSampler(dataset_test)
@@ -312,14 +316,19 @@ def main(args):
         msg = model.load_state_dict(checkpoint_model, strict=False)
         print(msg)
         trunc_normal_(model.head.weight, std=2e-5)
-        '''
-        # I want to freeze all layers except for the head
+
+    if args.linear_probe:
+        if not args.finetune:
+            raise ValueError("--linear_probe requires --finetune to load a pretrained checkpoint.")
+        trainable_names = []
         for name, param in model.named_parameters():
             if "head" not in name and "fc_norm" not in name:
                 param.requires_grad = False
             else:
+                trainable_names.append(name)
                 print(f"Finetuning {name}...")
-        '''   
+        if not trainable_names:
+            raise ValueError("--linear_probe did not find any head or fc_norm parameters to train.")
         
     model.to(device)
     model_without_ddp = model

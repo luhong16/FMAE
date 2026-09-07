@@ -1,0 +1,715 @@
+[06:02:25.846860] job dir: /nfs/nfs-home/luhong/FMAE_clean/FMAE/experiment/multimae/code
+[06:02:25.846985] Namespace(SFT_blr=1e-06,
+accum_iter=1,
+batch_size=32,
+blr=0.8,
+brand_num=5,
+clip_grad=None,
+cycle_gap=0,
+cycle_id=None,
+data_percent=5,
+device='cuda',
+dist_eval=False,
+dist_on_itp=False,
+dist_url='env://',
+distributed=False,
+downstream='capacity',
+drop_path=0.0,
+epochs=20,
+eval=False,
+finetune='/nfs/nfs-home/luhong/FMAE_clean/FMAE/experiment/multimae/pretrained_model/evMultiMAE_pretrainpretrain_multimae_half_mpr0.5_lrNone_blr0.00015_minlr0.0_weightdecay0.05_warmupepoch40_numsnippet0_epochs800_s0/checkpoint-799.pth',
+fold_num=4,
+global_pool=True,
+h=None,
+inference_cycle_id=None,
+input_size=224,
+job_type='training-',
+label_normalizer=False,
+layer_decay=0.8,
+local_rank=-1,
+log_dir=None,
+lr=None,
+mask_type='no',
+min_lr=1e-06,
+model='multivit_half',
+num_snippet=0,
+num_workers=10,
+output_dir='/nfs/nfs-home/luhong/FMAE_clean/FMAE/experiment/multimae/logs/capacity/no/799_pretrain_multivit_half/epoch20_blr8e-1_bsz32_ld0.8_wd0.01_dp0.0/s5/f4_b5',
+pin_mem=True,
+pos_embed_dim=12,
+resume='',
+same_normalizer=True,
+save_interval=10000,
+seed=5,
+snippet_size=128,
+start_epoch=0,
+task='batterybrandmileage',
+use_wandb=False,
+user_name='',
+wandb_group='vit_finetune',
+wandb_name='',
+wandb_project='',
+warmup_epochs=4,
+weight_decay=0.01,
+world_size=1)
+[06:02:26.347482] ind_car_num_list [5063, 5071, 5055, 5073, 5052, 5074, 5044, 5046, 5045, 5053, 5066, 5086, 5057, 5061, 5078, 5047, 5075, 5087, 5036, 5068, 5085, 5056, 5058, 5059, 5060, 5043, 5033, 5050, 5064]
+[06:02:26.347590] ood_car_num_list []
+[06:02:26.347612] car_number is  finetune_train [5063, 5071, 5055, 5073, 5052, 5074, 5044, 5046, 5045, 5053, 5066, 5086, 5057, 5061, 5078, 5047, 5075, 5087, 5036, 5068, 5085, 5056, 5058]
+[06:02:26.347626] 23
+[06:02:26.347638] 0 378
+[06:02:26.350797] 1 481
+[06:02:26.354384] 2 468
+[06:02:26.357802] 3 816
+[06:02:26.363708] 4 330
+[06:02:26.366265] 5 271
+[06:02:26.368205] 6 450
+[06:02:26.371468] 7 290
+[06:02:26.373548] 8 314
+[06:02:26.375772] 9 400
+[06:02:26.378762] 10 391
+[06:02:26.381546] 11 443
+[06:02:26.384801] 12 566
+[06:02:26.388898] 13 822
+[06:02:26.394942] 14 682
+[06:02:26.399962] 15 405
+[06:02:26.402905] 16 595
+[06:02:26.407181] 17 342
+[06:02:26.409711] 18 414
+[06:02:26.412663] 19 714
+[06:02:26.417844] 20 522
+[06:02:26.421660] 21 780
+[06:02:26.427495] 22 449
+[06:02:26.432535] dfs (557, 8, 128)
+[06:02:26.441383] ind_car_num_list [5063, 5071, 5055, 5073, 5052, 5074, 5044, 5046, 5045, 5053, 5066, 5086, 5057, 5061, 5078, 5047, 5075, 5087, 5036, 5068, 5085, 5056, 5058, 5059, 5060, 5043, 5033, 5050, 5064]
+[06:02:26.441410] ood_car_num_list []
+[06:02:26.441425] car_number is  finetune_test [5059, 5060, 5043, 5033, 5050, 5064]
+[06:02:26.441436] 6
+[06:02:26.441447] 0 288
+[06:02:26.484420] 1 350
+[06:02:26.544139] 2 364
+[06:02:26.598663] 3 502
+[06:02:26.672590] 4 282
+[06:02:26.714180] 5 473
+[06:02:26.898999] Load pre-trained checkpoint from: /nfs/nfs-home/luhong/FMAE_clean/FMAE/experiment/multimae/pretrained_model/evMultiMAE_pretrainpretrain_multimae_half_mpr0.5_lrNone_blr0.00015_minlr0.0_weightdecay0.05_warmupepoch40_numsnippet0_epochs800_s0/checkpoint-799.pth
+[06:02:26.926358] _IncompatibleKeys(missing_keys=['output_adapters.prediction.norm.weight', 'output_adapters.prediction.norm.bias', 'output_adapters.prediction.head.weight', 'output_adapters.prediction.head.bias'], unexpected_keys=['output_adapters.soc.mask_token', 'output_adapters.soc.pos_emb', 'output_adapters.soc.task_embeddings.current', 'output_adapters.soc.task_embeddings.max_single_volt', 'output_adapters.soc.task_embeddings.max_temp', 'output_adapters.soc.task_embeddings.mileage', 'output_adapters.soc.task_embeddings.min_single_volt', 'output_adapters.soc.task_embeddings.min_temp', 'output_adapters.soc.task_embeddings.soc', 'output_adapters.soc.task_embeddings.volt', 'output_adapters.soc.decoder.q.weight', 'output_adapters.soc.decoder.q.bias', 'output_adapters.soc.decoder.kv.weight', 'output_adapters.soc.decoder.kv.bias', 'output_adapters.soc.decoder.proj.weight', 'output_adapters.soc.decoder.proj.bias', 'output_adapters.soc.context_norm.weight', 'output_adapters.soc.context_norm.bias', 'output_adapters.soc.query_norm.weight', 'output_adapters.soc.query_norm.bias', 'output_adapters.soc.out_norm.weight', 'output_adapters.soc.out_norm.bias', 'output_adapters.soc.mlp.fc1.weight', 'output_adapters.soc.mlp.fc1.bias', 'output_adapters.soc.mlp.fc2.weight', 'output_adapters.soc.mlp.fc2.bias', 'output_adapters.soc.decoder_transformer.0.norm1.weight', 'output_adapters.soc.decoder_transformer.0.norm1.bias', 'output_adapters.soc.decoder_transformer.0.attn.qkv.weight', 'output_adapters.soc.decoder_transformer.0.attn.qkv.bias', 'output_adapters.soc.decoder_transformer.0.attn.proj.weight', 'output_adapters.soc.decoder_transformer.0.attn.proj.bias', 'output_adapters.soc.decoder_transformer.0.norm2.weight', 'output_adapters.soc.decoder_transformer.0.norm2.bias', 'output_adapters.soc.decoder_transformer.0.mlp.fc1.weight', 'output_adapters.soc.decoder_transformer.0.mlp.fc1.bias', 'output_adapters.soc.decoder_transformer.0.mlp.fc2.weight', 'output_adapters.soc.decoder_transformer.0.mlp.fc2.bias', 'output_adapters.soc.decoder_transformer.1.norm1.weight', 'output_adapters.soc.decoder_transformer.1.norm1.bias', 'output_adapters.soc.decoder_transformer.1.attn.qkv.weight', 'output_adapters.soc.decoder_transformer.1.attn.qkv.bias', 'output_adapters.soc.decoder_transformer.1.attn.proj.weight', 'output_adapters.soc.decoder_transformer.1.attn.proj.bias', 'output_adapters.soc.decoder_transformer.1.norm2.weight', 'output_adapters.soc.decoder_transformer.1.norm2.bias', 'output_adapters.soc.decoder_transformer.1.mlp.fc1.weight', 'output_adapters.soc.decoder_transformer.1.mlp.fc1.bias', 'output_adapters.soc.decoder_transformer.1.mlp.fc2.weight', 'output_adapters.soc.decoder_transformer.1.mlp.fc2.bias', 'output_adapters.soc.decoder_transformer.2.norm1.weight', 'output_adapters.soc.decoder_transformer.2.norm1.bias', 'output_adapters.soc.decoder_transformer.2.attn.qkv.weight', 'output_adapters.soc.decoder_transformer.2.attn.qkv.bias', 'output_adapters.soc.decoder_transformer.2.attn.proj.weight', 'output_adapters.soc.decoder_transformer.2.attn.proj.bias', 'output_adapters.soc.decoder_transformer.2.norm2.weight', 'output_adapters.soc.decoder_transformer.2.norm2.bias', 'output_adapters.soc.decoder_transformer.2.mlp.fc1.weight', 'output_adapters.soc.decoder_transformer.2.mlp.fc1.bias', 'output_adapters.soc.decoder_transformer.2.mlp.fc2.weight', 'output_adapters.soc.decoder_transformer.2.mlp.fc2.bias', 'output_adapters.soc.decoder_transformer.3.norm1.weight', 'output_adapters.soc.decoder_transformer.3.norm1.bias', 'output_adapters.soc.decoder_transformer.3.attn.qkv.weight', 'output_adapters.soc.decoder_transformer.3.attn.qkv.bias', 'output_adapters.soc.decoder_transformer.3.attn.proj.weight', 'output_adapters.soc.decoder_transformer.3.attn.proj.bias', 'output_adapters.soc.decoder_transformer.3.norm2.weight', 'output_adapters.soc.decoder_transformer.3.norm2.bias', 'output_adapters.soc.decoder_transformer.3.mlp.fc1.weight', 'output_adapters.soc.decoder_transformer.3.mlp.fc1.bias', 'output_adapters.soc.decoder_transformer.3.mlp.fc2.weight', 'output_adapters.soc.decoder_transformer.3.mlp.fc2.bias', 'output_adapters.soc.out_proj.weight', 'output_adapters.soc.out_proj.bias', 'output_adapters.soc.proj_context.weight', 'output_adapters.soc.proj_context.bias', 'output_adapters.current.mask_token', 'output_adapters.current.pos_emb', 'output_adapters.current.task_embeddings.current', 'output_adapters.current.task_embeddings.max_single_volt', 'output_adapters.current.task_embeddings.max_temp', 'output_adapters.current.task_embeddings.mileage', 'output_adapters.current.task_embeddings.min_single_volt', 'output_adapters.current.task_embeddings.min_temp', 'output_adapters.current.task_embeddings.soc', 'output_adapters.current.task_embeddings.volt', 'output_adapters.current.decoder.q.weight', 'output_adapters.current.decoder.q.bias', 'output_adapters.current.decoder.kv.weight', 'output_adapters.current.decoder.kv.bias', 'output_adapters.current.decoder.proj.weight', 'output_adapters.current.decoder.proj.bias', 'output_adapters.current.context_norm.weight', 'output_adapters.current.context_norm.bias', 'output_adapters.current.query_norm.weight', 'output_adapters.current.query_norm.bias', 'output_adapters.current.out_norm.weight', 'output_adapters.current.out_norm.bias', 'output_adapters.current.mlp.fc1.weight', 'output_adapters.current.mlp.fc1.bias', 'output_adapters.current.mlp.fc2.weight', 'output_adapters.current.mlp.fc2.bias', 'output_adapters.current.decoder_transformer.0.norm1.weight', 'output_adapters.current.decoder_transformer.0.norm1.bias', 'output_adapters.current.decoder_transformer.0.attn.qkv.weight', 'output_adapters.current.decoder_transformer.0.attn.qkv.bias', 'output_adapters.current.decoder_transformer.0.attn.proj.weight', 'output_adapters.current.decoder_transformer.0.attn.proj.bias', 'output_adapters.current.decoder_transformer.0.norm2.weight', 'output_adapters.current.decoder_transformer.0.norm2.bias', 'output_adapters.current.decoder_transformer.0.mlp.fc1.weight', 'output_adapters.current.decoder_transformer.0.mlp.fc1.bias', 'output_adapters.current.decoder_transformer.0.mlp.fc2.weight', 'output_adapters.current.decoder_transformer.0.mlp.fc2.bias', 'output_adapters.current.decoder_transformer.1.norm1.weight', 'output_adapters.current.decoder_transformer.1.norm1.bias', 'output_adapters.current.decoder_transformer.1.attn.qkv.weight', 'output_adapters.current.decoder_transformer.1.attn.qkv.bias', 'output_adapters.current.decoder_transformer.1.attn.proj.weight', 'output_adapters.current.decoder_transformer.1.attn.proj.bias', 'output_adapters.current.decoder_transformer.1.norm2.weight', 'output_adapters.current.decoder_transformer.1.norm2.bias', 'output_adapters.current.decoder_transformer.1.mlp.fc1.weight', 'output_adapters.current.decoder_transformer.1.mlp.fc1.bias', 'output_adapters.current.decoder_transformer.1.mlp.fc2.weight', 'output_adapters.current.decoder_transformer.1.mlp.fc2.bias', 'output_adapters.current.decoder_transformer.2.norm1.weight', 'output_adapters.current.decoder_transformer.2.norm1.bias', 'output_adapters.current.decoder_transformer.2.attn.qkv.weight', 'output_adapters.current.decoder_transformer.2.attn.qkv.bias', 'output_adapters.current.decoder_transformer.2.attn.proj.weight', 'output_adapters.current.decoder_transformer.2.attn.proj.bias', 'output_adapters.current.decoder_transformer.2.norm2.weight', 'output_adapters.current.decoder_transformer.2.norm2.bias', 'output_adapters.current.decoder_transformer.2.mlp.fc1.weight', 'output_adapters.current.decoder_transformer.2.mlp.fc1.bias', 'output_adapters.current.decoder_transformer.2.mlp.fc2.weight', 'output_adapters.current.decoder_transformer.2.mlp.fc2.bias', 'output_adapters.current.decoder_transformer.3.norm1.weight', 'output_adapters.current.decoder_transformer.3.norm1.bias', 'output_adapters.current.decoder_transformer.3.attn.qkv.weight', 'output_adapters.current.decoder_transformer.3.attn.qkv.bias', 'output_adapters.current.decoder_transformer.3.attn.proj.weight', 'output_adapters.current.decoder_transformer.3.attn.proj.bias', 'output_adapters.current.decoder_transformer.3.norm2.weight', 'output_adapters.current.decoder_transformer.3.norm2.bias', 'output_adapters.current.decoder_transformer.3.mlp.fc1.weight', 'output_adapters.current.decoder_transformer.3.mlp.fc1.bias', 'output_adapters.current.decoder_transformer.3.mlp.fc2.weight', 'output_adapters.current.decoder_transformer.3.mlp.fc2.bias', 'output_adapters.current.out_proj.weight', 'output_adapters.current.out_proj.bias', 'output_adapters.current.proj_context.weight', 'output_adapters.current.proj_context.bias', 'output_adapters.min_temp.mask_token', 'output_adapters.min_temp.pos_emb', 'output_adapters.min_temp.task_embeddings.current', 'output_adapters.min_temp.task_embeddings.max_single_volt', 'output_adapters.min_temp.task_embeddings.max_temp', 'output_adapters.min_temp.task_embeddings.mileage', 'output_adapters.min_temp.task_embeddings.min_single_volt', 'output_adapters.min_temp.task_embeddings.min_temp', 'output_adapters.min_temp.task_embeddings.soc', 'output_adapters.min_temp.task_embeddings.volt', 'output_adapters.min_temp.decoder.q.weight', 'output_adapters.min_temp.decoder.q.bias', 'output_adapters.min_temp.decoder.kv.weight', 'output_adapters.min_temp.decoder.kv.bias', 'output_adapters.min_temp.decoder.proj.weight', 'output_adapters.min_temp.decoder.proj.bias', 'output_adapters.min_temp.context_norm.weight', 'output_adapters.min_temp.context_norm.bias', 'output_adapters.min_temp.query_norm.weight', 'output_adapters.min_temp.query_norm.bias', 'output_adapters.min_temp.out_norm.weight', 'output_adapters.min_temp.out_norm.bias', 'output_adapters.min_temp.mlp.fc1.weight', 'output_adapters.min_temp.mlp.fc1.bias', 'output_adapters.min_temp.mlp.fc2.weight', 'output_adapters.min_temp.mlp.fc2.bias', 'output_adapters.min_temp.decoder_transformer.0.norm1.weight', 'output_adapters.min_temp.decoder_transformer.0.norm1.bias', 'output_adapters.min_temp.decoder_transformer.0.attn.qkv.weight', 'output_adapters.min_temp.decoder_transformer.0.attn.qkv.bias', 'output_adapters.min_temp.decoder_transformer.0.attn.proj.weight', 'output_adapters.min_temp.decoder_transformer.0.attn.proj.bias', 'output_adapters.min_temp.decoder_transformer.0.norm2.weight', 'output_adapters.min_temp.decoder_transformer.0.norm2.bias', 'output_adapters.min_temp.decoder_transformer.0.mlp.fc1.weight', 'output_adapters.min_temp.decoder_transformer.0.mlp.fc1.bias', 'output_adapters.min_temp.decoder_transformer.0.mlp.fc2.weight', 'output_adapters.min_temp.decoder_transformer.0.mlp.fc2.bias', 'output_adapters.min_temp.decoder_transformer.1.norm1.weight', 'output_adapters.min_temp.decoder_transformer.1.norm1.bias', 'output_adapters.min_temp.decoder_transformer.1.attn.qkv.weight', 'output_adapters.min_temp.decoder_transformer.1.attn.qkv.bias', 'output_adapters.min_temp.decoder_transformer.1.attn.proj.weight', 'output_adapters.min_temp.decoder_transformer.1.attn.proj.bias', 'output_adapters.min_temp.decoder_transformer.1.norm2.weight', 'output_adapters.min_temp.decoder_transformer.1.norm2.bias', 'output_adapters.min_temp.decoder_transformer.1.mlp.fc1.weight', 'output_adapters.min_temp.decoder_transformer.1.mlp.fc1.bias', 'output_adapters.min_temp.decoder_transformer.1.mlp.fc2.weight', 'output_adapters.min_temp.decoder_transformer.1.mlp.fc2.bias', 'output_adapters.min_temp.decoder_transformer.2.norm1.weight', 'output_adapters.min_temp.decoder_transformer.2.norm1.bias', 'output_adapters.min_temp.decoder_transformer.2.attn.qkv.weight', 'output_adapters.min_temp.decoder_transformer.2.attn.qkv.bias', 'output_adapters.min_temp.decoder_transformer.2.attn.proj.weight', 'output_adapters.min_temp.decoder_transformer.2.attn.proj.bias', 'output_adapters.min_temp.decoder_transformer.2.norm2.weight', 'output_adapters.min_temp.decoder_transformer.2.norm2.bias', 'output_adapters.min_temp.decoder_transformer.2.mlp.fc1.weight', 'output_adapters.min_temp.decoder_transformer.2.mlp.fc1.bias', 'output_adapters.min_temp.decoder_transformer.2.mlp.fc2.weight', 'output_adapters.min_temp.decoder_transformer.2.mlp.fc2.bias', 'output_adapters.min_temp.decoder_transformer.3.norm1.weight', 'output_adapters.min_temp.decoder_transformer.3.norm1.bias', 'output_adapters.min_temp.decoder_transformer.3.attn.qkv.weight', 'output_adapters.min_temp.decoder_transformer.3.attn.qkv.bias', 'output_adapters.min_temp.decoder_transformer.3.attn.proj.weight', 'output_adapters.min_temp.decoder_transformer.3.attn.proj.bias', 'output_adapters.min_temp.decoder_transformer.3.norm2.weight', 'output_adapters.min_temp.decoder_transformer.3.norm2.bias', 'output_adapters.min_temp.decoder_transformer.3.mlp.fc1.weight', 'output_adapters.min_temp.decoder_transformer.3.mlp.fc1.bias', 'output_adapters.min_temp.decoder_transformer.3.mlp.fc2.weight', 'output_adapters.min_temp.decoder_transformer.3.mlp.fc2.bias', 'output_adapters.min_temp.out_proj.weight', 'output_adapters.min_temp.out_proj.bias', 'output_adapters.min_temp.proj_context.weight', 'output_adapters.min_temp.proj_context.bias', 'output_adapters.max_single_volt.mask_token', 'output_adapters.max_single_volt.pos_emb', 'output_adapters.max_single_volt.task_embeddings.current', 'output_adapters.max_single_volt.task_embeddings.max_single_volt', 'output_adapters.max_single_volt.task_embeddings.max_temp', 'output_adapters.max_single_volt.task_embeddings.mileage', 'output_adapters.max_single_volt.task_embeddings.min_single_volt', 'output_adapters.max_single_volt.task_embeddings.min_temp', 'output_adapters.max_single_volt.task_embeddings.soc', 'output_adapters.max_single_volt.task_embeddings.volt', 'output_adapters.max_single_volt.decoder.q.weight', 'output_adapters.max_single_volt.decoder.q.bias', 'output_adapters.max_single_volt.decoder.kv.weight', 'output_adapters.max_single_volt.decoder.kv.bias', 'output_adapters.max_single_volt.decoder.proj.weight', 'output_adapters.max_single_volt.decoder.proj.bias', 'output_adapters.max_single_volt.context_norm.weight', 'output_adapters.max_single_volt.context_norm.bias', 'output_adapters.max_single_volt.query_norm.weight', 'output_adapters.max_single_volt.query_norm.bias', 'output_adapters.max_single_volt.out_norm.weight', 'output_adapters.max_single_volt.out_norm.bias', 'output_adapters.max_single_volt.mlp.fc1.weight', 'output_adapters.max_single_volt.mlp.fc1.bias', 'output_adapters.max_single_volt.mlp.fc2.weight', 'output_adapters.max_single_volt.mlp.fc2.bias', 'output_adapters.max_single_volt.decoder_transformer.0.norm1.weight', 'output_adapters.max_single_volt.decoder_transformer.0.norm1.bias', 'output_adapters.max_single_volt.decoder_transformer.0.attn.qkv.weight', 'output_adapters.max_single_volt.decoder_transformer.0.attn.qkv.bias', 'output_adapters.max_single_volt.decoder_transformer.0.attn.proj.weight', 'output_adapters.max_single_volt.decoder_transformer.0.attn.proj.bias', 'output_adapters.max_single_volt.decoder_transformer.0.norm2.weight', 'output_adapters.max_single_volt.decoder_transformer.0.norm2.bias', 'output_adapters.max_single_volt.decoder_transformer.0.mlp.fc1.weight', 'output_adapters.max_single_volt.decoder_transformer.0.mlp.fc1.bias', 'output_adapters.max_single_volt.decoder_transformer.0.mlp.fc2.weight', 'output_adapters.max_single_volt.decoder_transformer.0.mlp.fc2.bias', 'output_adapters.max_single_volt.decoder_transformer.1.norm1.weight', 'output_adapters.max_single_volt.decoder_transformer.1.norm1.bias', 'output_adapters.max_single_volt.decoder_transformer.1.attn.qkv.weight', 'output_adapters.max_single_volt.decoder_transformer.1.attn.qkv.bias', 'output_adapters.max_single_volt.decoder_transformer.1.attn.proj.weight', 'output_adapters.max_single_volt.decoder_transformer.1.attn.proj.bias', 'output_adapters.max_single_volt.decoder_transformer.1.norm2.weight', 'output_adapters.max_single_volt.decoder_transformer.1.norm2.bias', 'output_adapters.max_single_volt.decoder_transformer.1.mlp.fc1.weight', 'output_adapters.max_single_volt.decoder_transformer.1.mlp.fc1.bias', 'output_adapters.max_single_volt.decoder_transformer.1.mlp.fc2.weight', 'output_adapters.max_single_volt.decoder_transformer.1.mlp.fc2.bias', 'output_adapters.max_single_volt.decoder_transformer.2.norm1.weight', 'output_adapters.max_single_volt.decoder_transformer.2.norm1.bias', 'output_adapters.max_single_volt.decoder_transformer.2.attn.qkv.weight', 'output_adapters.max_single_volt.decoder_transformer.2.attn.qkv.bias', 'output_adapters.max_single_volt.decoder_transformer.2.attn.proj.weight', 'output_adapters.max_single_volt.decoder_transformer.2.attn.proj.bias', 'output_adapters.max_single_volt.decoder_transformer.2.norm2.weight', 'output_adapters.max_single_volt.decoder_transformer.2.norm2.bias', 'output_adapters.max_single_volt.decoder_transformer.2.mlp.fc1.weight', 'output_adapters.max_single_volt.decoder_transformer.2.mlp.fc1.bias', 'output_adapters.max_single_volt.decoder_transformer.2.mlp.fc2.weight', 'output_adapters.max_single_volt.decoder_transformer.2.mlp.fc2.bias', 'output_adapters.max_single_volt.decoder_transformer.3.norm1.weight', 'output_adapters.max_single_volt.decoder_transformer.3.norm1.bias', 'output_adapters.max_single_volt.decoder_transformer.3.attn.qkv.weight', 'output_adapters.max_single_volt.decoder_transformer.3.attn.qkv.bias', 'output_adapters.max_single_volt.decoder_transformer.3.attn.proj.weight', 'output_adapters.max_single_volt.decoder_transformer.3.attn.proj.bias', 'output_adapters.max_single_volt.decoder_transformer.3.norm2.weight', 'output_adapters.max_single_volt.decoder_transformer.3.norm2.bias', 'output_adapters.max_single_volt.decoder_transformer.3.mlp.fc1.weight', 'output_adapters.max_single_volt.decoder_transformer.3.mlp.fc1.bias', 'output_adapters.max_single_volt.decoder_transformer.3.mlp.fc2.weight', 'output_adapters.max_single_volt.decoder_transformer.3.mlp.fc2.bias', 'output_adapters.max_single_volt.out_proj.weight', 'output_adapters.max_single_volt.out_proj.bias', 'output_adapters.max_single_volt.proj_context.weight', 'output_adapters.max_single_volt.proj_context.bias', 'output_adapters.max_temp.mask_token', 'output_adapters.max_temp.pos_emb', 'output_adapters.max_temp.task_embeddings.current', 'output_adapters.max_temp.task_embeddings.max_single_volt', 'output_adapters.max_temp.task_embeddings.max_temp', 'output_adapters.max_temp.task_embeddings.mileage', 'output_adapters.max_temp.task_embeddings.min_single_volt', 'output_adapters.max_temp.task_embeddings.min_temp', 'output_adapters.max_temp.task_embeddings.soc', 'output_adapters.max_temp.task_embeddings.volt', 'output_adapters.max_temp.decoder.q.weight', 'output_adapters.max_temp.decoder.q.bias', 'output_adapters.max_temp.decoder.kv.weight', 'output_adapters.max_temp.decoder.kv.bias', 'output_adapters.max_temp.decoder.proj.weight', 'output_adapters.max_temp.decoder.proj.bias', 'output_adapters.max_temp.context_norm.weight', 'output_adapters.max_temp.context_norm.bias', 'output_adapters.max_temp.query_norm.weight', 'output_adapters.max_temp.query_norm.bias', 'output_adapters.max_temp.out_norm.weight', 'output_adapters.max_temp.out_norm.bias', 'output_adapters.max_temp.mlp.fc1.weight', 'output_adapters.max_temp.mlp.fc1.bias', 'output_adapters.max_temp.mlp.fc2.weight', 'output_adapters.max_temp.mlp.fc2.bias', 'output_adapters.max_temp.decoder_transformer.0.norm1.weight', 'output_adapters.max_temp.decoder_transformer.0.norm1.bias', 'output_adapters.max_temp.decoder_transformer.0.attn.qkv.weight', 'output_adapters.max_temp.decoder_transformer.0.attn.qkv.bias', 'output_adapters.max_temp.decoder_transformer.0.attn.proj.weight', 'output_adapters.max_temp.decoder_transformer.0.attn.proj.bias', 'output_adapters.max_temp.decoder_transformer.0.norm2.weight', 'output_adapters.max_temp.decoder_transformer.0.norm2.bias', 'output_adapters.max_temp.decoder_transformer.0.mlp.fc1.weight', 'output_adapters.max_temp.decoder_transformer.0.mlp.fc1.bias', 'output_adapters.max_temp.decoder_transformer.0.mlp.fc2.weight', 'output_adapters.max_temp.decoder_transformer.0.mlp.fc2.bias', 'output_adapters.max_temp.decoder_transformer.1.norm1.weight', 'output_adapters.max_temp.decoder_transformer.1.norm1.bias', 'output_adapters.max_temp.decoder_transformer.1.attn.qkv.weight', 'output_adapters.max_temp.decoder_transformer.1.attn.qkv.bias', 'output_adapters.max_temp.decoder_transformer.1.attn.proj.weight', 'output_adapters.max_temp.decoder_transformer.1.attn.proj.bias', 'output_adapters.max_temp.decoder_transformer.1.norm2.weight', 'output_adapters.max_temp.decoder_transformer.1.norm2.bias', 'output_adapters.max_temp.decoder_transformer.1.mlp.fc1.weight', 'output_adapters.max_temp.decoder_transformer.1.mlp.fc1.bias', 'output_adapters.max_temp.decoder_transformer.1.mlp.fc2.weight', 'output_adapters.max_temp.decoder_transformer.1.mlp.fc2.bias', 'output_adapters.max_temp.decoder_transformer.2.norm1.weight', 'output_adapters.max_temp.decoder_transformer.2.norm1.bias', 'output_adapters.max_temp.decoder_transformer.2.attn.qkv.weight', 'output_adapters.max_temp.decoder_transformer.2.attn.qkv.bias', 'output_adapters.max_temp.decoder_transformer.2.attn.proj.weight', 'output_adapters.max_temp.decoder_transformer.2.attn.proj.bias', 'output_adapters.max_temp.decoder_transformer.2.norm2.weight', 'output_adapters.max_temp.decoder_transformer.2.norm2.bias', 'output_adapters.max_temp.decoder_transformer.2.mlp.fc1.weight', 'output_adapters.max_temp.decoder_transformer.2.mlp.fc1.bias', 'output_adapters.max_temp.decoder_transformer.2.mlp.fc2.weight', 'output_adapters.max_temp.decoder_transformer.2.mlp.fc2.bias', 'output_adapters.max_temp.decoder_transformer.3.norm1.weight', 'output_adapters.max_temp.decoder_transformer.3.norm1.bias', 'output_adapters.max_temp.decoder_transformer.3.attn.qkv.weight', 'output_adapters.max_temp.decoder_transformer.3.attn.qkv.bias', 'output_adapters.max_temp.decoder_transformer.3.attn.proj.weight', 'output_adapters.max_temp.decoder_transformer.3.attn.proj.bias', 'output_adapters.max_temp.decoder_transformer.3.norm2.weight', 'output_adapters.max_temp.decoder_transformer.3.norm2.bias', 'output_adapters.max_temp.decoder_transformer.3.mlp.fc1.weight', 'output_adapters.max_temp.decoder_transformer.3.mlp.fc1.bias', 'output_adapters.max_temp.decoder_transformer.3.mlp.fc2.weight', 'output_adapters.max_temp.decoder_transformer.3.mlp.fc2.bias', 'output_adapters.max_temp.out_proj.weight', 'output_adapters.max_temp.out_proj.bias', 'output_adapters.max_temp.proj_context.weight', 'output_adapters.max_temp.proj_context.bias', 'output_adapters.min_single_volt.mask_token', 'output_adapters.min_single_volt.pos_emb', 'output_adapters.min_single_volt.task_embeddings.current', 'output_adapters.min_single_volt.task_embeddings.max_single_volt', 'output_adapters.min_single_volt.task_embeddings.max_temp', 'output_adapters.min_single_volt.task_embeddings.mileage', 'output_adapters.min_single_volt.task_embeddings.min_single_volt', 'output_adapters.min_single_volt.task_embeddings.min_temp', 'output_adapters.min_single_volt.task_embeddings.soc', 'output_adapters.min_single_volt.task_embeddings.volt', 'output_adapters.min_single_volt.decoder.q.weight', 'output_adapters.min_single_volt.decoder.q.bias', 'output_adapters.min_single_volt.decoder.kv.weight', 'output_adapters.min_single_volt.decoder.kv.bias', 'output_adapters.min_single_volt.decoder.proj.weight', 'output_adapters.min_single_volt.decoder.proj.bias', 'output_adapters.min_single_volt.context_norm.weight', 'output_adapters.min_single_volt.context_norm.bias', 'output_adapters.min_single_volt.query_norm.weight', 'output_adapters.min_single_volt.query_norm.bias', 'output_adapters.min_single_volt.out_norm.weight', 'output_adapters.min_single_volt.out_norm.bias', 'output_adapters.min_single_volt.mlp.fc1.weight', 'output_adapters.min_single_volt.mlp.fc1.bias', 'output_adapters.min_single_volt.mlp.fc2.weight', 'output_adapters.min_single_volt.mlp.fc2.bias', 'output_adapters.min_single_volt.decoder_transformer.0.norm1.weight', 'output_adapters.min_single_volt.decoder_transformer.0.norm1.bias', 'output_adapters.min_single_volt.decoder_transformer.0.attn.qkv.weight', 'output_adapters.min_single_volt.decoder_transformer.0.attn.qkv.bias', 'output_adapters.min_single_volt.decoder_transformer.0.attn.proj.weight', 'output_adapters.min_single_volt.decoder_transformer.0.attn.proj.bias', 'output_adapters.min_single_volt.decoder_transformer.0.norm2.weight', 'output_adapters.min_single_volt.decoder_transformer.0.norm2.bias', 'output_adapters.min_single_volt.decoder_transformer.0.mlp.fc1.weight', 'output_adapters.min_single_volt.decoder_transformer.0.mlp.fc1.bias', 'output_adapters.min_single_volt.decoder_transformer.0.mlp.fc2.weight', 'output_adapters.min_single_volt.decoder_transformer.0.mlp.fc2.bias', 'output_adapters.min_single_volt.decoder_transformer.1.norm1.weight', 'output_adapters.min_single_volt.decoder_transformer.1.norm1.bias', 'output_adapters.min_single_volt.decoder_transformer.1.attn.qkv.weight', 'output_adapters.min_single_volt.decoder_transformer.1.attn.qkv.bias', 'output_adapters.min_single_volt.decoder_transformer.1.attn.proj.weight', 'output_adapters.min_single_volt.decoder_transformer.1.attn.proj.bias', 'output_adapters.min_single_volt.decoder_transformer.1.norm2.weight', 'output_adapters.min_single_volt.decoder_transformer.1.norm2.bias', 'output_adapters.min_single_volt.decoder_transformer.1.mlp.fc1.weight', 'output_adapters.min_single_volt.decoder_transformer.1.mlp.fc1.bias', 'output_adapters.min_single_volt.decoder_transformer.1.mlp.fc2.weight', 'output_adapters.min_single_volt.decoder_transformer.1.mlp.fc2.bias', 'output_adapters.min_single_volt.decoder_transformer.2.norm1.weight', 'output_adapters.min_single_volt.decoder_transformer.2.norm1.bias', 'output_adapters.min_single_volt.decoder_transformer.2.attn.qkv.weight', 'output_adapters.min_single_volt.decoder_transformer.2.attn.qkv.bias', 'output_adapters.min_single_volt.decoder_transformer.2.attn.proj.weight', 'output_adapters.min_single_volt.decoder_transformer.2.attn.proj.bias', 'output_adapters.min_single_volt.decoder_transformer.2.norm2.weight', 'output_adapters.min_single_volt.decoder_transformer.2.norm2.bias', 'output_adapters.min_single_volt.decoder_transformer.2.mlp.fc1.weight', 'output_adapters.min_single_volt.decoder_transformer.2.mlp.fc1.bias', 'output_adapters.min_single_volt.decoder_transformer.2.mlp.fc2.weight', 'output_adapters.min_single_volt.decoder_transformer.2.mlp.fc2.bias', 'output_adapters.min_single_volt.decoder_transformer.3.norm1.weight', 'output_adapters.min_single_volt.decoder_transformer.3.norm1.bias', 'output_adapters.min_single_volt.decoder_transformer.3.attn.qkv.weight', 'output_adapters.min_single_volt.decoder_transformer.3.attn.qkv.bias', 'output_adapters.min_single_volt.decoder_transformer.3.attn.proj.weight', 'output_adapters.min_single_volt.decoder_transformer.3.attn.proj.bias', 'output_adapters.min_single_volt.decoder_transformer.3.norm2.weight', 'output_adapters.min_single_volt.decoder_transformer.3.norm2.bias', 'output_adapters.min_single_volt.decoder_transformer.3.mlp.fc1.weight', 'output_adapters.min_single_volt.decoder_transformer.3.mlp.fc1.bias', 'output_adapters.min_single_volt.decoder_transformer.3.mlp.fc2.weight', 'output_adapters.min_single_volt.decoder_transformer.3.mlp.fc2.bias', 'output_adapters.min_single_volt.out_proj.weight', 'output_adapters.min_single_volt.out_proj.bias', 'output_adapters.min_single_volt.proj_context.weight', 'output_adapters.min_single_volt.proj_context.bias', 'output_adapters.volt.mask_token', 'output_adapters.volt.pos_emb', 'output_adapters.volt.task_embeddings.current', 'output_adapters.volt.task_embeddings.max_single_volt', 'output_adapters.volt.task_embeddings.max_temp', 'output_adapters.volt.task_embeddings.mileage', 'output_adapters.volt.task_embeddings.min_single_volt', 'output_adapters.volt.task_embeddings.min_temp', 'output_adapters.volt.task_embeddings.soc', 'output_adapters.volt.task_embeddings.volt', 'output_adapters.volt.decoder.q.weight', 'output_adapters.volt.decoder.q.bias', 'output_adapters.volt.decoder.kv.weight', 'output_adapters.volt.decoder.kv.bias', 'output_adapters.volt.decoder.proj.weight', 'output_adapters.volt.decoder.proj.bias', 'output_adapters.volt.context_norm.weight', 'output_adapters.volt.context_norm.bias', 'output_adapters.volt.query_norm.weight', 'output_adapters.volt.query_norm.bias', 'output_adapters.volt.out_norm.weight', 'output_adapters.volt.out_norm.bias', 'output_adapters.volt.mlp.fc1.weight', 'output_adapters.volt.mlp.fc1.bias', 'output_adapters.volt.mlp.fc2.weight', 'output_adapters.volt.mlp.fc2.bias', 'output_adapters.volt.decoder_transformer.0.norm1.weight', 'output_adapters.volt.decoder_transformer.0.norm1.bias', 'output_adapters.volt.decoder_transformer.0.attn.qkv.weight', 'output_adapters.volt.decoder_transformer.0.attn.qkv.bias', 'output_adapters.volt.decoder_transformer.0.attn.proj.weight', 'output_adapters.volt.decoder_transformer.0.attn.proj.bias', 'output_adapters.volt.decoder_transformer.0.norm2.weight', 'output_adapters.volt.decoder_transformer.0.norm2.bias', 'output_adapters.volt.decoder_transformer.0.mlp.fc1.weight', 'output_adapters.volt.decoder_transformer.0.mlp.fc1.bias', 'output_adapters.volt.decoder_transformer.0.mlp.fc2.weight', 'output_adapters.volt.decoder_transformer.0.mlp.fc2.bias', 'output_adapters.volt.decoder_transformer.1.norm1.weight', 'output_adapters.volt.decoder_transformer.1.norm1.bias', 'output_adapters.volt.decoder_transformer.1.attn.qkv.weight', 'output_adapters.volt.decoder_transformer.1.attn.qkv.bias', 'output_adapters.volt.decoder_transformer.1.attn.proj.weight', 'output_adapters.volt.decoder_transformer.1.attn.proj.bias', 'output_adapters.volt.decoder_transformer.1.norm2.weight', 'output_adapters.volt.decoder_transformer.1.norm2.bias', 'output_adapters.volt.decoder_transformer.1.mlp.fc1.weight', 'output_adapters.volt.decoder_transformer.1.mlp.fc1.bias', 'output_adapters.volt.decoder_transformer.1.mlp.fc2.weight', 'output_adapters.volt.decoder_transformer.1.mlp.fc2.bias', 'output_adapters.volt.decoder_transformer.2.norm1.weight', 'output_adapters.volt.decoder_transformer.2.norm1.bias', 'output_adapters.volt.decoder_transformer.2.attn.qkv.weight', 'output_adapters.volt.decoder_transformer.2.attn.qkv.bias', 'output_adapters.volt.decoder_transformer.2.attn.proj.weight', 'output_adapters.volt.decoder_transformer.2.attn.proj.bias', 'output_adapters.volt.decoder_transformer.2.norm2.weight', 'output_adapters.volt.decoder_transformer.2.norm2.bias', 'output_adapters.volt.decoder_transformer.2.mlp.fc1.weight', 'output_adapters.volt.decoder_transformer.2.mlp.fc1.bias', 'output_adapters.volt.decoder_transformer.2.mlp.fc2.weight', 'output_adapters.volt.decoder_transformer.2.mlp.fc2.bias', 'output_adapters.volt.decoder_transformer.3.norm1.weight', 'output_adapters.volt.decoder_transformer.3.norm1.bias', 'output_adapters.volt.decoder_transformer.3.attn.qkv.weight', 'output_adapters.volt.decoder_transformer.3.attn.qkv.bias', 'output_adapters.volt.decoder_transformer.3.attn.proj.weight', 'output_adapters.volt.decoder_transformer.3.attn.proj.bias', 'output_adapters.volt.decoder_transformer.3.norm2.weight', 'output_adapters.volt.decoder_transformer.3.norm2.bias', 'output_adapters.volt.decoder_transformer.3.mlp.fc1.weight', 'output_adapters.volt.decoder_transformer.3.mlp.fc1.bias', 'output_adapters.volt.decoder_transformer.3.mlp.fc2.weight', 'output_adapters.volt.decoder_transformer.3.mlp.fc2.bias', 'output_adapters.volt.out_proj.weight', 'output_adapters.volt.out_proj.bias', 'output_adapters.volt.proj_context.weight', 'output_adapters.volt.proj_context.bias', 'output_adapters.mileage.mask_token', 'output_adapters.mileage.pos_emb', 'output_adapters.mileage.task_embeddings.current', 'output_adapters.mileage.task_embeddings.max_single_volt', 'output_adapters.mileage.task_embeddings.max_temp', 'output_adapters.mileage.task_embeddings.mileage', 'output_adapters.mileage.task_embeddings.min_single_volt', 'output_adapters.mileage.task_embeddings.min_temp', 'output_adapters.mileage.task_embeddings.soc', 'output_adapters.mileage.task_embeddings.volt', 'output_adapters.mileage.decoder.q.weight', 'output_adapters.mileage.decoder.q.bias', 'output_adapters.mileage.decoder.kv.weight', 'output_adapters.mileage.decoder.kv.bias', 'output_adapters.mileage.decoder.proj.weight', 'output_adapters.mileage.decoder.proj.bias', 'output_adapters.mileage.context_norm.weight', 'output_adapters.mileage.context_norm.bias', 'output_adapters.mileage.query_norm.weight', 'output_adapters.mileage.query_norm.bias', 'output_adapters.mileage.out_norm.weight', 'output_adapters.mileage.out_norm.bias', 'output_adapters.mileage.mlp.fc1.weight', 'output_adapters.mileage.mlp.fc1.bias', 'output_adapters.mileage.mlp.fc2.weight', 'output_adapters.mileage.mlp.fc2.bias', 'output_adapters.mileage.decoder_transformer.0.norm1.weight', 'output_adapters.mileage.decoder_transformer.0.norm1.bias', 'output_adapters.mileage.decoder_transformer.0.attn.qkv.weight', 'output_adapters.mileage.decoder_transformer.0.attn.qkv.bias', 'output_adapters.mileage.decoder_transformer.0.attn.proj.weight', 'output_adapters.mileage.decoder_transformer.0.attn.proj.bias', 'output_adapters.mileage.decoder_transformer.0.norm2.weight', 'output_adapters.mileage.decoder_transformer.0.norm2.bias', 'output_adapters.mileage.decoder_transformer.0.mlp.fc1.weight', 'output_adapters.mileage.decoder_transformer.0.mlp.fc1.bias', 'output_adapters.mileage.decoder_transformer.0.mlp.fc2.weight', 'output_adapters.mileage.decoder_transformer.0.mlp.fc2.bias', 'output_adapters.mileage.decoder_transformer.1.norm1.weight', 'output_adapters.mileage.decoder_transformer.1.norm1.bias', 'output_adapters.mileage.decoder_transformer.1.attn.qkv.weight', 'output_adapters.mileage.decoder_transformer.1.attn.qkv.bias', 'output_adapters.mileage.decoder_transformer.1.attn.proj.weight', 'output_adapters.mileage.decoder_transformer.1.attn.proj.bias', 'output_adapters.mileage.decoder_transformer.1.norm2.weight', 'output_adapters.mileage.decoder_transformer.1.norm2.bias', 'output_adapters.mileage.decoder_transformer.1.mlp.fc1.weight', 'output_adapters.mileage.decoder_transformer.1.mlp.fc1.bias', 'output_adapters.mileage.decoder_transformer.1.mlp.fc2.weight', 'output_adapters.mileage.decoder_transformer.1.mlp.fc2.bias', 'output_adapters.mileage.decoder_transformer.2.norm1.weight', 'output_adapters.mileage.decoder_transformer.2.norm1.bias', 'output_adapters.mileage.decoder_transformer.2.attn.qkv.weight', 'output_adapters.mileage.decoder_transformer.2.attn.qkv.bias', 'output_adapters.mileage.decoder_transformer.2.attn.proj.weight', 'output_adapters.mileage.decoder_transformer.2.attn.proj.bias', 'output_adapters.mileage.decoder_transformer.2.norm2.weight', 'output_adapters.mileage.decoder_transformer.2.norm2.bias', 'output_adapters.mileage.decoder_transformer.2.mlp.fc1.weight', 'output_adapters.mileage.decoder_transformer.2.mlp.fc1.bias', 'output_adapters.mileage.decoder_transformer.2.mlp.fc2.weight', 'output_adapters.mileage.decoder_transformer.2.mlp.fc2.bias', 'output_adapters.mileage.decoder_transformer.3.norm1.weight', 'output_adapters.mileage.decoder_transformer.3.norm1.bias', 'output_adapters.mileage.decoder_transformer.3.attn.qkv.weight', 'output_adapters.mileage.decoder_transformer.3.attn.qkv.bias', 'output_adapters.mileage.decoder_transformer.3.attn.proj.weight', 'output_adapters.mileage.decoder_transformer.3.attn.proj.bias', 'output_adapters.mileage.decoder_transformer.3.norm2.weight', 'output_adapters.mileage.decoder_transformer.3.norm2.bias', 'output_adapters.mileage.decoder_transformer.3.mlp.fc1.weight', 'output_adapters.mileage.decoder_transformer.3.mlp.fc1.bias', 'output_adapters.mileage.decoder_transformer.3.mlp.fc2.weight', 'output_adapters.mileage.decoder_transformer.3.mlp.fc2.bias', 'output_adapters.mileage.out_proj.weight', 'output_adapters.mileage.out_proj.bias', 'output_adapters.mileage.proj_context.weight', 'output_adapters.mileage.proj_context.bias'])
+[06:02:30.976883] Model = MultiViT(
+  (input_adapters): ModuleDict(
+    (soc): PatchedInputAdapter(
+      (proj): Conv1d(1, 96, kernel_size=(16,), stride=(16,))
+    )
+    (current): PatchedInputAdapter(
+      (proj): Conv1d(1, 96, kernel_size=(16,), stride=(16,))
+    )
+    (min_temp): PatchedInputAdapter(
+      (proj): Conv1d(1, 96, kernel_size=(16,), stride=(16,))
+    )
+    (max_single_volt): PatchedInputAdapter(
+      (proj): Conv1d(1, 96, kernel_size=(16,), stride=(16,))
+    )
+    (max_temp): PatchedInputAdapter(
+      (proj): Conv1d(1, 96, kernel_size=(16,), stride=(16,))
+    )
+    (min_single_volt): PatchedInputAdapter(
+      (proj): Conv1d(1, 96, kernel_size=(16,), stride=(16,))
+    )
+    (volt): PatchedInputAdapter(
+      (proj): Conv1d(1, 96, kernel_size=(16,), stride=(16,))
+    )
+    (mileage): PatchedInputAdapter(
+      (proj): Conv1d(1, 96, kernel_size=(16,), stride=(16,))
+    )
+  )
+  (output_adapters): ModuleDict(
+    (prediction): LinearOutputAdapter(
+      (norm): LayerNorm((96,), eps=1e-06, elementwise_affine=True)
+      (head): Linear(in_features=96, out_features=1, bias=True)
+    )
+  )
+  (encoder): Sequential(
+    (0): Block(
+      (norm1): LayerNorm((96,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=96, out_features=288, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=96, out_features=96, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((96,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=96, out_features=384, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=384, out_features=96, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (1): Block(
+      (norm1): LayerNorm((96,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=96, out_features=288, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=96, out_features=96, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((96,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=96, out_features=384, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=384, out_features=96, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (2): Block(
+      (norm1): LayerNorm((96,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=96, out_features=288, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=96, out_features=96, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((96,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=96, out_features=384, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=384, out_features=96, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (3): Block(
+      (norm1): LayerNorm((96,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=96, out_features=288, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=96, out_features=96, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((96,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=96, out_features=384, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=384, out_features=96, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (4): Block(
+      (norm1): LayerNorm((96,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=96, out_features=288, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=96, out_features=96, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((96,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=96, out_features=384, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=384, out_features=96, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+    (5): Block(
+      (norm1): LayerNorm((96,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=96, out_features=288, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=96, out_features=96, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (drop_path): Identity()
+      (norm2): LayerNorm((96,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=96, out_features=384, bias=True)
+        (act): GELU()
+        (fc2): Linear(in_features=384, out_features=96, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+    )
+  )
+)
+[06:02:30.978726] number of params (M): 0.68
+[06:02:30.978750] base lr: 8.00e-01
+[06:02:30.978760] actual lr: 1.00e-01
+[06:02:30.978770] accumulate grad iterations: 1
+[06:02:30.978779] effective batch size: 32
+[06:02:30.978909] global_tokens
+[06:02:30.978948] input_adapters.soc.proj.weight
+[06:02:30.978966] input_adapters.soc.proj.bias
+[06:02:30.978992] input_adapters.current.proj.weight
+[06:02:30.979008] input_adapters.current.proj.bias
+[06:02:30.979033] input_adapters.min_temp.proj.weight
+[06:02:30.979048] input_adapters.min_temp.proj.bias
+[06:02:30.979078] input_adapters.max_single_volt.proj.weight
+[06:02:30.979108] input_adapters.max_single_volt.proj.bias
+[06:02:30.979134] input_adapters.max_temp.proj.weight
+[06:02:30.979150] input_adapters.max_temp.proj.bias
+[06:02:30.979173] input_adapters.min_single_volt.proj.weight
+[06:02:30.979189] input_adapters.min_single_volt.proj.bias
+[06:02:30.979213] input_adapters.volt.proj.weight
+[06:02:30.979229] input_adapters.volt.proj.bias
+[06:02:30.979253] input_adapters.mileage.proj.weight
+[06:02:30.979268] input_adapters.mileage.proj.bias
+[06:02:30.979289] output_adapters.prediction.norm.weight
+[06:02:30.979306] output_adapters.prediction.norm.bias
+[06:02:30.979323] output_adapters.prediction.head.weight
+[06:02:30.979340] output_adapters.prediction.head.bias
+[06:02:30.979360] encoder.0.norm1.weight
+[06:02:30.979382] encoder.0.norm1.bias
+[06:02:30.979403] encoder.0.attn.qkv.weight
+[06:02:30.979420] encoder.0.attn.qkv.bias
+[06:02:30.979440] encoder.0.attn.proj.weight
+[06:02:30.979457] encoder.0.attn.proj.bias
+[06:02:30.979477] encoder.0.norm2.weight
+[06:02:30.979494] encoder.0.norm2.bias
+[06:02:30.979513] encoder.0.mlp.fc1.weight
+[06:02:30.979529] encoder.0.mlp.fc1.bias
+[06:02:30.979548] encoder.0.mlp.fc2.weight
+[06:02:30.979564] encoder.0.mlp.fc2.bias
+[06:02:30.979584] encoder.1.norm1.weight
+[06:02:30.979604] encoder.1.norm1.bias
+[06:02:30.979624] encoder.1.attn.qkv.weight
+[06:02:30.979641] encoder.1.attn.qkv.bias
+[06:02:30.979661] encoder.1.attn.proj.weight
+[06:02:30.979677] encoder.1.attn.proj.bias
+[06:02:30.979698] encoder.1.norm2.weight
+[06:02:30.979715] encoder.1.norm2.bias
+[06:02:30.979734] encoder.1.mlp.fc1.weight
+[06:02:30.979750] encoder.1.mlp.fc1.bias
+[06:02:30.979769] encoder.1.mlp.fc2.weight
+[06:02:30.979785] encoder.1.mlp.fc2.bias
+[06:02:30.979805] encoder.2.norm1.weight
+[06:02:30.979822] encoder.2.norm1.bias
+[06:02:30.979841] encoder.2.attn.qkv.weight
+[06:02:30.979857] encoder.2.attn.qkv.bias
+[06:02:30.979877] encoder.2.attn.proj.weight
+[06:02:30.979893] encoder.2.attn.proj.bias
+[06:02:30.979914] encoder.2.norm2.weight
+[06:02:30.979929] encoder.2.norm2.bias
+[06:02:30.979948] encoder.2.mlp.fc1.weight
+[06:02:30.979964] encoder.2.mlp.fc1.bias
+[06:02:30.979984] encoder.2.mlp.fc2.weight
+[06:02:30.980000] encoder.2.mlp.fc2.bias
+[06:02:30.980021] encoder.3.norm1.weight
+[06:02:30.980038] encoder.3.norm1.bias
+[06:02:30.980058] encoder.3.attn.qkv.weight
+[06:02:30.980075] encoder.3.attn.qkv.bias
+[06:02:30.980094] encoder.3.attn.proj.weight
+[06:02:30.980110] encoder.3.attn.proj.bias
+[06:02:30.980131] encoder.3.norm2.weight
+[06:02:30.980148] encoder.3.norm2.bias
+[06:02:30.980167] encoder.3.mlp.fc1.weight
+[06:02:30.980183] encoder.3.mlp.fc1.bias
+[06:02:30.980202] encoder.3.mlp.fc2.weight
+[06:02:30.980218] encoder.3.mlp.fc2.bias
+[06:02:30.980238] encoder.4.norm1.weight
+[06:02:30.980254] encoder.4.norm1.bias
+[06:02:30.980274] encoder.4.attn.qkv.weight
+[06:02:30.980290] encoder.4.attn.qkv.bias
+[06:02:30.980311] encoder.4.attn.proj.weight
+[06:02:30.980328] encoder.4.attn.proj.bias
+[06:02:30.980348] encoder.4.norm2.weight
+[06:02:30.980366] encoder.4.norm2.bias
+[06:02:30.980386] encoder.4.mlp.fc1.weight
+[06:02:30.980402] encoder.4.mlp.fc1.bias
+[06:02:30.980421] encoder.4.mlp.fc2.weight
+[06:02:30.980437] encoder.4.mlp.fc2.bias
+[06:02:30.980458] encoder.5.norm1.weight
+[06:02:30.980474] encoder.5.norm1.bias
+[06:02:30.980494] encoder.5.attn.qkv.weight
+[06:02:30.980511] encoder.5.attn.qkv.bias
+[06:02:30.980531] encoder.5.attn.proj.weight
+[06:02:30.980547] encoder.5.attn.proj.bias
+[06:02:30.980569] encoder.5.norm2.weight
+[06:02:30.980585] encoder.5.norm2.bias
+[06:02:30.980605] encoder.5.mlp.fc1.weight
+[06:02:30.980622] encoder.5.mlp.fc1.bias
+[06:02:30.980641] encoder.5.mlp.fc2.weight
+[06:02:30.980846] encoder.5.mlp.fc2.bias
+[06:02:30.981138] parameter groups: 
+{
+  "layer_0_no_decay": {
+    "lr_scale": 0.20971520000000007,
+    "weight_decay": 0.0,
+    "params": [
+      "global_tokens",
+      "input_adapters.soc.proj.bias",
+      "input_adapters.current.proj.bias",
+      "input_adapters.min_temp.proj.bias",
+      "input_adapters.max_single_volt.proj.bias",
+      "input_adapters.max_temp.proj.bias",
+      "input_adapters.min_single_volt.proj.bias",
+      "input_adapters.volt.proj.bias",
+      "input_adapters.mileage.proj.bias"
+    ]
+  },
+  "layer_0_decay": {
+    "lr_scale": 0.20971520000000007,
+    "weight_decay": 0.01,
+    "params": [
+      "input_adapters.soc.proj.weight",
+      "input_adapters.current.proj.weight",
+      "input_adapters.min_temp.proj.weight",
+      "input_adapters.max_single_volt.proj.weight",
+      "input_adapters.max_temp.proj.weight",
+      "input_adapters.min_single_volt.proj.weight",
+      "input_adapters.volt.proj.weight",
+      "input_adapters.mileage.proj.weight"
+    ]
+  },
+  "layer_7_no_decay": {
+    "lr_scale": 1.0,
+    "weight_decay": 0.0,
+    "params": [
+      "output_adapters.prediction.norm.weight",
+      "output_adapters.prediction.norm.bias",
+      "output_adapters.prediction.head.bias"
+    ]
+  },
+  "layer_7_decay": {
+    "lr_scale": 1.0,
+    "weight_decay": 0.01,
+    "params": [
+      "output_adapters.prediction.head.weight"
+    ]
+  },
+  "layer_1_no_decay": {
+    "lr_scale": 0.2621440000000001,
+    "weight_decay": 0.0,
+    "params": [
+      "encoder.0.norm1.weight",
+      "encoder.0.norm1.bias",
+      "encoder.0.attn.qkv.bias",
+      "encoder.0.attn.proj.bias",
+      "encoder.0.norm2.weight",
+      "encoder.0.norm2.bias",
+      "encoder.0.mlp.fc1.bias",
+      "encoder.0.mlp.fc2.bias"
+    ]
+  },
+  "layer_1_decay": {
+    "lr_scale": 0.2621440000000001,
+    "weight_decay": 0.01,
+    "params": [
+      "encoder.0.attn.qkv.weight",
+      "encoder.0.attn.proj.weight",
+      "encoder.0.mlp.fc1.weight",
+      "encoder.0.mlp.fc2.weight"
+    ]
+  },
+  "layer_2_no_decay": {
+    "lr_scale": 0.3276800000000001,
+    "weight_decay": 0.0,
+    "params": [
+      "encoder.1.norm1.weight",
+      "encoder.1.norm1.bias",
+      "encoder.1.attn.qkv.bias",
+      "encoder.1.attn.proj.bias",
+      "encoder.1.norm2.weight",
+      "encoder.1.norm2.bias",
+      "encoder.1.mlp.fc1.bias",
+      "encoder.1.mlp.fc2.bias"
+    ]
+  },
+  "layer_2_decay": {
+    "lr_scale": 0.3276800000000001,
+    "weight_decay": 0.01,
+    "params": [
+      "encoder.1.attn.qkv.weight",
+      "encoder.1.attn.proj.weight",
+      "encoder.1.mlp.fc1.weight",
+      "encoder.1.mlp.fc2.weight"
+    ]
+  },
+  "layer_3_no_decay": {
+    "lr_scale": 0.4096000000000001,
+    "weight_decay": 0.0,
+    "params": [
+      "encoder.2.norm1.weight",
+      "encoder.2.norm1.bias",
+      "encoder.2.attn.qkv.bias",
+      "encoder.2.attn.proj.bias",
+      "encoder.2.norm2.weight",
+      "encoder.2.norm2.bias",
+      "encoder.2.mlp.fc1.bias",
+      "encoder.2.mlp.fc2.bias"
+    ]
+  },
+  "layer_3_decay": {
+    "lr_scale": 0.4096000000000001,
+    "weight_decay": 0.01,
+    "params": [
+      "encoder.2.attn.qkv.weight",
+      "encoder.2.attn.proj.weight",
+      "encoder.2.mlp.fc1.weight",
+      "encoder.2.mlp.fc2.weight"
+    ]
+  },
+  "layer_4_no_decay": {
+    "lr_scale": 0.5120000000000001,
+    "weight_decay": 0.0,
+    "params": [
+      "encoder.3.norm1.weight",
+      "encoder.3.norm1.bias",
+      "encoder.3.attn.qkv.bias",
+      "encoder.3.attn.proj.bias",
+      "encoder.3.norm2.weight",
+      "encoder.3.norm2.bias",
+      "encoder.3.mlp.fc1.bias",
+      "encoder.3.mlp.fc2.bias"
+    ]
+  },
+  "layer_4_decay": {
+    "lr_scale": 0.5120000000000001,
+    "weight_decay": 0.01,
+    "params": [
+      "encoder.3.attn.qkv.weight",
+      "encoder.3.attn.proj.weight",
+      "encoder.3.mlp.fc1.weight",
+      "encoder.3.mlp.fc2.weight"
+    ]
+  },
+  "layer_5_no_decay": {
+    "lr_scale": 0.6400000000000001,
+    "weight_decay": 0.0,
+    "params": [
+      "encoder.4.norm1.weight",
+      "encoder.4.norm1.bias",
+      "encoder.4.attn.qkv.bias",
+      "encoder.4.attn.proj.bias",
+      "encoder.4.norm2.weight",
+      "encoder.4.norm2.bias",
+      "encoder.4.mlp.fc1.bias",
+      "encoder.4.mlp.fc2.bias"
+    ]
+  },
+  "layer_5_decay": {
+    "lr_scale": 0.6400000000000001,
+    "weight_decay": 0.01,
+    "params": [
+      "encoder.4.attn.qkv.weight",
+      "encoder.4.attn.proj.weight",
+      "encoder.4.mlp.fc1.weight",
+      "encoder.4.mlp.fc2.weight"
+    ]
+  },
+  "layer_6_no_decay": {
+    "lr_scale": 0.8,
+    "weight_decay": 0.0,
+    "params": [
+      "encoder.5.norm1.weight",
+      "encoder.5.norm1.bias",
+      "encoder.5.attn.qkv.bias",
+      "encoder.5.attn.proj.bias",
+      "encoder.5.norm2.weight",
+      "encoder.5.norm2.bias",
+      "encoder.5.mlp.fc1.bias",
+      "encoder.5.mlp.fc2.bias"
+    ]
+  },
+  "layer_6_decay": {
+    "lr_scale": 0.8,
+    "weight_decay": 0.01,
+    "params": [
+      "encoder.5.attn.qkv.weight",
+      "encoder.5.attn.proj.weight",
+      "encoder.5.mlp.fc1.weight",
+      "encoder.5.mlp.fc2.weight"
+    ]
+  }
+}
+[06:02:30.983437] criterion = MSELoss()
+[06:02:32.549879] test  [ 0/71]  eta: 0:01:51  loss: 1.3107 (1.3107)  time: 1.5653  data: 1.5362  max mem: 12
+[06:02:33.286712] test  [70/71]  eta: 0:00:00  loss: 1.8488 (1.8911)  time: 0.0061  data: 0.0000  max mem: 12
+[06:02:33.509692] test Total time: 0:00:02 (0.0356 s / it)
+[06:02:33.510638] Start training for 20 epochs
+[06:02:35.372757] Epoch: [0]  [ 0/17]  eta: 0:00:31  lr: 0.000000  loss: 2.3301 (2.3301)  time: 1.8596  data: 1.7788  max mem: 100
+[06:02:36.092167] Epoch: [0]  [16/17]  eta: 0:00:00  lr: 0.023529  loss: 0.3178 (1.4513)  time: 0.1517  data: 0.1124  max mem: 107
+[06:02:36.302616] Epoch: [0] Total time: 0:00:02 (0.1641 s / it)
+[06:02:36.302735] Averaged stats: lr: 0.023529  loss: 0.3178 (1.4513)
+[06:02:38.137405] test  [ 0/71]  eta: 0:02:10  loss: 0.0891 (0.0891)  time: 1.8315  data: 1.8197  max mem: 107
+[06:02:38.989307] test  [70/71]  eta: 0:00:00  loss: 0.0825 (0.0853)  time: 0.0059  data: 0.0000  max mem: 107
+[06:02:39.220448] test Total time: 0:00:02 (0.0411 s / it)
+[06:02:39.221120] update saved res
+[06:02:39.221964] Min test set RMSE: 0.292177695
+[06:02:39.221986] test_RMSE 0.292177695, test_loss 0.085367806
+[06:02:40.878148] Epoch: [1]  [ 0/17]  eta: 0:00:28  lr: 0.025000  loss: 0.0762 (0.0762)  time: 1.6527  data: 1.6042  max mem: 107
+[06:02:41.840135] Epoch: [1]  [16/17]  eta: 0:00:00  lr: 0.048529  loss: 0.0157 (0.0299)  time: 0.1538  data: 0.1106  max mem: 107
+[06:02:42.052256] Epoch: [1] Total time: 0:00:02 (0.1663 s / it)
+[06:02:42.052315] Averaged stats: lr: 0.048529  loss: 0.0157 (0.0299)
+[06:02:43.620031] test  [ 0/71]  eta: 0:01:51  loss: 0.0138 (0.0138)  time: 1.5651  data: 1.5515  max mem: 107
+[06:02:44.294940] test  [70/71]  eta: 0:00:00  loss: 0.0120 (0.0131)  time: 0.0056  data: 0.0000  max mem: 107
+[06:02:44.488880] test Total time: 0:00:02 (0.0343 s / it)
+[06:02:44.489809] update saved res
+[06:02:44.491154] Min test set RMSE: 0.114630039
+[06:02:44.491236] test_RMSE 0.114630039, test_loss 0.013140046
+[06:02:46.048085] Epoch: [2]  [ 0/17]  eta: 0:00:26  lr: 0.050000  loss: 0.0100 (0.0100)  time: 1.5497  data: 1.5066  max mem: 107
+[06:02:46.734479] Epoch: [2]  [16/17]  eta: 0:00:00  lr: 0.073529  loss: 0.0061 (0.0059)  time: 0.1315  data: 0.0965  max mem: 107
+[06:02:46.926043] Epoch: [2] Total time: 0:00:02 (0.1429 s / it)
+[06:02:46.926116] Averaged stats: lr: 0.073529  loss: 0.0061 (0.0059)
+[06:02:48.411475] test  [ 0/71]  eta: 0:01:45  loss: 0.0016 (0.0016)  time: 1.4826  data: 1.4642  max mem: 107
+[06:02:49.109569] test  [70/71]  eta: 0:00:00  loss: 0.0009 (0.0011)  time: 0.0055  data: 0.0000  max mem: 107
+[06:02:49.325035] test Total time: 0:00:02 (0.0338 s / it)
+[06:02:49.325728] update saved res
+[06:02:49.326485] Min test set RMSE: 0.032886064
+[06:02:49.326509] test_RMSE 0.032886064, test_loss 0.001081493
+[06:02:50.892608] Epoch: [3]  [ 0/17]  eta: 0:00:26  lr: 0.075000  loss: 0.0014 (0.0014)  time: 1.5627  data: 1.5146  max mem: 107
+[06:02:51.596665] Epoch: [3]  [16/17]  eta: 0:00:00  lr: 0.098529  loss: 0.0009 (0.0010)  time: 0.1333  data: 0.0909  max mem: 107
+[06:02:51.785255] Epoch: [3] Total time: 0:00:02 (0.1445 s / it)
+[06:02:51.785470] Averaged stats: lr: 0.098529  loss: 0.0009 (0.0010)
+[06:02:53.317724] test  [ 0/71]  eta: 0:01:48  loss: 0.0002 (0.0002)  time: 1.5305  data: 1.5216  max mem: 107
+[06:02:54.084030] test  [70/71]  eta: 0:00:00  loss: 0.0004 (0.0004)  time: 0.0056  data: 0.0000  max mem: 107
+[06:02:54.271555] test Total time: 0:00:02 (0.0350 s / it)
+[06:02:54.272459] update saved res
+[06:02:54.273739] Min test set RMSE: 0.019331365
+[06:02:54.273822] test_RMSE 0.019331365, test_loss 0.000373702
+[06:02:55.789560] Epoch: [4]  [ 0/17]  eta: 0:00:25  lr: 0.100000  loss: 0.0004 (0.0004)  time: 1.5095  data: 1.4607  max mem: 107
+[06:02:56.734299] Epoch: [4]  [16/17]  eta: 0:00:00  lr: 0.099149  loss: 0.0002 (0.0003)  time: 0.1443  data: 0.1008  max mem: 107
+[06:02:56.934339] Epoch: [4] Total time: 0:00:02 (0.1562 s / it)
+[06:02:56.934426] Averaged stats: lr: 0.099149  loss: 0.0002 (0.0003)
+[06:02:58.732677] test  [ 0/71]  eta: 0:02:07  loss: 0.0001 (0.0001)  time: 1.7959  data: 1.7784  max mem: 107
+[06:02:59.207249] test  [70/71]  eta: 0:00:00  loss: 0.0000 (0.0001)  time: 0.0056  data: 0.0000  max mem: 107
+[06:02:59.415127] test Total time: 0:00:02 (0.0349 s / it)
+[06:02:59.416014] update saved res
+[06:02:59.418539] Min test set RMSE: 0.008164193
+[06:02:59.418594] test_RMSE 0.008164193, test_loss 0.000066654
+[06:03:00.974284] Epoch: [5]  [ 0/17]  eta: 0:00:26  lr: 0.099039  loss: 0.0001 (0.0001)  time: 1.5494  data: 1.4993  max mem: 107
+[06:03:01.612939] Epoch: [5]  [16/17]  eta: 0:00:00  lr: 0.096412  loss: 0.0001 (0.0001)  time: 0.1287  data: 0.0903  max mem: 107
+[06:03:01.814545] Epoch: [5] Total time: 0:00:02 (0.1406 s / it)
+[06:03:01.814712] Averaged stats: lr: 0.096412  loss: 0.0001 (0.0001)
+[06:03:03.358554] test  [ 0/71]  eta: 0:01:49  loss: 0.0000 (0.0000)  time: 1.5416  data: 1.5248  max mem: 107
+[06:03:03.824580] test  [70/71]  eta: 0:00:00  loss: 0.0002 (0.0002)  time: 0.0055  data: 0.0000  max mem: 107
+[06:03:04.016469] test Total time: 0:00:02 (0.0310 s / it)
+[06:03:04.017280] Min test set RMSE: 0.008164193
+[06:03:04.017304] test_RMSE 0.012465129, test_loss 0.000155379
+[06:03:05.587537] Epoch: [6]  [ 0/17]  eta: 0:00:26  lr: 0.096194  loss: 0.0001 (0.0001)  time: 1.5668  data: 1.5187  max mem: 107
+[06:03:06.360517] Epoch: [6]  [16/17]  eta: 0:00:00  lr: 0.091892  loss: 0.0001 (0.0001)  time: 0.1376  data: 0.0964  max mem: 107
+[06:03:06.590964] Epoch: [6] Total time: 0:00:02 (0.1512 s / it)
+[06:03:06.591029] Averaged stats: lr: 0.091892  loss: 0.0001 (0.0001)
+[06:03:08.103811] test  [ 0/71]  eta: 0:01:47  loss: 0.0001 (0.0001)  time: 1.5108  data: 1.4949  max mem: 107
+[06:03:08.861387] test  [70/71]  eta: 0:00:00  loss: 0.0000 (0.0001)  time: 0.0055  data: 0.0000  max mem: 107
+[06:03:09.065525] test Total time: 0:00:02 (0.0348 s / it)
+[06:03:09.065920] Min test set RMSE: 0.008164193
+[06:03:09.065940] test_RMSE 0.008343484, test_loss 0.000069614
+[06:03:10.609355] Epoch: [7]  [ 0/17]  eta: 0:00:26  lr: 0.091574  loss: 0.0002 (0.0002)  time: 1.5403  data: 1.4901  max mem: 107
+[06:03:11.373801] Epoch: [7]  [16/17]  eta: 0:00:00  lr: 0.085761  loss: 0.0001 (0.0001)  time: 0.1355  data: 0.0946  max mem: 107
+[06:03:11.565029] Epoch: [7] Total time: 0:00:02 (0.1468 s / it)
+[06:03:11.565094] Averaged stats: lr: 0.085761  loss: 0.0001 (0.0001)
+[06:03:13.058663] test  [ 0/71]  eta: 0:01:45  loss: 0.0001 (0.0001)  time: 1.4918  data: 1.4773  max mem: 107
+[06:03:13.786238] test  [70/71]  eta: 0:00:00  loss: 0.0000 (0.0001)  time: 0.0065  data: 0.0000  max mem: 107
+[06:03:13.983283] test Total time: 0:00:02 (0.0340 s / it)
+[06:03:13.984028] Min test set RMSE: 0.008164193
+[06:03:13.984062] test_RMSE 0.008555271, test_loss 0.000073193
+[06:03:15.468013] Epoch: [8]  [ 0/17]  eta: 0:00:25  lr: 0.085355  loss: 0.0002 (0.0002)  time: 1.4799  data: 1.4340  max mem: 107
+[06:03:16.302662] Epoch: [8]  [16/17]  eta: 0:00:00  lr: 0.078257  loss: 0.0001 (0.0001)  time: 0.1361  data: 0.0975  max mem: 107
+[06:03:16.496083] Epoch: [8] Total time: 0:00:02 (0.1476 s / it)
+[06:03:16.496187] Averaged stats: lr: 0.078257  loss: 0.0001 (0.0001)
+[06:03:17.932998] test  [ 0/71]  eta: 0:01:41  loss: 0.0000 (0.0000)  time: 1.4342  data: 1.4201  max mem: 107
+[06:03:18.430731] test  [70/71]  eta: 0:00:00  loss: 0.0002 (0.0002)  time: 0.0055  data: 0.0000  max mem: 107
+[06:03:18.634130] test Total time: 0:00:02 (0.0301 s / it)
+[06:03:18.635613] Min test set RMSE: 0.008164193
+[06:03:18.635660] test_RMSE 0.014432401, test_loss 0.000208294
+[06:03:20.154821] Epoch: [9]  [ 0/17]  eta: 0:00:25  lr: 0.077779  loss: 0.0001 (0.0001)  time: 1.5131  data: 1.4732  max mem: 107
+[06:03:20.964002] Epoch: [9]  [16/17]  eta: 0:00:00  lr: 0.069667  loss: 0.0001 (0.0001)  time: 0.1366  data: 0.0951  max mem: 107
+[06:03:21.160858] Epoch: [9] Total time: 0:00:02 (0.1482 s / it)
+[06:03:21.160951] Averaged stats: lr: 0.069667  loss: 0.0001 (0.0001)
+[06:03:22.655397] test  [ 0/71]  eta: 0:01:45  loss: 0.0001 (0.0001)  time: 1.4920  data: 1.4811  max mem: 107
+[06:03:23.422038] test  [70/71]  eta: 0:00:00  loss: 0.0000 (0.0001)  time: 0.0057  data: 0.0000  max mem: 107
+[06:03:23.638704] test Total time: 0:00:02 (0.0349 s / it)
+[06:03:23.639608] update saved res
+[06:03:23.641086] Min test set RMSE: 0.007922756
+[06:03:23.641142] test_RMSE 0.007922756, test_loss 0.000062770
+[06:03:25.113640] Epoch: [10]  [ 0/17]  eta: 0:00:24  lr: 0.069134  loss: 0.0001 (0.0001)  time: 1.4662  data: 1.4239  max mem: 107
+[06:03:25.904267] Epoch: [10]  [16/17]  eta: 0:00:00  lr: 0.060321  loss: 0.0001 (0.0001)  time: 0.1327  data: 0.0968  max mem: 107
+[06:03:26.124535] Epoch: [10] Total time: 0:00:02 (0.1457 s / it)
+[06:03:26.124636] Averaged stats: lr: 0.060321  loss: 0.0001 (0.0001)
+[06:03:27.700073] test  [ 0/71]  eta: 0:01:51  loss: 0.0000 (0.0000)  time: 1.5731  data: 1.5598  max mem: 107
+[06:03:28.411445] test  [70/71]  eta: 0:00:00  loss: 0.0001 (0.0001)  time: 0.0056  data: 0.0000  max mem: 107
+[06:03:28.618243] test Total time: 0:00:02 (0.0351 s / it)
+[06:03:28.618795] Min test set RMSE: 0.007922756
+[06:03:28.618815] test_RMSE 0.008805574, test_loss 0.000077538
+[06:03:30.274440] Epoch: [11]  [ 0/17]  eta: 0:00:28  lr: 0.059755  loss: 0.0001 (0.0001)  time: 1.6524  data: 1.6068  max mem: 107
+[06:03:30.982928] Epoch: [11]  [16/17]  eta: 0:00:00  lr: 0.050578  loss: 0.0001 (0.0001)  time: 0.1388  data: 0.1018  max mem: 107
+[06:03:31.184274] Epoch: [11] Total time: 0:00:02 (0.1507 s / it)
+[06:03:31.184486] Averaged stats: lr: 0.050578  loss: 0.0001 (0.0001)
+[06:03:32.736784] test  [ 0/71]  eta: 0:01:50  loss: 0.0000 (0.0000)  time: 1.5496  data: 1.5339  max mem: 107
+[06:03:33.561106] test  [70/71]  eta: 0:00:00  loss: 0.0001 (0.0001)  time: 0.0056  data: 0.0000  max mem: 107
+[06:03:33.755235] test Total time: 0:00:02 (0.0362 s / it)
+[06:03:33.755840] Min test set RMSE: 0.007922756
+[06:03:33.755860] test_RMSE 0.011064499, test_loss 0.000122423
+[06:03:35.214956] Epoch: [12]  [ 0/17]  eta: 0:00:24  lr: 0.050001  loss: 0.0001 (0.0001)  time: 1.4558  data: 1.4136  max mem: 107
+[06:03:35.857420] Epoch: [12]  [16/17]  eta: 0:00:00  lr: 0.040813  loss: 0.0001 (0.0001)  time: 0.1234  data: 0.0896  max mem: 107
+[06:03:36.070252] Epoch: [12] Total time: 0:00:02 (0.1360 s / it)
+[06:03:36.070347] Averaged stats: lr: 0.040813  loss: 0.0001 (0.0001)
+[06:03:37.586744] test  [ 0/71]  eta: 0:01:47  loss: 0.0000 (0.0000)  time: 1.5137  data: 1.5038  max mem: 107
+[06:03:38.315770] test  [70/71]  eta: 0:00:00  loss: 0.0000 (0.0001)  time: 0.0056  data: 0.0000  max mem: 107
+[06:03:38.525724] test Total time: 0:00:02 (0.0346 s / it)
+[06:03:38.526231] update saved res
+[06:03:38.526942] Min test set RMSE: 0.007766491
+[06:03:38.526992] test_RMSE 0.007766491, test_loss 0.000060318
+[06:03:40.085881] Epoch: [13]  [ 0/17]  eta: 0:00:26  lr: 0.040246  loss: 0.0001 (0.0001)  time: 1.5556  data: 1.5075  max mem: 107
+[06:03:40.769578] Epoch: [13]  [16/17]  eta: 0:00:00  lr: 0.031401  loss: 0.0001 (0.0001)  time: 0.1317  data: 0.0919  max mem: 107
+[06:03:40.961361] Epoch: [13] Total time: 0:00:02 (0.1430 s / it)
+[06:03:40.961566] Averaged stats: lr: 0.031401  loss: 0.0001 (0.0001)
+[06:03:42.368056] test  [ 0/71]  eta: 0:01:39  loss: 0.0000 (0.0000)  time: 1.4045  data: 1.3881  max mem: 107
+[06:03:42.972397] test  [70/71]  eta: 0:00:00  loss: 0.0001 (0.0001)  time: 0.0058  data: 0.0000  max mem: 107
+[06:03:43.190407] test Total time: 0:00:02 (0.0314 s / it)
+[06:03:43.192076] Min test set RMSE: 0.007766491
+[06:03:43.192117] test_RMSE 0.008369081, test_loss 0.000070042
+[06:03:44.810429] Epoch: [14]  [ 0/17]  eta: 0:00:27  lr: 0.030867  loss: 0.0001 (0.0001)  time: 1.6152  data: 1.5701  max mem: 107
+[06:03:45.492219] Epoch: [14]  [16/17]  eta: 0:00:00  lr: 0.022704  loss: 0.0001 (0.0001)  time: 0.1351  data: 0.0983  max mem: 107
+[06:03:45.703211] Epoch: [14] Total time: 0:00:02 (0.1476 s / it)
+[06:03:45.703352] Averaged stats: lr: 0.022704  loss: 0.0001 (0.0001)
+[06:03:47.227739] test  [ 0/71]  eta: 0:01:48  loss: 0.0000 (0.0000)  time: 1.5231  data: 1.5134  max mem: 107
+[06:03:47.889622] test  [70/71]  eta: 0:00:00  loss: 0.0001 (0.0001)  time: 0.0056  data: 0.0000  max mem: 107
+[06:03:48.089829] test Total time: 0:00:02 (0.0336 s / it)
+[06:03:48.090872] Min test set RMSE: 0.007766491
+[06:03:48.090894] test_RMSE 0.008395696, test_loss 0.000070488
+[06:03:49.692806] Epoch: [15]  [ 0/17]  eta: 0:00:27  lr: 0.022222  loss: 0.0001 (0.0001)  time: 1.5985  data: 1.5530  max mem: 107
+[06:03:50.326014] Epoch: [15]  [16/17]  eta: 0:00:00  lr: 0.015056  loss: 0.0001 (0.0001)  time: 0.1312  data: 0.0914  max mem: 107
+[06:03:50.519129] Epoch: [15] Total time: 0:00:02 (0.1427 s / it)
+[06:03:50.519761] Averaged stats: lr: 0.015056  loss: 0.0001 (0.0001)
+[06:03:52.368723] test  [ 0/71]  eta: 0:02:11  loss: 0.0000 (0.0000)  time: 1.8465  data: 1.8330  max mem: 107
+[06:03:52.885634] test  [70/71]  eta: 0:00:00  loss: 0.0001 (0.0001)  time: 0.0056  data: 0.0000  max mem: 107
+[06:03:53.095197] test Total time: 0:00:02 (0.0362 s / it)
+[06:03:53.095963] Min test set RMSE: 0.007766491
+[06:03:53.096008] test_RMSE 0.008514812, test_loss 0.000072502
+[06:03:54.645340] Epoch: [16]  [ 0/17]  eta: 0:00:26  lr: 0.014646  loss: 0.0001 (0.0001)  time: 1.5432  data: 1.4902  max mem: 107
+[06:03:55.427490] Epoch: [16]  [16/17]  eta: 0:00:00  lr: 0.008751  loss: 0.0001 (0.0001)  time: 0.1367  data: 0.0948  max mem: 107
+[06:03:55.661258] Epoch: [16] Total time: 0:00:02 (0.1506 s / it)
+[06:03:55.661341] Averaged stats: lr: 0.008751  loss: 0.0001 (0.0001)
+[06:03:57.156625] test  [ 0/71]  eta: 0:01:45  loss: 0.0000 (0.0000)  time: 1.4928  data: 1.4771  max mem: 107
+[06:03:57.941810] test  [70/71]  eta: 0:00:00  loss: 0.0001 (0.0001)  time: 0.0056  data: 0.0000  max mem: 107
+[06:03:58.149232] test Total time: 0:00:02 (0.0350 s / it)
+[06:03:58.149996] Min test set RMSE: 0.007766491
+[06:03:58.150038] test_RMSE 0.008954185, test_loss 0.000080177
+[06:03:59.744395] Epoch: [17]  [ 0/17]  eta: 0:00:27  lr: 0.008427  loss: 0.0001 (0.0001)  time: 1.5883  data: 1.5342  max mem: 107
+[06:04:00.723519] Epoch: [17]  [16/17]  eta: 0:00:00  lr: 0.004031  loss: 0.0001 (0.0001)  time: 0.1510  data: 0.1069  max mem: 107
+[06:04:00.922637] Epoch: [17] Total time: 0:00:02 (0.1628 s / it)
+[06:04:00.922739] Averaged stats: lr: 0.004031  loss: 0.0001 (0.0001)
+[06:04:02.504645] test  [ 0/71]  eta: 0:01:52  loss: 0.0000 (0.0000)  time: 1.5792  data: 1.5660  max mem: 107
+[06:04:03.170850] test  [70/71]  eta: 0:00:00  loss: 0.0001 (0.0001)  time: 0.0055  data: 0.0000  max mem: 107
+[06:04:03.384326] test Total time: 0:00:02 (0.0346 s / it)
+[06:04:03.384921] Min test set RMSE: 0.007766491
+[06:04:03.384941] test_RMSE 0.008470167, test_loss 0.000071744
+[06:04:04.969726] Epoch: [18]  [ 0/17]  eta: 0:00:26  lr: 0.003807  loss: 0.0001 (0.0001)  time: 1.5814  data: 1.5374  max mem: 107
+[06:04:05.805654] Epoch: [18]  [16/17]  eta: 0:00:00  lr: 0.001078  loss: 0.0001 (0.0001)  time: 0.1422  data: 0.0993  max mem: 107
+[06:04:06.017892] Epoch: [18] Total time: 0:00:02 (0.1547 s / it)
+[06:04:06.017993] Averaged stats: lr: 0.001078  loss: 0.0001 (0.0001)
+[06:04:07.593174] test  [ 0/71]  eta: 0:01:51  loss: 0.0000 (0.0000)  time: 1.5728  data: 1.5589  max mem: 107
+[06:04:08.219135] test  [70/71]  eta: 0:00:00  loss: 0.0001 (0.0001)  time: 0.0058  data: 0.0000  max mem: 107
+[06:04:08.419588] test Total time: 0:00:02 (0.0338 s / it)
+[06:04:08.420616] Min test set RMSE: 0.007766491
+[06:04:08.420640] test_RMSE 0.008763339, test_loss 0.000076796
+[06:04:10.041705] Epoch: [19]  [ 0/17]  eta: 0:00:27  lr: 0.000962  loss: 0.0000 (0.0000)  time: 1.6178  data: 1.5744  max mem: 107
+[06:04:10.698737] Epoch: [19]  [16/17]  eta: 0:00:00  lr: 0.000004  loss: 0.0001 (0.0001)  time: 0.1338  data: 0.0934  max mem: 107
+[06:04:10.918771] Epoch: [19] Total time: 0:00:02 (0.1468 s / it)
+[06:04:10.918867] Averaged stats: lr: 0.000004  loss: 0.0001 (0.0001)
+[06:04:12.463050] test  [ 0/71]  eta: 0:01:49  loss: 0.0000 (0.0000)  time: 1.5425  data: 1.5303  max mem: 107
+[06:04:13.191511] test  [70/71]  eta: 0:00:00  loss: 0.0001 (0.0001)  time: 0.0056  data: 0.0000  max mem: 107
+[06:04:13.399086] test Total time: 0:00:02 (0.0349 s / it)
+[06:04:13.400648] Min test set RMSE: 0.007766491
+[06:04:13.400694] test_RMSE 0.008470314, test_loss 0.000071746
+[06:04:13.400726] Training time 0:01:39

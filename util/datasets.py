@@ -190,7 +190,7 @@ class PreprocessNormalizer:
             return df, label, car
 
 
-def load_dataset(fold_num, brand_num, same_normalizer=False, car_dict_dir='five_fold_utils_six_brand_all', downstream='', data_type=None, normalizer = None, dataset_fn=None, ind_ood_car_dict=None, all_car_dict=None, num_snippet=0, cycle_gap=0, cycle_id=None, data_percent=100, seed=0, normalizer_lab=None, task='', car_dict_dir_lab=None):
+def load_dataset(fold_num, brand_num, same_normalizer=False, car_dict_dir='five_fold_utils_six_brand_all', downstream='', data_type=None, normalizer = None, dataset_fn=None, ind_ood_car_dict=None, all_car_dict=None, num_snippet=0, cycle_gap=0, cycle_id=None, data_percent=100, seed=0, normalizer_lab=None, task='', car_dict_dir_lab=None, apply_noise=False):
     
     TOTAL_BRAND_NUM = 14
     LAB_CAR_ID_OFFSET = 10000
@@ -291,11 +291,9 @@ def load_dataset(fold_num, brand_num, same_normalizer=False, car_dict_dir='five_
                 assert NotImplementedError
 
             x = train1[0].transpose(1, 0).astype(np.float32)
-            '''
-            # add guassian noise with 0.005 std on x[0], which has length 128
-            noise = np.random.normal(0, 0.005, x[0].shape)
-            x[0] = x[0] + noise
-            '''
+            if apply_noise:
+                noise = np.random.normal(0, 0.005, x[0].shape).astype(x.dtype)
+                x[0] = x[0] + noise
             X.append(x) 
             
             metadata.append(train1[1])
